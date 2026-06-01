@@ -1,0 +1,45 @@
+import { useState } from 'react'
+import { usePageOverlay } from '../../context/PageOverlayContext'
+import { PAGE_COMPONENTS } from '../../pages'
+import AdicionarPorcentagemPage from '../../pages/AdicionarPorcentagemPage'
+import PesquisarCNPJPage from '../../pages/PesquisarCNPJPage'
+import type { PageId } from '../../types/navigation'
+import { ResizablePagesLogs } from './ResizablePagesLogs'
+import { Sidebar } from './Sidebar'
+
+export function AppShell() {
+  const { overlay, cnpjInitialRows, closeOverlay } = usePageOverlay()
+  const [collapsed, setCollapsed] = useState(false)
+  const [activePage, setActivePage] = useState<PageId>('home')
+
+  const ActivePage = PAGE_COMPONENTS[activePage]
+
+  const mainContent =
+    overlay === 'pesquisar-cnpj' ? (
+      <PesquisarCNPJPage initialRows={cnpjInitialRows} />
+    ) : overlay === 'adicionar-porcentagem' ? (
+      <AdicionarPorcentagemPage />
+    ) : (
+      <ActivePage />
+    )
+
+  return (
+    <div className="app-shell flex h-dvh w-full">
+      <Sidebar
+        collapsed={collapsed}
+        activePage={activePage}
+        onToggleCollapse={() => setCollapsed((value) => !value)}
+        onNavigate={(page) => {
+          if (overlay) closeOverlay()
+          setActivePage(page)
+        }}
+      />
+
+      <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
+        <ResizablePagesLogs showLogs={activePage !== 'home'}>
+          {mainContent}
+        </ResizablePagesLogs>
+      </div>
+    </div>
+  )
+}

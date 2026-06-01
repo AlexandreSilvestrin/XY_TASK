@@ -1,0 +1,762 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-display: 'Caveat', cursive;
+  --font-sans: 'Outfit', system-ui, sans-serif;
+
+  --color-accent: #38bdf8;
+  --color-foreground: #e0f2fe;
+  --color-muted: #7dd3fc;
+  --color-surface: #0c1222;
+  --color-surface-elevated: #111827;
+  --color-canvas: #030712;
+}
+
+@theme inline {
+  --color-intensity-1: var(--intensity-border-1);
+  --color-intensity-2: var(--intensity-border-2);
+  --color-intensity-3: var(--intensity-border-3);
+  --color-intensity-fill-1: var(--intensity-bg-1);
+  --color-intensity-fill-2: var(--intensity-bg-2);
+  --color-intensity-fill-3: var(--intensity-bg-3);
+  --color-intensity-ring: var(--intensity-ring);
+  --color-intensity-shadow: var(--intensity-shadow);
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    font-size: calc(16px * var(--font-scale, 1));
+    --palette-canvas: #030712;
+    --palette-surface: #0c1222;
+    --palette-surface-elevated: #111827;
+    --palette-foreground: #e0f2fe;
+    --palette-muted: #94a3b8;
+    --palette-accent: #38bdf8;
+    --color-highlight-month: #38bdf8;
+    --color-highlight-year: #f59e0b;
+
+    --excel-surface: var(--color-surface-elevated);
+    --excel-foreground: var(--color-foreground);
+    --excel-grid: color-mix(in oklab, var(--color-accent) 28%, transparent);
+    --excel-border: color-mix(in oklab, #4ade80 50%, var(--color-accent));
+    --excel-i1: color-mix(in oklab, var(--color-foreground) 5%, var(--excel-surface));
+    --excel-i2: color-mix(in oklab, var(--color-foreground) 11%, var(--excel-surface));
+    --excel-i3: color-mix(in oklab, #4ade80 22%, var(--excel-surface));
+    --excel-head-text: color-mix(in oklab, var(--color-foreground) 78%, var(--excel-surface));
+    --excel-shadow: rgb(0 0 0 / 0.45);
+  }
+
+  html[data-theme='dark'] {
+    --color-accent: var(--palette-accent);
+    --color-foreground: var(--palette-foreground);
+    --color-muted: var(--palette-muted);
+  }
+
+  html[data-theme='light'] {
+    --palette-canvas: #e2e8f0;
+    --palette-surface: #f8fafc;
+    --palette-surface-elevated: #ffffff;
+    --palette-foreground: #0f172a;
+    --palette-muted: #64748b;
+    --palette-accent: #0284c7;
+    --color-accent: var(--palette-accent);
+    --color-foreground: var(--palette-foreground);
+    --color-muted: var(--palette-muted);
+    --color-highlight-month: #0284c7;
+    --color-highlight-year: #d97706;
+
+    --excel-surface: #ffffff;
+    --excel-foreground: #1a1a1a;
+    --excel-grid: #d0d0d0;
+    --excel-border: #5c9a5c;
+    --excel-i1: #f6f8fa;
+    --excel-i2: #e8ecef;
+    --excel-i3: #d4ead4;
+    --excel-head-text: #333333;
+    --excel-shadow: rgb(15 23 42 / 0.12);
+  }
+
+  /* Escala global — tema escuro (fundo + componentes) */
+  html[data-theme='dark'][data-intensity='1'] {
+    --color-canvas: #020617;
+    --color-surface: #070d19;
+    --color-surface-elevated: #0b1220;
+    --color-foreground: var(--palette-foreground);
+    --color-muted: var(--palette-muted);
+    --color-accent: var(--palette-accent);
+    --intensity-border-1: color-mix(in oklab, var(--color-accent) 10%, transparent);
+    --intensity-border-2: color-mix(in oklab, var(--color-accent) 20%, transparent);
+    --intensity-border-3: color-mix(in oklab, var(--color-accent) 34%, transparent);
+    --intensity-bg-1: color-mix(in oklab, var(--color-accent) 3%, transparent);
+    --intensity-bg-2: color-mix(in oklab, var(--color-accent) 6%, transparent);
+    --intensity-bg-3: color-mix(in oklab, var(--color-accent) 9%, transparent);
+    --intensity-ring: color-mix(in oklab, var(--color-accent) 12%, transparent);
+    --intensity-shadow: color-mix(in oklab, var(--color-accent) 18%, transparent);
+    --intensity-row: color-mix(in oklab, var(--color-accent) 6%, transparent);
+    --intensity-surface: color-mix(in oklab, var(--color-surface) 35%, transparent);
+  }
+
+  html[data-theme='dark'][data-intensity='2'] {
+    --color-canvas: color-mix(in oklab, var(--color-accent) 18%, var(--palette-canvas));
+    --color-surface: color-mix(in oklab, var(--color-accent) 24%, var(--palette-surface));
+    --color-surface-elevated: color-mix(
+      in oklab,
+      var(--color-accent) 30%,
+      var(--palette-surface-elevated)
+    );
+    --color-foreground: color-mix(in oklab, white 8%, var(--palette-foreground));
+    --color-muted: color-mix(in oklab, white 12%, var(--palette-muted));
+    --color-accent: color-mix(in oklab, white 6%, var(--palette-accent));
+    --intensity-border-1: color-mix(in oklab, var(--color-accent) 26%, transparent);
+    --intensity-border-2: color-mix(in oklab, var(--color-accent) 44%, transparent);
+    --intensity-border-3: color-mix(in oklab, var(--color-accent) 64%, transparent);
+    --intensity-bg-1: color-mix(in oklab, var(--color-accent) 10%, transparent);
+    --intensity-bg-2: color-mix(in oklab, var(--color-accent) 16%, transparent);
+    --intensity-bg-3: color-mix(in oklab, var(--color-accent) 24%, transparent);
+    --intensity-ring: color-mix(in oklab, var(--color-accent) 26%, transparent);
+    --intensity-shadow: color-mix(in oklab, var(--color-accent) 42%, transparent);
+    --intensity-row: color-mix(in oklab, var(--color-accent) 14%, transparent);
+    --intensity-surface: color-mix(in oklab, var(--color-surface) 58%, transparent);
+  }
+
+  html[data-theme='dark'][data-intensity='3'] {
+    --color-canvas: color-mix(in oklab, var(--color-accent) 42%, var(--palette-canvas));
+    --color-surface: color-mix(in oklab, var(--color-accent) 48%, var(--palette-surface));
+    --color-surface-elevated: color-mix(
+      in oklab,
+      var(--color-accent) 54%,
+      var(--palette-surface-elevated)
+    );
+    --color-foreground: #f8fafc;
+    --color-muted: #e2e8f0;
+    --color-accent: #bae6fd;
+    --intensity-border-1: color-mix(in oklab, var(--color-accent) 40%, transparent);
+    --intensity-border-2: color-mix(in oklab, var(--color-accent) 62%, transparent);
+    --intensity-border-3: color-mix(in oklab, var(--color-accent) 88%, transparent);
+    --intensity-bg-1: color-mix(in oklab, var(--color-accent) 18%, transparent);
+    --intensity-bg-2: color-mix(in oklab, var(--color-accent) 28%, transparent);
+    --intensity-bg-3: color-mix(in oklab, var(--color-accent) 40%, transparent);
+    --intensity-ring: color-mix(in oklab, var(--color-accent) 40%, transparent);
+    --intensity-shadow: color-mix(in oklab, var(--color-accent) 62%, transparent);
+    --intensity-row: color-mix(in oklab, var(--color-accent) 22%, transparent);
+    --intensity-surface: color-mix(in oklab, var(--color-surface) 78%, transparent);
+  }
+
+  /* Escala global — tema claro (fundo + componentes) */
+  html[data-theme='light'][data-intensity='1'] {
+    --color-canvas: #eef2f7;
+    --color-surface: #f8fafc;
+    --color-surface-elevated: #ffffff;
+    --color-foreground: var(--palette-foreground);
+    --color-muted: var(--palette-muted);
+    --color-accent: var(--palette-accent);
+    --intensity-border-1: color-mix(in oklab, var(--color-accent) 12%, transparent);
+    --intensity-border-2: color-mix(in oklab, var(--color-accent) 24%, transparent);
+    --intensity-border-3: color-mix(in oklab, var(--color-accent) 38%, transparent);
+    --intensity-bg-1: color-mix(in oklab, var(--color-accent) 4%, transparent);
+    --intensity-bg-2: color-mix(in oklab, var(--color-accent) 8%, transparent);
+    --intensity-bg-3: color-mix(in oklab, var(--color-accent) 12%, transparent);
+    --intensity-ring: color-mix(in oklab, var(--color-accent) 14%, transparent);
+    --intensity-shadow: color-mix(in oklab, var(--color-accent) 16%, transparent);
+    --intensity-row: color-mix(in oklab, var(--color-accent) 6%, transparent);
+    --intensity-surface: color-mix(in oklab, var(--color-surface) 50%, transparent);
+  }
+
+  html[data-theme='light'][data-intensity='2'] {
+    --color-canvas: color-mix(in oklab, var(--color-accent) 16%, var(--palette-canvas));
+    --color-surface: color-mix(in oklab, var(--color-accent) 12%, var(--palette-surface));
+    --color-surface-elevated: color-mix(
+      in oklab,
+      var(--color-accent) 8%,
+      var(--palette-surface-elevated)
+    );
+    --color-foreground: color-mix(in oklab, #020617 6%, var(--palette-foreground));
+    --color-muted: color-mix(in oklab, #020617 10%, var(--palette-muted));
+    --color-accent: color-mix(in oklab, #020617 8%, var(--palette-accent));
+    --intensity-border-1: color-mix(in oklab, var(--color-accent) 28%, transparent);
+    --intensity-border-2: color-mix(in oklab, var(--color-accent) 46%, transparent);
+    --intensity-border-3: color-mix(in oklab, var(--color-accent) 66%, transparent);
+    --intensity-bg-1: color-mix(in oklab, var(--color-accent) 10%, transparent);
+    --intensity-bg-2: color-mix(in oklab, var(--color-accent) 16%, transparent);
+    --intensity-bg-3: color-mix(in oklab, var(--color-accent) 24%, transparent);
+    --intensity-ring: color-mix(in oklab, var(--color-accent) 28%, transparent);
+    --intensity-shadow: color-mix(in oklab, var(--color-accent) 34%, transparent);
+    --intensity-row: color-mix(in oklab, var(--color-accent) 12%, transparent);
+    --intensity-surface: color-mix(in oklab, var(--color-surface) 72%, transparent);
+  }
+
+  html[data-theme='light'][data-intensity='3'] {
+    --color-canvas: color-mix(in oklab, var(--color-accent) 36%, var(--palette-canvas));
+    --color-surface: color-mix(in oklab, var(--color-accent) 28%, var(--palette-surface));
+    --color-surface-elevated: color-mix(
+      in oklab,
+      var(--color-accent) 18%,
+      var(--palette-surface-elevated)
+    );
+    --color-foreground: #020617;
+    --color-muted: #1e3a5f;
+    --color-accent: #0369a1;
+    --intensity-border-1: color-mix(in oklab, var(--color-accent) 42%, transparent);
+    --intensity-border-2: color-mix(in oklab, var(--color-accent) 64%, transparent);
+    --intensity-border-3: color-mix(in oklab, var(--color-accent) 90%, transparent);
+    --intensity-bg-1: color-mix(in oklab, var(--color-accent) 16%, transparent);
+    --intensity-bg-2: color-mix(in oklab, var(--color-accent) 26%, transparent);
+    --intensity-bg-3: color-mix(in oklab, var(--color-accent) 38%, transparent);
+    --intensity-ring: color-mix(in oklab, var(--color-accent) 42%, transparent);
+    --intensity-shadow: color-mix(in oklab, var(--color-accent) 52%, transparent);
+    --intensity-row: color-mix(in oklab, var(--color-accent) 18%, transparent);
+    --intensity-surface: color-mix(in oklab, var(--color-surface) 88%, transparent);
+  }
+
+  body {
+    margin: 0;
+    min-height: 100dvh;
+    overflow: hidden;
+    background-color: var(--color-canvas);
+    color: var(--color-foreground);
+  }
+
+  #root {
+    min-height: 100dvh;
+  }
+
+  .app-shell {
+    background: var(--color-canvas);
+  }
+}
+
+@layer components {
+  .log-table {
+    width: 100%;
+    min-width: 36rem;
+    table-layout: fixed;
+    border-collapse: separate;
+    border-spacing: 0 0.5rem;
+  }
+
+  .log-table thead th {
+    border: 1px solid var(--intensity-border-3);
+    background-color: color-mix(in oklab, var(--color-surface) 90%, transparent);
+    padding: 0.625rem 0.75rem;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    text-align: left;
+  }
+
+  .log-table thead th:first-child {
+    border-top-left-radius: 0.75rem;
+    border-bottom-left-radius: 0.75rem;
+  }
+
+  .log-table thead th:last-child {
+    border-top-right-radius: 0.75rem;
+    border-bottom-right-radius: 0.75rem;
+  }
+
+  .log-table tbody td {
+    border: 1px solid transparent;
+    padding: 0.625rem 0.75rem;
+    font-size: 0.875rem;
+    vertical-align: middle;
+    text-align: left;
+  }
+
+  .log-table tbody tr[data-status='success'] td {
+    background-color: #14532d;
+    border-color: #4ade80;
+    color: #dcfce7;
+  }
+
+  .log-table tbody tr[data-status='error'] td {
+    background-color: #450a0a;
+    border-color: #f87171;
+    color: #fee2e2;
+  }
+
+  .log-table tbody tr[data-status='success'] td:first-child,
+  .log-table tbody tr[data-status='error'] td:first-child {
+    border-top-left-radius: 0.75rem;
+    border-bottom-left-radius: 0.75rem;
+    border-right-width: 0;
+  }
+
+  .log-table tbody tr[data-status='success'] td:nth-child(2),
+  .log-table tbody tr[data-status='error'] td:nth-child(2) {
+    border-left-width: 0;
+    border-right-width: 0;
+  }
+
+  .log-table tbody tr[data-status='success'] td:last-child,
+  .log-table tbody tr[data-status='error'] td:last-child {
+    border-top-right-radius: 0.75rem;
+    border-bottom-right-radius: 0.75rem;
+    border-left-width: 0;
+  }
+
+  .log-table .log-cell {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .log-table .log-cell--type {
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .cnpj-table thead th {
+    border: 1px solid var(--intensity-border-3);
+    background-color: color-mix(in oklab, var(--color-surface) 90%, transparent);
+    padding: 0.625rem 0.75rem;
+    font-size: 0.65rem;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    text-align: left;
+  }
+
+  .cnpj-table tbody td {
+    border: 1px solid var(--intensity-border-1);
+    padding: 0.25rem 0.5rem;
+    vertical-align: middle;
+  }
+
+  .cnpj-table tbody tr[data-highlight='true'] td {
+    background-color: var(--intensity-row);
+  }
+
+  .cnpj-table-input {
+    width: 100%;
+    border: none;
+    background: transparent;
+    padding: 0.5rem 0.375rem;
+    font-size: 0.875rem;
+    color: var(--color-foreground);
+    outline: none;
+  }
+
+  .cnpj-table-input:disabled {
+    opacity: 0.6;
+  }
+
+  .cnpj-table-input::placeholder {
+    color: color-mix(in oklab, var(--color-muted) 60%, transparent);
+  }
+
+  .explanation-page {
+    display: flex;
+    min-height: 100%;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    overflow-y: auto;
+    padding: 2rem 2rem 3rem;
+  }
+
+  .explanation-page__header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    text-align: center;
+  }
+
+  .explanation-page__version {
+    line-height: 1.1;
+  }
+
+  .explanation-page__list {
+    display: flex;
+    width: 100%;
+    max-width: min(72rem, 100%);
+    flex: 1;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .explanation-page__note {
+    width: 100%;
+    max-width: min(72rem, 100%);
+    margin: 0;
+    text-align: center;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--color-muted);
+  }
+
+  .explanation-page__footer {
+    margin-top: auto;
+    width: 100%;
+    max-width: min(72rem, 100%);
+    padding-top: 1.5rem;
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--color-muted);
+  }
+
+  .explanation-page__footer-link {
+    font-weight: 600;
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: color 0.15s ease;
+  }
+
+  .explanation-page__footer-link:hover {
+    color: var(--color-foreground);
+    text-decoration: underline;
+  }
+
+  .explanation-accordion {
+    overflow: hidden;
+    border-radius: 0.75rem;
+    border: 1px solid var(--intensity-border-3);
+    background-color: var(--intensity-surface);
+  }
+
+  .explanation-accordion__trigger {
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    border: none;
+    background: transparent;
+    padding: 1rem 1.25rem;
+    text-align: left;
+    color: var(--color-accent);
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+  }
+
+  .explanation-accordion__trigger:hover:not(:disabled) {
+    background-color: var(--intensity-bg-1);
+  }
+
+  .explanation-accordion__trigger:disabled {
+    cursor: default;
+    opacity: 0.55;
+  }
+
+  .explanation-accordion__title {
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  .explanation-accordion__chevron {
+    height: 1.25rem;
+    width: 1.25rem;
+    flex-shrink: 0;
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .explanation-accordion__chevron.is-open {
+    transform: rotate(180deg);
+  }
+
+  .explanation-accordion__panel-wrap {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .explanation-accordion__panel-wrap.is-open {
+    grid-template-rows: 1fr;
+  }
+
+  .explanation-accordion__panel {
+    overflow: hidden;
+    border-top: 1px solid transparent;
+    transition: border-color 0.35s ease;
+  }
+
+  .explanation-accordion__panel-wrap.is-open .explanation-accordion__panel {
+    border-top-color: var(--intensity-border-1);
+  }
+
+  .explanation-accordion__panel-inner {
+    min-height: 0;
+    padding: 0 1.75rem;
+    opacity: 0;
+    transform: translateY(-0.35rem);
+    transition:
+      opacity 0.35s ease,
+      transform 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      padding 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .explanation-accordion__panel-wrap.is-open .explanation-accordion__panel-inner {
+    padding: 1.35rem 1.75rem 1.65rem;
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .explanation-accordion__chevron,
+    .explanation-accordion__panel-wrap,
+    .explanation-accordion__panel,
+    .explanation-accordion__panel-inner {
+      transition: none;
+    }
+
+    .explanation-accordion__panel-inner {
+      transform: none;
+    }
+  }
+
+  .explanation-content {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    font-size: 0.9375rem;
+    line-height: 1.55;
+    color: var(--color-foreground);
+  }
+
+  .explanation-content__lead {
+    margin: 0;
+    font-weight: 600;
+    color: var(--color-accent);
+  }
+
+  .explanation-content__list {
+    margin: 0;
+    padding-left: 1.25rem;
+    color: var(--color-foreground);
+  }
+
+  .explanation-content__list li {
+    margin-bottom: 0.35rem;
+  }
+
+  .explanation-content__list--ordered {
+    list-style-type: decimal;
+  }
+
+  .explanation-content__column-order {
+    margin: 0;
+    line-height: 1.65;
+    color: var(--color-muted);
+  }
+
+  .explanation-content__sep {
+    color: var(--color-muted);
+    font-weight: 400;
+  }
+
+  .explanation-content__section {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .explanation-content__section--continued {
+    margin-top: 0.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--intensity-border-2);
+  }
+
+  .explanation-content__heading {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--color-accent);
+  }
+
+  .explanation-content__label {
+    margin: 0;
+    font-weight: 600;
+    color: var(--color-muted);
+  }
+
+  .explanation-tree {
+    margin: 0;
+    overflow-x: auto;
+    border-radius: 0.5rem;
+    border: 1px solid var(--intensity-border-1);
+    background-color: color-mix(in oklab, var(--color-canvas) 80%, transparent);
+    padding: 1rem 1.25rem;
+    font-family: ui-monospace, 'Cascadia Code', 'Consolas', monospace;
+    font-size: 0.8125rem;
+    line-height: 1.45;
+    color: var(--color-foreground);
+    white-space: pre;
+  }
+
+  .explanation-content__obs {
+    margin: 0;
+    padding-top: 0.5rem;
+    color: var(--color-muted);
+  }
+
+  .explanation-content__footnote {
+    margin: 0;
+    color: var(--color-foreground);
+  }
+
+  .explanation-filename {
+    font-family: ui-monospace, monospace;
+    color: var(--color-accent);
+  }
+
+  .explanation-month {
+    font-weight: 700;
+    color: var(--color-highlight-month);
+  }
+
+  .explanation-year {
+    font-weight: 700;
+    color: var(--color-highlight-year);
+  }
+
+  .excel-preview {
+    overflow-x: auto;
+    border-radius: 0.375rem;
+    border: 1px solid var(--excel-border);
+    box-shadow: 0 2px 12px var(--excel-shadow);
+  }
+
+  .dimob-excel-preview .excel-preview__table {
+    min-width: 52rem;
+  }
+
+  .excel-preview__header-cell {
+    font-size: 0.6875rem;
+    font-weight: 600;
+    text-align: left;
+    background: var(--excel-i2);
+    color: var(--excel-head-text);
+  }
+
+  .excel-preview__table {
+    width: 100%;
+    min-width: 40rem;
+    border-collapse: collapse;
+    font-family: 'Segoe UI', Calibri, Arial, sans-serif;
+    font-size: 0.8125rem;
+    background-color: var(--excel-surface);
+    color: var(--excel-foreground);
+  }
+
+  .excel-preview__col-head {
+    min-width: 2.25rem;
+    border: 1px solid var(--excel-grid);
+    background: var(--excel-i2);
+    padding: 0.35rem 0.5rem;
+    font-weight: 600;
+    text-align: center;
+    color: var(--excel-head-text);
+  }
+
+  .excel-preview__col-head:nth-child(5),
+  .excel-preview__col-head:nth-child(6),
+  .excel-preview__col-head:nth-child(8) {
+    background: linear-gradient(
+      180deg,
+      color-mix(in oklab, var(--excel-i3) 65%, var(--excel-i2)) 0%,
+      var(--excel-i3) 100%
+    );
+  }
+
+  .excel-preview__table td {
+    border: 1px solid var(--excel-grid);
+    padding: 0.3rem 0.5rem;
+    vertical-align: middle;
+  }
+
+  .excel-preview__empty {
+    background-color: var(--excel-i1);
+    min-width: 2.5rem;
+  }
+
+  .excel-preview__value {
+    text-align: right;
+    white-space: nowrap;
+    background-color: var(--excel-surface);
+  }
+
+  .excel-preview__date {
+    text-align: center;
+    white-space: nowrap;
+    background-color: var(--excel-surface);
+  }
+
+  .excel-preview__text {
+    min-width: 14rem;
+    background-color: var(--excel-surface);
+    font-size: 0.75rem;
+    line-height: 1.3;
+  }
+
+  .porcentagem-page {
+    font-family: var(--font-sans);
+    color: var(--color-foreground);
+  }
+
+  .porcentagem-field {
+    width: 100%;
+    border-radius: 0.75rem;
+    border: 1px solid var(--intensity-border-2);
+    background-color: color-mix(in oklab, var(--color-surface) 70%, transparent);
+    padding: 0.625rem 0.875rem;
+    font-size: 0.875rem;
+    color: var(--color-foreground);
+    outline: none;
+    transition:
+      border-color 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+
+  .porcentagem-field:focus {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 2px var(--intensity-ring);
+  }
+
+  .porcentagem-field:disabled {
+    opacity: 0.55;
+  }
+
+  .porcentagem-panel {
+    box-shadow: inset 0 0 24px -16px var(--intensity-shadow);
+  }
+
+  .porcentagem-table-input {
+    width: 100%;
+    min-width: 0;
+    border-radius: 0.5rem;
+    border: 1px solid var(--intensity-border-1);
+    background-color: color-mix(in oklab, var(--color-canvas) 50%, transparent);
+    padding: 0.35rem 0.5rem;
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    color: var(--color-foreground);
+    outline: none;
+  }
+
+  .porcentagem-table-input::placeholder {
+    color: var(--color-muted);
+  }
+
+  .porcentagem-field::placeholder {
+    color: var(--color-muted);
+  }
+
+  .porcentagem-table-input:focus {
+    border-color: var(--intensity-border-2);
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: var(--font-display);
+  }
+}

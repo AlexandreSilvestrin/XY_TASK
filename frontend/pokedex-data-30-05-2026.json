@@ -1,0 +1,2881 @@
+{
+  "pokemons": [
+    {
+      "name": "NidoranM1",
+      "sex": "male",
+      "hp": 0,
+      "ivAttack": 0,
+      "ivDefence": 31,
+      "ivSpeAttack": 0,
+      "ivSpeDefence": 31,
+      "ivSpeed": 0,
+      "slug": "Nidoran",
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/32.png",
+      "eggGroups": [
+        {
+          "name": "Monstrueux",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/a/ab/Ghost.png"
+        },
+        {
+          "name": "Terrestre",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png"
+        }
+      ],
+      "pokedexId": 32,
+      "apiEvolutions": [
+        {
+          "name": "Nidorino",
+          "pokedexId": 33
+        }
+      ],
+      "apiPreEvolution": "none",
+      "apiBaseEvolution": null,
+      "apiTypes": [
+        {
+          "name": "Poison",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/0/05/Poison.png"
+        }
+      ],
+      "englishSlug": "Nidoran",
+      "germanSlug": "Nidoran♀",
+      "forcedSex": "female",
+      "createdAt": 1779951162134,
+      "id": 1
+    },
+    {
+      "name": "Scraggy2",
+      "sex": "female",
+      "hp": 31,
+      "ivAttack": 0,
+      "ivDefence": 0,
+      "ivSpeAttack": 0,
+      "ivSpeDefence": 0,
+      "ivSpeed": 31,
+      "slug": "Baggiguane",
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/559.png",
+      "eggGroups": [
+        {
+          "name": "Draconique",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/c/c7/Dragon.png"
+        },
+        {
+          "name": "Terrestre",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png"
+        }
+      ],
+      "pokedexId": 559,
+      "apiEvolutions": [
+        {
+          "name": "Baggaïd",
+          "pokedexId": 560
+        }
+      ],
+      "apiPreEvolution": "none",
+      "apiBaseEvolution": null,
+      "apiTypes": [
+        {
+          "name": "Combat",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/3/30/Fighting.png"
+        },
+        {
+          "name": "Ténèbres",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/0/0e/Dark.png"
+        }
+      ],
+      "englishSlug": "Scraggy",
+      "germanSlug": "Zurrokex",
+      "createdAt": 1779951199463,
+      "id": 2
+    },
+    {
+      "name": "Combusken4",
+      "sex": "male",
+      "hp": 31,
+      "ivAttack": 0,
+      "ivDefence": 0,
+      "ivSpeAttack": 0,
+      "ivSpeDefence": 0,
+      "ivSpeed": 0,
+      "slug": "Galifeu",
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/256.png",
+      "eggGroups": [
+        {
+          "name": "Terrestre",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png"
+        }
+      ],
+      "pokedexId": 256,
+      "apiEvolutions": [
+        {
+          "name": "Braségali",
+          "pokedexId": 257
+        }
+      ],
+      "apiPreEvolution": {
+        "name": "Poussifeu",
+        "pokedexIdd": 255
+      },
+      "apiBaseEvolution": {
+        "id": 255,
+        "pokedexId": 255,
+        "name": "Poussifeu",
+        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/255.png",
+        "slug": "Poussifeu",
+        "stats": {
+          "HP": 45,
+          "attack": 60,
+          "defence": 40,
+          "special_attack": 70,
+          "special_defence": 50,
+          "speed": 45
+        },
+        "apiTypes": [
+          {
+            "name": "Feu",
+            "image": "https://static.wikia.nocookie.net/pokemongo/images/3/30/Fire.png"
+          }
+        ],
+        "apiGeneration": 3,
+        "apiResistances": [
+          {
+            "name": "Normal",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Combat",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Vol",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Poison",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Sol",
+            "damage_multiplier": 2,
+            "damage_relation": "vulnerable"
+          },
+          {
+            "name": "Roche",
+            "damage_multiplier": 2,
+            "damage_relation": "vulnerable"
+          },
+          {
+            "name": "Insecte",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Spectre",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Acier",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Feu",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Eau",
+            "damage_multiplier": 2,
+            "damage_relation": "vulnerable"
+          },
+          {
+            "name": "Plante",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Électrik",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Psy",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Glace",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Dragon",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Ténèbres",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Fée",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          }
+        ],
+        "resistanceModifyingAbilitiesForApi": [],
+        "apiEvolutions": [
+          {
+            "name": "Galifeu",
+            "pokedexId": 256
+          }
+        ],
+        "apiPreEvolution": "none",
+        "apiResistancesWithAbilities": [],
+        "englishSlug": "Torchic",
+        "eggGroups": [
+          {
+            "name": "Terrestre",
+            "image": "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png"
+          }
+        ],
+        "apiBaseEvolution": null,
+        "sex": "undefined",
+        "hp": 0,
+        "ivAttack": 0,
+        "ivDefence": 0,
+        "ivSpeAttack": 0,
+        "ivSpeDefence": 0,
+        "ivSpeed": 0
+      },
+      "apiTypes": [
+        {
+          "name": "Combat",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/3/30/Fighting.png"
+        },
+        {
+          "name": "Feu",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/3/30/Fire.png"
+        }
+      ],
+      "englishSlug": "Combusken",
+      "germanSlug": "Jungglut",
+      "createdAt": 1779951392553,
+      "id": 6
+    },
+    {
+      "name": "Sandile5",
+      "sex": "male",
+      "hp": 31,
+      "ivAttack": 0,
+      "ivDefence": 0,
+      "ivSpeAttack": 0,
+      "ivSpeDefence": 0,
+      "ivSpeed": 0,
+      "slug": "Mascaiman",
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/551.png",
+      "eggGroups": [
+        {
+          "name": "Terrestre",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png"
+        }
+      ],
+      "pokedexId": 551,
+      "apiEvolutions": [
+        {
+          "name": "Escroco",
+          "pokedexId": 552
+        }
+      ],
+      "apiPreEvolution": "none",
+      "apiBaseEvolution": null,
+      "apiTypes": [
+        {
+          "name": "Sol",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png"
+        },
+        {
+          "name": "Ténèbres",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/0/0e/Dark.png"
+        }
+      ],
+      "englishSlug": "Sandile",
+      "germanSlug": "Ganovil",
+      "createdAt": 1779951410952,
+      "id": 7
+    },
+    {
+      "name": "Liepard6",
+      "sex": "female",
+      "hp": 0,
+      "ivAttack": 31,
+      "ivDefence": 0,
+      "ivSpeAttack": 0,
+      "ivSpeDefence": 0,
+      "ivSpeed": 0,
+      "slug": "Leopardus",
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/510.png",
+      "eggGroups": [
+        {
+          "name": "Terrestre",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png"
+        }
+      ],
+      "pokedexId": 510,
+      "apiEvolutions": [],
+      "apiPreEvolution": {
+        "name": "Chacripan",
+        "pokedexIdd": 509
+      },
+      "apiBaseEvolution": {
+        "id": 509,
+        "pokedexId": 509,
+        "name": "Chacripan",
+        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/509.png",
+        "slug": "Chacripan",
+        "stats": {
+          "HP": 41,
+          "attack": 50,
+          "defence": 37,
+          "special_attack": 50,
+          "special_defence": 37,
+          "speed": 66
+        },
+        "apiTypes": [
+          {
+            "name": "Ténèbres",
+            "image": "https://static.wikia.nocookie.net/pokemongo/images/0/0e/Dark.png"
+          }
+        ],
+        "apiGeneration": 5,
+        "apiResistances": [
+          {
+            "name": "Normal",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Combat",
+            "damage_multiplier": 2,
+            "damage_relation": "vulnerable"
+          },
+          {
+            "name": "Vol",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Poison",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Sol",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Roche",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Insecte",
+            "damage_multiplier": 2,
+            "damage_relation": "vulnerable"
+          },
+          {
+            "name": "Spectre",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Acier",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Feu",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Eau",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Plante",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Électrik",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Psy",
+            "damage_multiplier": 0,
+            "damage_relation": "immune"
+          },
+          {
+            "name": "Glace",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Dragon",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Ténèbres",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Fée",
+            "damage_multiplier": 2,
+            "damage_relation": "vulnerable"
+          }
+        ],
+        "resistanceModifyingAbilitiesForApi": [],
+        "apiEvolutions": [
+          {
+            "name": "Léopardus",
+            "pokedexId": 510
+          }
+        ],
+        "apiPreEvolution": "none",
+        "apiResistancesWithAbilities": [],
+        "englishSlug": "Purrloin",
+        "eggGroups": [
+          {
+            "name": "Terrestre",
+            "image": "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png"
+          }
+        ],
+        "apiBaseEvolution": null,
+        "sex": "undefined",
+        "hp": 0,
+        "ivAttack": 0,
+        "ivDefence": 0,
+        "ivSpeAttack": 0,
+        "ivSpeDefence": 0,
+        "ivSpeed": 0
+      },
+      "id": 8,
+      "apiTypes": [
+        {
+          "name": "Ténèbres",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/0/0e/Dark.png"
+        }
+      ],
+      "createdAt": 1779951474378,
+      "isUsedInSavedBreed": false,
+      "forcedSex": null,
+      "englishSlug": "Liepard",
+      "germanSlug": "Kleoparda"
+    },
+    {
+      "name": "Liepard7",
+      "sex": "male",
+      "hp": 0,
+      "ivAttack": 31,
+      "ivDefence": 0,
+      "ivSpeAttack": 0,
+      "ivSpeDefence": 0,
+      "ivSpeed": 0,
+      "slug": "Leopardus",
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/510.png",
+      "eggGroups": [
+        {
+          "name": "Terrestre",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png"
+        }
+      ],
+      "pokedexId": 510,
+      "apiEvolutions": [],
+      "apiPreEvolution": {
+        "name": "Chacripan",
+        "pokedexIdd": 509
+      },
+      "apiBaseEvolution": {
+        "id": 509,
+        "pokedexId": 509,
+        "name": "Chacripan",
+        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/509.png",
+        "slug": "Chacripan",
+        "stats": {
+          "HP": 41,
+          "attack": 50,
+          "defence": 37,
+          "special_attack": 50,
+          "special_defence": 37,
+          "speed": 66
+        },
+        "apiTypes": [
+          {
+            "name": "Ténèbres",
+            "image": "https://static.wikia.nocookie.net/pokemongo/images/0/0e/Dark.png"
+          }
+        ],
+        "apiGeneration": 5,
+        "apiResistances": [
+          {
+            "name": "Normal",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Combat",
+            "damage_multiplier": 2,
+            "damage_relation": "vulnerable"
+          },
+          {
+            "name": "Vol",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Poison",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Sol",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Roche",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Insecte",
+            "damage_multiplier": 2,
+            "damage_relation": "vulnerable"
+          },
+          {
+            "name": "Spectre",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Acier",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Feu",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Eau",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Plante",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Électrik",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Psy",
+            "damage_multiplier": 0,
+            "damage_relation": "immune"
+          },
+          {
+            "name": "Glace",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Dragon",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Ténèbres",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Fée",
+            "damage_multiplier": 2,
+            "damage_relation": "vulnerable"
+          }
+        ],
+        "resistanceModifyingAbilitiesForApi": [],
+        "apiEvolutions": [
+          {
+            "name": "Léopardus",
+            "pokedexId": 510
+          }
+        ],
+        "apiPreEvolution": "none",
+        "apiResistancesWithAbilities": [],
+        "englishSlug": "Purrloin",
+        "eggGroups": [
+          {
+            "name": "Terrestre",
+            "image": "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png"
+          }
+        ],
+        "apiBaseEvolution": null,
+        "sex": "undefined",
+        "hp": 0,
+        "ivAttack": 0,
+        "ivDefence": 0,
+        "ivSpeAttack": 0,
+        "ivSpeDefence": 0,
+        "ivSpeed": 0
+      },
+      "apiTypes": [
+        {
+          "name": "Ténèbres",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/0/0e/Dark.png"
+        }
+      ],
+      "englishSlug": "Liepard",
+      "germanSlug": "Kleoparda",
+      "createdAt": 1779951474381,
+      "id": 9
+    },
+    {
+      "name": "Sandshrew8",
+      "sex": "female",
+      "hp": 0,
+      "ivAttack": 31,
+      "ivDefence": 0,
+      "ivSpeAttack": 0,
+      "ivSpeDefence": 0,
+      "ivSpeed": 0,
+      "slug": "Sabelette",
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/27.png",
+      "eggGroups": [
+        {
+          "name": "Terrestre",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png"
+        }
+      ],
+      "pokedexId": 27,
+      "apiEvolutions": [
+        {
+          "name": "Sablaireau",
+          "pokedexId": 28
+        }
+      ],
+      "apiPreEvolution": "none",
+      "apiBaseEvolution": null,
+      "apiTypes": [
+        {
+          "name": "Sol",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png"
+        }
+      ],
+      "englishSlug": "Sandshrew",
+      "germanSlug": "Sandan",
+      "createdAt": 1779951521367,
+      "id": 10
+    },
+    {
+      "name": "Buizel9",
+      "sex": "male",
+      "hp": 0,
+      "ivAttack": 0,
+      "ivDefence": 0,
+      "ivSpeAttack": 0,
+      "ivSpeDefence": 31,
+      "ivSpeed": 0,
+      "slug": "Mustebouee",
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/418.png",
+      "eggGroups": [
+        {
+          "name": "Aquatique 1",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/9/9d/Water.png"
+        },
+        {
+          "name": "Terrestre",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png"
+        }
+      ],
+      "pokedexId": 418,
+      "apiEvolutions": [
+        {
+          "name": "Mustéflott",
+          "pokedexId": 419
+        }
+      ],
+      "apiPreEvolution": "none",
+      "apiBaseEvolution": null,
+      "apiTypes": [
+        {
+          "name": "Eau",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/9/9d/Water.png"
+        }
+      ],
+      "englishSlug": "Buizel",
+      "germanSlug": "Bamelin",
+      "createdAt": 1779951545140,
+      "id": 11
+    },
+    {
+      "name": "Mankey10",
+      "sex": "male",
+      "hp": 0,
+      "ivAttack": 0,
+      "ivDefence": 31,
+      "ivSpeAttack": 0,
+      "ivSpeDefence": 0,
+      "ivSpeed": 0,
+      "slug": "Ferosinge",
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/56.png",
+      "eggGroups": [
+        {
+          "name": "Terrestre",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png"
+        }
+      ],
+      "pokedexId": 56,
+      "apiEvolutions": [
+        {
+          "name": "Colossinge",
+          "pokedexId": 57
+        }
+      ],
+      "apiPreEvolution": "none",
+      "apiBaseEvolution": null,
+      "apiTypes": [
+        {
+          "name": "Combat",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/3/30/Fighting.png"
+        }
+      ],
+      "englishSlug": "Mankey",
+      "germanSlug": "Menki",
+      "createdAt": 1779951568275,
+      "id": 12
+    },
+    {
+      "name": "Combusken11",
+      "sex": "male",
+      "hp": 0,
+      "ivAttack": 0,
+      "ivDefence": 31,
+      "ivSpeAttack": 0,
+      "ivSpeDefence": 0,
+      "ivSpeed": 0,
+      "slug": "Galifeu",
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/256.png",
+      "eggGroups": [
+        {
+          "name": "Terrestre",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png"
+        }
+      ],
+      "pokedexId": 256,
+      "apiEvolutions": [
+        {
+          "name": "Braségali",
+          "pokedexId": 257
+        }
+      ],
+      "apiPreEvolution": {
+        "name": "Poussifeu",
+        "pokedexIdd": 255
+      },
+      "apiBaseEvolution": {
+        "id": 255,
+        "pokedexId": 255,
+        "name": "Poussifeu",
+        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/255.png",
+        "slug": "Poussifeu",
+        "stats": {
+          "HP": 45,
+          "attack": 60,
+          "defence": 40,
+          "special_attack": 70,
+          "special_defence": 50,
+          "speed": 45
+        },
+        "apiTypes": [
+          {
+            "name": "Feu",
+            "image": "https://static.wikia.nocookie.net/pokemongo/images/3/30/Fire.png"
+          }
+        ],
+        "apiGeneration": 3,
+        "apiResistances": [
+          {
+            "name": "Normal",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Combat",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Vol",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Poison",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Sol",
+            "damage_multiplier": 2,
+            "damage_relation": "vulnerable"
+          },
+          {
+            "name": "Roche",
+            "damage_multiplier": 2,
+            "damage_relation": "vulnerable"
+          },
+          {
+            "name": "Insecte",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Spectre",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Acier",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Feu",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Eau",
+            "damage_multiplier": 2,
+            "damage_relation": "vulnerable"
+          },
+          {
+            "name": "Plante",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Électrik",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Psy",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Glace",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Dragon",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Ténèbres",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Fée",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          }
+        ],
+        "resistanceModifyingAbilitiesForApi": [],
+        "apiEvolutions": [
+          {
+            "name": "Galifeu",
+            "pokedexId": 256
+          }
+        ],
+        "apiPreEvolution": "none",
+        "apiResistancesWithAbilities": [],
+        "englishSlug": "Torchic",
+        "eggGroups": [
+          {
+            "name": "Terrestre",
+            "image": "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png"
+          }
+        ],
+        "apiBaseEvolution": null,
+        "sex": "undefined",
+        "hp": 0,
+        "ivAttack": 0,
+        "ivDefence": 0,
+        "ivSpeAttack": 0,
+        "ivSpeDefence": 0,
+        "ivSpeed": 0
+      },
+      "id": 13,
+      "apiTypes": [
+        {
+          "name": "Combat",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/3/30/Fighting.png"
+        },
+        {
+          "name": "Feu",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/3/30/Fire.png"
+        }
+      ],
+      "createdAt": 1779951614956,
+      "isUsedInSavedBreed": false,
+      "forcedSex": null,
+      "englishSlug": "Combusken",
+      "germanSlug": "Jungglut"
+    },
+    {
+      "name": "Mienfoo12",
+      "sex": "female",
+      "hp": 0,
+      "ivAttack": 0,
+      "ivDefence": 31,
+      "ivSpeAttack": 0,
+      "ivSpeDefence": 0,
+      "ivSpeed": 0,
+      "slug": "Kungfouine",
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/619.png",
+      "eggGroups": [
+        {
+          "name": "Terrestre",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png"
+        },
+        {
+          "name": "Humanoïde",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/2/21/Psychic.png"
+        }
+      ],
+      "pokedexId": 619,
+      "apiEvolutions": [
+        {
+          "name": "Shaofouine",
+          "pokedexId": 620
+        }
+      ],
+      "apiPreEvolution": "none",
+      "apiBaseEvolution": null,
+      "apiTypes": [
+        {
+          "name": "Combat",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/3/30/Fighting.png"
+        }
+      ],
+      "englishSlug": "Mienfoo",
+      "germanSlug": "Lin-Fu",
+      "createdAt": 1779954538609,
+      "id": 14
+    },
+    {
+      "name": "Lucario14",
+      "sex": "male",
+      "hp": 0,
+      "ivAttack": 0,
+      "ivDefence": 0,
+      "ivSpeAttack": 31,
+      "ivSpeDefence": 0,
+      "ivSpeed": 0,
+      "slug": "Lucario",
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/448.png",
+      "eggGroups": [
+        {
+          "name": "Terrestre",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png"
+        },
+        {
+          "name": "Humanoïde",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/2/21/Psychic.png"
+        }
+      ],
+      "pokedexId": 448,
+      "apiEvolutions": [],
+      "apiPreEvolution": {
+        "name": "Riolu",
+        "pokedexIdd": 447
+      },
+      "apiBaseEvolution": {
+        "id": 447,
+        "pokedexId": 447,
+        "name": "Riolu",
+        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/447.png",
+        "slug": "Riolu",
+        "stats": {
+          "HP": 40,
+          "attack": 70,
+          "defence": 40,
+          "special_attack": 35,
+          "special_defence": 40,
+          "speed": 60
+        },
+        "apiTypes": [
+          {
+            "name": "Combat",
+            "image": "https://static.wikia.nocookie.net/pokemongo/images/3/30/Fighting.png"
+          }
+        ],
+        "apiGeneration": 4,
+        "apiResistances": [
+          {
+            "name": "Normal",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Combat",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Vol",
+            "damage_multiplier": 2,
+            "damage_relation": "vulnerable"
+          },
+          {
+            "name": "Poison",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Sol",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Roche",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Insecte",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Spectre",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Acier",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Feu",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Eau",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Plante",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Électrik",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Psy",
+            "damage_multiplier": 2,
+            "damage_relation": "vulnerable"
+          },
+          {
+            "name": "Glace",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Dragon",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Ténèbres",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Fée",
+            "damage_multiplier": 2,
+            "damage_relation": "vulnerable"
+          }
+        ],
+        "resistanceModifyingAbilitiesForApi": [],
+        "apiEvolutions": [
+          {
+            "name": "Lucario",
+            "pokedexId": 448
+          }
+        ],
+        "apiPreEvolution": "none",
+        "apiResistancesWithAbilities": [],
+        "englishSlug": "Riolu",
+        "apiBaseEvolution": null,
+        "sex": "undefined",
+        "hp": 0,
+        "ivAttack": 0,
+        "ivDefence": 0,
+        "ivSpeAttack": 0,
+        "ivSpeDefence": 0,
+        "ivSpeed": 0
+      },
+      "apiTypes": [
+        {
+          "name": "Combat",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/3/30/Fighting.png"
+        },
+        {
+          "name": "Acier",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/c/c9/Steel.png"
+        }
+      ],
+      "englishSlug": "Lucario",
+      "germanSlug": "Lucario",
+      "createdAt": 1779954578695,
+      "id": 16
+    },
+    {
+      "name": "Blitzle15",
+      "sex": "female",
+      "hp": 0,
+      "ivAttack": 0,
+      "ivDefence": 0,
+      "ivSpeAttack": 0,
+      "ivSpeDefence": 31,
+      "ivSpeed": 0,
+      "slug": "Zebibron",
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/522.png",
+      "eggGroups": [
+        {
+          "name": "Terrestre",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png"
+        }
+      ],
+      "pokedexId": 522,
+      "apiEvolutions": [
+        {
+          "name": "Zéblitz",
+          "pokedexId": 523
+        }
+      ],
+      "apiPreEvolution": "none",
+      "apiBaseEvolution": null,
+      "apiTypes": [
+        {
+          "name": "Électrik",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/2/2f/Electric.png"
+        }
+      ],
+      "englishSlug": "Blitzle",
+      "germanSlug": "Elezeba",
+      "createdAt": 1779954613506,
+      "id": 17
+    },
+    {
+      "name": "Spinda16",
+      "sex": "male",
+      "hp": 0,
+      "ivAttack": 0,
+      "ivDefence": 0,
+      "ivSpeAttack": 0,
+      "ivSpeDefence": 31,
+      "ivSpeed": 0,
+      "slug": "Spinda",
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/327.png",
+      "eggGroups": [
+        {
+          "name": "Terrestre",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png"
+        },
+        {
+          "name": "Humanoïde",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/2/21/Psychic.png"
+        }
+      ],
+      "pokedexId": 327,
+      "apiEvolutions": [],
+      "apiPreEvolution": "none",
+      "apiBaseEvolution": null,
+      "apiTypes": [
+        {
+          "name": "Normal",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/f/fb/Normal.png"
+        }
+      ],
+      "englishSlug": "Spinda",
+      "germanSlug": "Pandir",
+      "createdAt": 1779954643018,
+      "id": 18
+    },
+    {
+      "name": "Bouffalant17",
+      "sex": "female",
+      "hp": 0,
+      "ivAttack": 0,
+      "ivDefence": 0,
+      "ivSpeAttack": 0,
+      "ivSpeDefence": 0,
+      "ivSpeed": 31,
+      "slug": "Frison",
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/626.png",
+      "eggGroups": [
+        {
+          "name": "Terrestre",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png"
+        }
+      ],
+      "pokedexId": 626,
+      "apiEvolutions": [],
+      "apiPreEvolution": "none",
+      "apiBaseEvolution": null,
+      "apiTypes": [
+        {
+          "name": "Normal",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/f/fb/Normal.png"
+        }
+      ],
+      "englishSlug": "Bouffalant",
+      "germanSlug": "Bisofank",
+      "createdAt": 1779954672774,
+      "id": 19
+    },
+    {
+      "name": "Golduck18",
+      "sex": "male",
+      "hp": 0,
+      "ivAttack": 0,
+      "ivDefence": 0,
+      "ivSpeAttack": 0,
+      "ivSpeDefence": 0,
+      "ivSpeed": 31,
+      "slug": "Akwakwak",
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/55.png",
+      "eggGroups": [
+        {
+          "name": "Aquatique 1",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/9/9d/Water.png"
+        },
+        {
+          "name": "Terrestre",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png"
+        }
+      ],
+      "pokedexId": 55,
+      "apiEvolutions": [],
+      "apiPreEvolution": {
+        "name": "Psykokwak",
+        "pokedexIdd": 54
+      },
+      "apiBaseEvolution": {
+        "id": 54,
+        "pokedexId": 54,
+        "name": "Psykokwak",
+        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/54.png",
+        "slug": "Psykokwak",
+        "stats": {
+          "HP": 50,
+          "attack": 52,
+          "defence": 48,
+          "special_attack": 65,
+          "special_defence": 50,
+          "speed": 55
+        },
+        "apiTypes": [
+          {
+            "name": "Eau",
+            "image": "https://static.wikia.nocookie.net/pokemongo/images/9/9d/Water.png"
+          }
+        ],
+        "apiGeneration": 1,
+        "apiResistances": [
+          {
+            "name": "Normal",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Combat",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Vol",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Poison",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Sol",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Roche",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Insecte",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Spectre",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Acier",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Feu",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Eau",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Plante",
+            "damage_multiplier": 2,
+            "damage_relation": "vulnerable"
+          },
+          {
+            "name": "Électrik",
+            "damage_multiplier": 2,
+            "damage_relation": "vulnerable"
+          },
+          {
+            "name": "Psy",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Glace",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Dragon",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Ténèbres",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Fée",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          }
+        ],
+        "resistanceModifyingAbilitiesForApi": [],
+        "apiEvolutions": [
+          {
+            "name": "Akwakwak",
+            "pokedexId": 55
+          }
+        ],
+        "apiPreEvolution": "none",
+        "apiResistancesWithAbilities": [],
+        "englishSlug": "Psyduck",
+        "eggGroups": [
+          {
+            "name": "Aquatique 1",
+            "image": "https://static.wikia.nocookie.net/pokemongo/images/9/9d/Water.png"
+          },
+          {
+            "name": "Terrestre",
+            "image": "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png"
+          }
+        ],
+        "apiBaseEvolution": null,
+        "sex": "undefined",
+        "hp": 0,
+        "ivAttack": 0,
+        "ivDefence": 0,
+        "ivSpeAttack": 0,
+        "ivSpeDefence": 0,
+        "ivSpeed": 0
+      },
+      "apiTypes": [
+        {
+          "name": "Eau",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/9/9d/Water.png"
+        }
+      ],
+      "englishSlug": "Golduck",
+      "germanSlug": "Entoron",
+      "createdAt": 1779954689174,
+      "id": 20
+    },
+    {
+      "name": "Sandile19",
+      "sex": "female",
+      "hp": 0,
+      "ivAttack": 0,
+      "ivDefence": 0,
+      "ivSpeAttack": 0,
+      "ivSpeDefence": 0,
+      "ivSpeed": 31,
+      "slug": "Mascaiman",
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/551.png",
+      "eggGroups": [
+        {
+          "name": "Terrestre",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png"
+        }
+      ],
+      "pokedexId": 551,
+      "apiEvolutions": [
+        {
+          "name": "Escroco",
+          "pokedexId": 552
+        }
+      ],
+      "apiPreEvolution": "none",
+      "apiBaseEvolution": null,
+      "apiTypes": [
+        {
+          "name": "Sol",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png"
+        },
+        {
+          "name": "Ténèbres",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/0/0e/Dark.png"
+        }
+      ],
+      "englishSlug": "Sandile",
+      "germanSlug": "Ganovil",
+      "createdAt": 1779954713656,
+      "id": 21
+    },
+    {
+      "name": "Electrike20",
+      "sex": "male",
+      "hp": 0,
+      "ivAttack": 0,
+      "ivDefence": 0,
+      "ivSpeAttack": 0,
+      "ivSpeDefence": 0,
+      "ivSpeed": 31,
+      "slug": "Dynavolt",
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/309.png",
+      "eggGroups": [
+        {
+          "name": "Terrestre",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png"
+        }
+      ],
+      "pokedexId": 309,
+      "apiEvolutions": [
+        {
+          "name": "Élecsprint",
+          "pokedexId": 310
+        }
+      ],
+      "apiPreEvolution": "none",
+      "apiBaseEvolution": null,
+      "apiTypes": [
+        {
+          "name": "Électrik",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/2/2f/Electric.png"
+        }
+      ],
+      "englishSlug": "Electrike",
+      "germanSlug": "Frizelbliz",
+      "createdAt": 1779954730335,
+      "id": 22
+    },
+    {
+      "name": "Zoroark21",
+      "sex": "male",
+      "hp": 0,
+      "ivAttack": 0,
+      "ivDefence": 0,
+      "ivSpeAttack": 0,
+      "ivSpeDefence": 0,
+      "ivSpeed": 31,
+      "slug": "Zoroark",
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/571.png",
+      "eggGroups": [
+        {
+          "name": "Terrestre",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png"
+        }
+      ],
+      "pokedexId": 571,
+      "apiEvolutions": [],
+      "apiPreEvolution": {
+        "name": "Zorua",
+        "pokedexIdd": 570
+      },
+      "apiBaseEvolution": {
+        "id": 570,
+        "pokedexId": 570,
+        "name": "Zorua",
+        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/570.png",
+        "slug": "Zorua",
+        "stats": {
+          "HP": 40,
+          "attack": 65,
+          "defence": 40,
+          "special_attack": 80,
+          "special_defence": 40,
+          "speed": 65
+        },
+        "apiTypes": [
+          {
+            "name": "Ténèbres",
+            "image": "https://static.wikia.nocookie.net/pokemongo/images/0/0e/Dark.png"
+          }
+        ],
+        "apiGeneration": 5,
+        "apiResistances": [
+          {
+            "name": "Normal",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Combat",
+            "damage_multiplier": 2,
+            "damage_relation": "vulnerable"
+          },
+          {
+            "name": "Vol",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Poison",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Sol",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Roche",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Insecte",
+            "damage_multiplier": 2,
+            "damage_relation": "vulnerable"
+          },
+          {
+            "name": "Spectre",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Acier",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Feu",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Eau",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Plante",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Électrik",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Psy",
+            "damage_multiplier": 0,
+            "damage_relation": "immune"
+          },
+          {
+            "name": "Glace",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Dragon",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Ténèbres",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Fée",
+            "damage_multiplier": 2,
+            "damage_relation": "vulnerable"
+          }
+        ],
+        "resistanceModifyingAbilitiesForApi": [],
+        "apiEvolutions": [
+          {
+            "name": "Zoroark",
+            "pokedexId": 571
+          }
+        ],
+        "apiPreEvolution": "none",
+        "apiResistancesWithAbilities": [],
+        "englishSlug": "Zorua",
+        "eggGroups": [
+          {
+            "name": "Terrestre",
+            "image": "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png"
+          }
+        ],
+        "apiBaseEvolution": null,
+        "sex": "undefined",
+        "hp": 0,
+        "ivAttack": 0,
+        "ivDefence": 0,
+        "ivSpeAttack": 0,
+        "ivSpeDefence": 0,
+        "ivSpeed": 0
+      },
+      "apiTypes": [
+        {
+          "name": "Ténèbres",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/0/0e/Dark.png"
+        }
+      ],
+      "englishSlug": "Zoroark",
+      "germanSlug": "Zoroark",
+      "createdAt": 1779954759110,
+      "id": 23
+    },
+    {
+      "name": "Raichu22",
+      "sex": "male",
+      "hp": 0,
+      "ivAttack": 0,
+      "ivDefence": 0,
+      "ivSpeAttack": 31,
+      "ivSpeDefence": 0,
+      "ivSpeed": 31,
+      "slug": "Raichu",
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/26.png",
+      "eggGroups": [
+        {
+          "name": "Terrestre",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png"
+        },
+        {
+          "name": "Féerique",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/4/43/Fairy.png"
+        }
+      ],
+      "pokedexId": 26,
+      "apiEvolutions": [],
+      "apiPreEvolution": {
+        "name": "Pikachu",
+        "pokedexIdd": 25
+      },
+      "apiBaseEvolution": {
+        "id": 25,
+        "pokedexId": 25,
+        "name": "Pikachu",
+        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/25.png",
+        "slug": "Pikachu",
+        "stats": {
+          "HP": 35,
+          "attack": 55,
+          "defence": 40,
+          "special_attack": 50,
+          "special_defence": 50,
+          "speed": 90
+        },
+        "apiTypes": [
+          {
+            "name": "Électrik",
+            "image": "https://static.wikia.nocookie.net/pokemongo/images/2/2f/Electric.png"
+          }
+        ],
+        "apiGeneration": 1,
+        "apiResistances": [
+          {
+            "name": "Normal",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Combat",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Vol",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Poison",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Sol",
+            "damage_multiplier": 2,
+            "damage_relation": "vulnerable"
+          },
+          {
+            "name": "Roche",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Insecte",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Spectre",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Acier",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Feu",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Eau",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Plante",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Électrik",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Psy",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Glace",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Dragon",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Ténèbres",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Fée",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          }
+        ],
+        "resistanceModifyingAbilitiesForApi": {
+          "name": "Paratonnerre",
+          "slug": "Paratonnerre"
+        },
+        "apiEvolutions": [
+          {
+            "name": "Raichu",
+            "pokedexId": 26
+          }
+        ],
+        "apiPreEvolution": "none",
+        "apiResistancesWithAbilities": [
+          {
+            "name": "Normal",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Combat",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Vol",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Poison",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Sol",
+            "damage_multiplier": 2,
+            "damage_relation": "vulnerable"
+          },
+          {
+            "name": "Roche",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Insecte",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Spectre",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Acier",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Feu",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Eau",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Plante",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Électrik",
+            "damage_multiplier": 0,
+            "damage_relation": "immune"
+          },
+          {
+            "name": "Psy",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Glace",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Dragon",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Ténèbres",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Fée",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          }
+        ],
+        "englishSlug": "Pikachu",
+        "eggGroups": [
+          {
+            "name": "Terrestre",
+            "image": "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png"
+          },
+          {
+            "name": "Féerique",
+            "image": "https://static.wikia.nocookie.net/pokemongo/images/4/43/Fairy.png"
+          }
+        ],
+        "apiBaseEvolution": null,
+        "sex": "undefined",
+        "hp": 0,
+        "ivAttack": 0,
+        "ivDefence": 0,
+        "ivSpeAttack": 0,
+        "ivSpeDefence": 0,
+        "ivSpeed": 0
+      },
+      "apiTypes": [
+        {
+          "name": "Électrik",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/2/2f/Electric.png"
+        }
+      ],
+      "englishSlug": "Raichu",
+      "germanSlug": "Raichu",
+      "createdAt": 1779955257398,
+      "id": 24
+    },
+    {
+      "name": "Rhyperior23",
+      "sex": "male",
+      "hp": 31,
+      "ivAttack": 0,
+      "ivDefence": 0,
+      "ivSpeAttack": 0,
+      "ivSpeDefence": 0,
+      "ivSpeed": 0,
+      "slug": "Rhinastoc",
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/464.png",
+      "eggGroups": [
+        {
+          "name": "Monstrueux",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/a/ab/Ghost.png"
+        },
+        {
+          "name": "Terrestre",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png"
+        }
+      ],
+      "pokedexId": 464,
+      "apiEvolutions": [],
+      "apiPreEvolution": {
+        "name": "Rhinoféros",
+        "pokedexIdd": 112
+      },
+      "apiBaseEvolution": {
+        "id": 111,
+        "pokedexId": 111,
+        "name": "Rhinocorne",
+        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/111.png",
+        "slug": "Rhinocorne",
+        "stats": {
+          "HP": 80,
+          "attack": 85,
+          "defence": 95,
+          "special_attack": 30,
+          "special_defence": 30,
+          "speed": 25
+        },
+        "apiTypes": [
+          {
+            "name": "Sol",
+            "image": "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png"
+          },
+          {
+            "name": "Roche",
+            "image": "https://static.wikia.nocookie.net/pokemongo/images/0/0b/Rock.png"
+          }
+        ],
+        "apiGeneration": 1,
+        "apiResistances": [
+          {
+            "name": "Normal",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Combat",
+            "damage_multiplier": 2,
+            "damage_relation": "vulnerable"
+          },
+          {
+            "name": "Vol",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Poison",
+            "damage_multiplier": 0.25,
+            "damage_relation": "twice_resistant"
+          },
+          {
+            "name": "Sol",
+            "damage_multiplier": 2,
+            "damage_relation": "vulnerable"
+          },
+          {
+            "name": "Roche",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Insecte",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Spectre",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Acier",
+            "damage_multiplier": 2,
+            "damage_relation": "vulnerable"
+          },
+          {
+            "name": "Feu",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Eau",
+            "damage_multiplier": 4,
+            "damage_relation": "twice_vulnerable"
+          },
+          {
+            "name": "Plante",
+            "damage_multiplier": 4,
+            "damage_relation": "twice_vulnerable"
+          },
+          {
+            "name": "Électrik",
+            "damage_multiplier": 0,
+            "damage_relation": "immune"
+          },
+          {
+            "name": "Psy",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Glace",
+            "damage_multiplier": 2,
+            "damage_relation": "vulnerable"
+          },
+          {
+            "name": "Dragon",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Ténèbres",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Fée",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          }
+        ],
+        "resistanceModifyingAbilitiesForApi": {
+          "name": "Paratonnerre",
+          "slug": "Paratonnerre"
+        },
+        "apiEvolutions": [
+          {
+            "name": "Rhinoféros",
+            "pokedexId": 112
+          }
+        ],
+        "apiPreEvolution": "none",
+        "apiResistancesWithAbilities": [
+          {
+            "name": "Normal",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Combat",
+            "damage_multiplier": 2,
+            "damage_relation": "vulnerable"
+          },
+          {
+            "name": "Vol",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Poison",
+            "damage_multiplier": 0.25,
+            "damage_relation": "twice_resistant"
+          },
+          {
+            "name": "Sol",
+            "damage_multiplier": 2,
+            "damage_relation": "vulnerable"
+          },
+          {
+            "name": "Roche",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Insecte",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Spectre",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Acier",
+            "damage_multiplier": 2,
+            "damage_relation": "vulnerable"
+          },
+          {
+            "name": "Feu",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Eau",
+            "damage_multiplier": 4,
+            "damage_relation": "twice_vulnerable"
+          },
+          {
+            "name": "Plante",
+            "damage_multiplier": 4,
+            "damage_relation": "twice_vulnerable"
+          },
+          {
+            "name": "Électrik",
+            "damage_multiplier": 0,
+            "damage_relation": "immune"
+          },
+          {
+            "name": "Psy",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Glace",
+            "damage_multiplier": 2,
+            "damage_relation": "vulnerable"
+          },
+          {
+            "name": "Dragon",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Ténèbres",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Fée",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          }
+        ],
+        "englishSlug": "Rhyhorn",
+        "eggGroups": [
+          {
+            "name": "Monstrueux",
+            "image": "https://static.wikia.nocookie.net/pokemongo/images/a/ab/Ghost.png"
+          },
+          {
+            "name": "Terrestre",
+            "image": "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png"
+          }
+        ],
+        "apiBaseEvolution": null,
+        "sex": "undefined",
+        "hp": 0,
+        "ivAttack": 0,
+        "ivDefence": 0,
+        "ivSpeAttack": 0,
+        "ivSpeDefence": 0,
+        "ivSpeed": 0
+      },
+      "apiTypes": [
+        {
+          "name": "Sol",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png"
+        },
+        {
+          "name": "Roche",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/0/0b/Rock.png"
+        }
+      ],
+      "englishSlug": "Rhyperior",
+      "germanSlug": "Rihornior",
+      "createdAt": 1779955381392,
+      "id": 25
+    },
+    {
+      "name": "Skitty27",
+      "sex": "male",
+      "hp": 0,
+      "ivAttack": 0,
+      "ivDefence": 0,
+      "ivSpeAttack": 31,
+      "ivSpeDefence": 0,
+      "ivSpeed": 0,
+      "slug": "Skitty",
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/300.png",
+      "eggGroups": [
+        {
+          "name": "Terrestre",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png"
+        },
+        {
+          "name": "Féerique",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/4/43/Fairy.png"
+        }
+      ],
+      "pokedexId": 300,
+      "apiEvolutions": [
+        {
+          "name": "Delcatty",
+          "pokedexId": 301
+        }
+      ],
+      "apiPreEvolution": "none",
+      "apiBaseEvolution": null,
+      "apiTypes": [
+        {
+          "name": "Normal",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/f/fb/Normal.png"
+        }
+      ],
+      "englishSlug": "Skitty",
+      "germanSlug": "Eneco",
+      "createdAt": 1779959576465,
+      "id": 29
+    },
+    {
+      "name": "Absol28",
+      "sex": "female",
+      "hp": 31,
+      "ivAttack": 0,
+      "ivDefence": 0,
+      "ivSpeAttack": 0,
+      "ivSpeDefence": 0,
+      "ivSpeed": 0,
+      "slug": "Absol",
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/359.png",
+      "eggGroups": [
+        {
+          "name": "Terrestre",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png"
+        }
+      ],
+      "pokedexId": 359,
+      "apiEvolutions": [],
+      "apiPreEvolution": "none",
+      "apiBaseEvolution": null,
+      "apiTypes": [
+        {
+          "name": "Ténèbres",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/0/0e/Dark.png"
+        }
+      ],
+      "englishSlug": "Absol",
+      "germanSlug": "Absol",
+      "createdAt": 1779961484481,
+      "id": 30
+    },
+    {
+      "name": "Ditto28",
+      "sex": "undefined",
+      "hp": 0,
+      "ivAttack": 31,
+      "ivDefence": 0,
+      "ivSpeAttack": 0,
+      "ivSpeDefence": 31,
+      "ivSpeed": 0,
+      "slug": "Metamorph",
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png",
+      "eggGroups": [
+        {
+          "name": "Métamorph",
+          "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png"
+        }
+      ],
+      "pokedexId": 132,
+      "apiEvolutions": [],
+      "apiPreEvolution": "none",
+      "apiBaseEvolution": null,
+      "id": 32,
+      "apiTypes": [
+        {
+          "name": "Normal",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/f/fb/Normal.png"
+        }
+      ],
+      "createdAt": 1780174753521,
+      "isUsedInSavedBreed": false,
+      "forcedSex": null,
+      "englishSlug": "Ditto",
+      "germanSlug": "Ditto"
+    },
+    {
+      "name": "Persian26",
+      "sex": "female",
+      "hp": 0,
+      "ivAttack": 0,
+      "ivDefence": 0,
+      "ivSpeAttack": 0,
+      "ivSpeDefence": 0,
+      "ivSpeed": 31,
+      "slug": "Persian",
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/53.png",
+      "eggGroups": [
+        {
+          "name": "Terrestre",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png"
+        }
+      ],
+      "pokedexId": 53,
+      "apiEvolutions": [],
+      "apiPreEvolution": {
+        "name": "Miaouss",
+        "pokedexIdd": 52
+      },
+      "apiBaseEvolution": {
+        "id": 52,
+        "pokedexId": 52,
+        "name": "Miaouss",
+        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/52.png",
+        "slug": "Miaouss",
+        "stats": {
+          "HP": 40,
+          "attack": 45,
+          "defence": 35,
+          "special_attack": 40,
+          "special_defence": 40,
+          "speed": 90
+        },
+        "apiTypes": [
+          {
+            "name": "Normal",
+            "image": "https://static.wikia.nocookie.net/pokemongo/images/f/fb/Normal.png"
+          }
+        ],
+        "apiGeneration": 1,
+        "apiResistances": [
+          {
+            "name": "Normal",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Combat",
+            "damage_multiplier": 2,
+            "damage_relation": "vulnerable"
+          },
+          {
+            "name": "Vol",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Poison",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Sol",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Roche",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Insecte",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Spectre",
+            "damage_multiplier": 0,
+            "damage_relation": "immune"
+          },
+          {
+            "name": "Acier",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Feu",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Eau",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Plante",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Électrik",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Psy",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Glace",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Dragon",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Ténèbres",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Fée",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          }
+        ],
+        "resistanceModifyingAbilitiesForApi": [],
+        "apiEvolutions": [
+          {
+            "name": "Persian",
+            "pokedexId": 53
+          },
+          {
+            "name": "Berserkatt",
+            "pokedexId": 863
+          }
+        ],
+        "apiPreEvolution": "none",
+        "apiResistancesWithAbilities": [],
+        "englishSlug": "Meowth",
+        "eggGroups": [
+          {
+            "name": "Terrestre",
+            "image": "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png"
+          }
+        ],
+        "apiBaseEvolution": null,
+        "sex": "undefined",
+        "hp": 0,
+        "ivAttack": 0,
+        "ivDefence": 0,
+        "ivSpeAttack": 0,
+        "ivSpeDefence": 0,
+        "ivSpeed": 0
+      },
+      "apiTypes": [
+        {
+          "name": "Normal",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/f/fb/Normal.png"
+        }
+      ],
+      "englishSlug": "Persian",
+      "germanSlug": "Snobilikat",
+      "createdAt": 1780174852328,
+      "id": 33
+    },
+    {
+      "name": "Ditto27",
+      "sex": "undefined",
+      "hp": 0,
+      "ivAttack": 31,
+      "ivDefence": 0,
+      "ivSpeAttack": 0,
+      "ivSpeDefence": 0,
+      "ivSpeed": 0,
+      "slug": "Metamorph",
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png",
+      "eggGroups": [
+        {
+          "name": "Métamorph",
+          "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png"
+        }
+      ],
+      "pokedexId": 132,
+      "apiEvolutions": [],
+      "apiPreEvolution": "none",
+      "apiBaseEvolution": null,
+      "apiTypes": [
+        {
+          "name": "Normal",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/f/fb/Normal.png"
+        }
+      ],
+      "englishSlug": "Ditto",
+      "germanSlug": "Ditto",
+      "createdAt": 1780189980616,
+      "id": 34
+    },
+    {
+      "name": "Quilava28",
+      "sex": "male",
+      "hp": 0,
+      "ivAttack": 0,
+      "ivDefence": 0,
+      "ivSpeAttack": 0,
+      "ivSpeDefence": 0,
+      "ivSpeed": 31,
+      "slug": "Feurisson",
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/156.png",
+      "eggGroups": [
+        {
+          "name": "Terrestre",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png"
+        }
+      ],
+      "pokedexId": 156,
+      "apiEvolutions": [
+        {
+          "name": "Typhlosion",
+          "pokedexId": 157
+        }
+      ],
+      "apiPreEvolution": {
+        "name": "Héricendre",
+        "pokedexIdd": 155
+      },
+      "apiBaseEvolution": {
+        "id": 155,
+        "pokedexId": 155,
+        "name": "Héricendre",
+        "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/155.png",
+        "slug": "Hericendre",
+        "stats": {
+          "HP": 39,
+          "attack": 52,
+          "defence": 43,
+          "special_attack": 60,
+          "special_defence": 50,
+          "speed": 65
+        },
+        "apiTypes": [
+          {
+            "name": "Feu",
+            "image": "https://static.wikia.nocookie.net/pokemongo/images/3/30/Fire.png"
+          }
+        ],
+        "apiGeneration": 2,
+        "apiResistances": [
+          {
+            "name": "Normal",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Combat",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Vol",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Poison",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Sol",
+            "damage_multiplier": 2,
+            "damage_relation": "vulnerable"
+          },
+          {
+            "name": "Roche",
+            "damage_multiplier": 2,
+            "damage_relation": "vulnerable"
+          },
+          {
+            "name": "Insecte",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Spectre",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Acier",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Feu",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Eau",
+            "damage_multiplier": 2,
+            "damage_relation": "vulnerable"
+          },
+          {
+            "name": "Plante",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Électrik",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Psy",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Glace",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Dragon",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Ténèbres",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Fée",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          }
+        ],
+        "resistanceModifyingAbilitiesForApi": {
+          "name": "Torche",
+          "slug": "Torche"
+        },
+        "apiEvolutions": [
+          {
+            "name": "Feurisson",
+            "pokedexId": 156
+          }
+        ],
+        "apiPreEvolution": "none",
+        "apiResistancesWithAbilities": [
+          {
+            "name": "Normal",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Combat",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Vol",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Poison",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Sol",
+            "damage_multiplier": 2,
+            "damage_relation": "vulnerable"
+          },
+          {
+            "name": "Roche",
+            "damage_multiplier": 2,
+            "damage_relation": "vulnerable"
+          },
+          {
+            "name": "Insecte",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Spectre",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Acier",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Feu",
+            "damage_multiplier": 0,
+            "damage_relation": "immune"
+          },
+          {
+            "name": "Eau",
+            "damage_multiplier": 2,
+            "damage_relation": "vulnerable"
+          },
+          {
+            "name": "Plante",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Électrik",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Psy",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Glace",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          },
+          {
+            "name": "Dragon",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Ténèbres",
+            "damage_multiplier": 1,
+            "damage_relation": "neutral"
+          },
+          {
+            "name": "Fée",
+            "damage_multiplier": 0.5,
+            "damage_relation": "resistant"
+          }
+        ],
+        "englishSlug": "Cyndaquil",
+        "eggGroups": [
+          {
+            "name": "Terrestre",
+            "image": "https://static.wikia.nocookie.net/pokemongo/images/8/8f/Ground.png"
+          }
+        ],
+        "apiBaseEvolution": null,
+        "sex": "undefined",
+        "hp": 0,
+        "ivAttack": 0,
+        "ivDefence": 0,
+        "ivSpeAttack": 0,
+        "ivSpeDefence": 0,
+        "ivSpeed": 0
+      },
+      "apiTypes": [
+        {
+          "name": "Feu",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/3/30/Fire.png"
+        }
+      ],
+      "englishSlug": "Quilava",
+      "germanSlug": "Igelavar",
+      "createdAt": 1780190049248,
+      "id": 35
+    },
+    {
+      "name": "Ditto29",
+      "sex": "undefined",
+      "hp": 0,
+      "ivAttack": 0,
+      "ivDefence": 0,
+      "ivSpeAttack": 31,
+      "ivSpeDefence": 0,
+      "ivSpeed": 0,
+      "slug": "Metamorph",
+      "sprite": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png",
+      "eggGroups": [
+        {
+          "name": "Métamorph",
+          "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/132.png"
+        }
+      ],
+      "pokedexId": 132,
+      "apiEvolutions": [],
+      "apiPreEvolution": "none",
+      "apiBaseEvolution": null,
+      "apiTypes": [
+        {
+          "name": "Normal",
+          "image": "https://static.wikia.nocookie.net/pokemongo/images/f/fb/Normal.png"
+        }
+      ],
+      "englishSlug": "Ditto",
+      "germanSlug": "Ditto",
+      "createdAt": 1780190077386,
+      "id": 36
+    }
+  ]
+}
