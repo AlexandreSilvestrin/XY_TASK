@@ -130,9 +130,10 @@ XY_TASK/
 | Modo | Local |
 |------|-------|
 | Desenvolvimento | `data/` na pasta do projeto |
-| Instalado (.exe) | `%LOCALAPPDATA%\XYT\data\` |
+| Instalado (.exe) | `%LOCALAPPDATA%\XY TASK\data\` |
+| Tema e preferências (WebView) | `%LOCALAPPDATA%\XY TASK\webview\` |
 
-Na primeira execução instalada, os arquivos de `data/seed/` são copiados automaticamente.
+Na primeira execução instalada, os arquivos de `data/seed/` são copiados automaticamente. O tema (claro/escuro), tamanho da fonte e intensidade de cor são salvos pelo React em `localStorage` e persistem entre aberturas graças ao `storage_path` do pywebview.
 
 ---
 

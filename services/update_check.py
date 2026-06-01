@@ -1,11 +1,15 @@
+import ctypes
 import json
 import os
 import sys
 import urllib.error
 import urllib.request
+from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
-from tkinter import Label, Tk, Toplevel, messagebox
+from threading import Thread
+
+from config.caminhos import get_local_app_dir
 
 GITHUB_RELEASES_URL = (
     "https://api.github.com/repos/AlexandreSilvestrin/XY_TASK/releases/latest"
@@ -16,6 +20,10 @@ _REQUEST_HEADERS = {
     "User-Agent": "XY-TASK",
 }
 
+_MB_OKCANCEL = 0x00000001
+_MB_ICONINFORMATION = 0x00000040
+_IDOK = 1
+
 
 @dataclass(frozen=True)
 class UpdateInfo:
@@ -24,12 +32,8 @@ class UpdateInfo:
 
 
 def get_installer_dir() -> Path:
-    """Pasta onde o instalador é salvo: %LOCALAPPDATA%\\XYT\\updates\\"""
-    local_app_data = os.environ.get("LOCALAPPDATA")
-    if not local_app_data:
-        local_app_data = str(Path.home() / "AppData" / "Local")
-
-    path = Path(local_app_data) / "XYT" / "updates"
+    """Pasta onde o instalador é salvo: %LOCALAPPDATA%\\XY TASK\\updates\\"""
+    path = get_local_app_dir() / "updates"
     path.mkdir(parents=True, exist_ok=True)
     return path
 
@@ -94,41 +98,38 @@ def fetch_latest_release() -> UpdateInfo | None:
 
 
 def _download_installer(download_url: str, destination: Path) -> None:
-    root = Tk()
-    root.withdraw()
-
-    progress = Toplevel(root)
-    progress.title("Atualização")
-    progress.attributes("-topmost", True)
-    progress.resizable(False, False)
-    Label(progress, text="Baixando atualização, aguarde...").pack(padx=20, pady=20)
-    progress.update()
-
-    try:
-        request = urllib.request.Request(download_url, headers=_REQUEST_HEADERS)
-        with urllib.request.urlopen(request, timeout=300) as response:
-            destination.write_bytes(response.read())
-    finally:
-        progress.destroy()
-        root.destroy()
+    request = urllib.request.Request(download_url, headers=_REQUEST_HEADERS)
+    with urllib.request.urlopen(request, timeout=300) as response:
+        destination.write_bytes(response.read())
 
 
 def _prompt_update_available(update: UpdateInfo, current: str) -> bool:
+    message = (
+        f"Uma nova versão ({update.version}) está disponível.\n\n"
+        f"Versão atual: {current}\n\n"
+        "O instalador já foi baixado. Ao clicar em OK, o programa "
+        "será encerrado e a instalação será iniciada."
+    )
+
+    if sys.platform == "win32":
+        result = ctypes.windll.user32.MessageBoxW(
+            0,
+            message,
+            "Atualização disponível",
+            _MB_OKCANCEL | _MB_ICONINFORMATION,
+        )
+        return result == _IDOK
+
+    from tkinter import Tk, messagebox
+
     root = Tk()
     root.withdraw()
     root.attributes("-topmost", True)
-
     accepted = messagebox.askokcancel(
         "Atualização disponível",
-        (
-            f"Uma nova versão ({update.version}) está disponível.\n\n"
-            f"Versão atual: {current}\n\n"
-            "O instalador já foi baixado. Ao clicar em OK, o programa "
-            "será encerrado e a instalação será iniciada."
-        ),
+        message,
         icon="info",
     )
-
     root.destroy()
     return accepted
 
@@ -141,15 +142,17 @@ def _run_installer(installer_path: Path) -> None:
         os.execv(installer_path, [str(installer_path)])
 
 
-def check_and_apply_update(current_version: str) -> bool:
-    """Verifica atualização na abertura. Retorna True se o app deve encerrar."""
+def _update_worker(
+    current_version: str,
+    on_before_exit: Callable[[], None] | None,
+) -> None:
     try:
         update = fetch_latest_release()
     except (urllib.error.URLError, TimeoutError, OSError, json.JSONDecodeError):
-        return False
+        return
 
     if update is None or not is_newer_version(update.version, current_version):
-        return False
+        return
 
     installer_path = get_installer_path(update.version)
 
@@ -157,15 +160,32 @@ def check_and_apply_update(current_version: str) -> bool:
         try:
             _download_installer(update.download_url, installer_path)
         except (urllib.error.URLError, TimeoutError, OSError):
-            return False
+            return
 
     _cleanup_old_installers(installer_path)
 
     if not _prompt_update_available(update, current_version):
-        return False
+        return
 
     try:
         _run_installer(installer_path)
-        return True
     except OSError:
-        return False
+        return
+
+    if on_before_exit is not None:
+        on_before_exit()
+    os._exit(0)
+
+
+def start_update_check(
+    current_version: str,
+    on_before_exit: Callable[[], None] | None = None,
+) -> None:
+    """Verifica e baixa atualização em background, sem bloquear a abertura do app."""
+    thread = Thread(
+        target=_update_worker,
+        args=(current_version, on_before_exit),
+        daemon=True,
+        name="update-check",
+    )
+    thread.start()

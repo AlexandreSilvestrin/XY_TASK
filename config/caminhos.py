@@ -3,7 +3,7 @@ import shutil
 import sys
 from pathlib import Path
 
-APP_NAME = "XYT"
+APP_NAME = "XY TASK"
 
 SEED_FILES = (
     "BANCOCNPJ.db",
@@ -27,12 +27,23 @@ def get_seed_dir() -> Path:
     return get_base_dir() / "data" / "seed"
 
 
+def get_local_app_dir() -> Path:
+    local_app_data = os.environ.get("LOCALAPPDATA")
+    if not local_app_data:
+        local_app_data = Path.home() / "AppData" / "Local"
+    return Path(local_app_data) / APP_NAME
+
+
+def get_webview_storage_dir() -> Path:
+    """Pasta persistente do WebView (localStorage, cookies, tema)."""
+    path = get_local_app_dir() / "webview"
+    path.mkdir(parents=True, exist_ok=True)
+    return path
+
+
 def get_data_dir() -> Path:
     if is_installed():
-        local_app_data = os.environ.get("LOCALAPPDATA")
-        if not local_app_data:
-            local_app_data = Path.home() / "AppData" / "Local"
-        path = Path(local_app_data) / APP_NAME / "data"
+        path = get_local_app_dir() / "data"
     else:
         path = get_base_dir() / "data"
 
