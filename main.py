@@ -21,6 +21,7 @@ from routes.notas_routes import notas_bp
 from routes.prn_routes import prn_bp
 from routes.razao_routes import razao_bp
 from services.cnpj_service import encerrar_pesquisa_cnpj
+from services.update_check import check_and_apply_update
 from app_webview import run_webview
 from websocket.emitter import init_socketio
 
@@ -199,6 +200,9 @@ def wait_for_server(url: str, timeout: float = 30) -> bool:
 # ---------------------------------------------------
 
 def main():
+    if check_and_apply_update(__version__):
+        os._exit(0)
+
     setup_data()
 
     flask_thread = Thread(
