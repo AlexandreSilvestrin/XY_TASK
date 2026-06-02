@@ -136,7 +136,11 @@ def salvar_cnpjs(payload):
             continue
         cnpj = str(item.get("cnpj", "")).strip()
         nome = str(item.get("nome", "")).strip()
-        if cnpj and nome:
+        if (
+            cnpj
+            and nome
+            and nome.upper() != CNPJModel.NOME_NAO_ENCONTRADO
+        ):
             rows.append({"CNPJ": cnpj.zfill(14), "Nome": nome})
 
     try:

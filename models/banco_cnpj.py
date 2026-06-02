@@ -9,6 +9,28 @@ from config.caminhos import Caminhos
 class CNPJModel:
     filepath = Caminhos.CAMINHO_BANCO_CNPJ
     _TABLE = "banco_cnpj"
+    NOME_NAO_ENCONTRADO = "NAO ENCONTRADO"
+
+    @staticmethod
+    def _nome_invalido(nome) -> bool:
+        if pd.isna(nome):
+            return False
+        return str(nome).strip().upper() == CNPJModel.NOME_NAO_ENCONTRADO
+
+    @staticmethod
+    def _filtrar_validos(df: pd.DataFrame) -> pd.DataFrame:
+        if df.empty:
+            return df
+
+        filtrado = df.copy()
+        filtrado["CNPJ"] = filtrado["CNPJ"].astype(str).str.strip()
+        filtrado["Nome"] = filtrado["Nome"].apply(
+            lambda x: str(x).strip() if pd.notna(x) else ""
+        )
+        return filtrado[
+            (filtrado["CNPJ"] != "")
+            & (~filtrado["Nome"].apply(CNPJModel._nome_invalido))
+        ].reset_index(drop=True)
 
     @staticmethod
     def _db_path():
@@ -47,6 +69,7 @@ class CNPJModel:
     @staticmethod
     def save_data(df):
         """Salva o DataFrame no SQLite preservando a ordem das linhas."""
+        df = CNPJModel._filtrar_validos(df[["CNPJ", "Nome"]])
         conn = CNPJModel._connect()
         try:
             conn.execute(f"DELETE FROM {CNPJModel._TABLE}")
@@ -66,7 +89,7 @@ class CNPJModel:
     @staticmethod
     def banco_to_dict():
         """Retorna todo o banco de dados como um dicionário (ordem preservada)."""
-        df = CNPJModel.load_data()
+        df = CNPJModel._filtrar_validos(CNPJModel.load_data())
         if df.empty:
             return {}
         df["CNPJ"] = df["CNPJ"].apply(lambda x: str(x).zfill(14))
@@ -76,18 +99,28 @@ class CNPJModel:
     @staticmethod
     def add_new_data(df):
         """Adiciona apenas linhas com CNPJ que ainda não existem no banco."""
-        existing_df = CNPJModel.load_data()
+        df = CNPJModel._filtrar_validos(df[["CNPJ", "Nome"]])
+        existing_raw = CNPJModel.load_data()
+        existing_df = CNPJModel._filtrar_validos(existing_raw)
+
+        if df.empty:
+            if len(existing_df) < len(existing_raw):
+                CNPJModel.save_data(existing_df)
+            return
 
         if existing_df.empty:
-            CNPJModel.save_data(df[["CNPJ", "Nome"]])
+            CNPJModel.save_data(df)
             return
 
         new_data = df[~df["CNPJ"].isin(existing_df["CNPJ"])]
+        precisa_limpar = len(existing_df) < len(existing_raw)
 
-        if not new_data.empty:
-            updated_df = pd.concat([existing_df, new_data], ignore_index=True)
-            updated_df = updated_df.drop_duplicates(subset="CNPJ", keep="first")
-            CNPJModel.save_data(updated_df)
+        if new_data.empty and not precisa_limpar:
+            return
+
+        updated_df = pd.concat([existing_df, new_data], ignore_index=True)
+        updated_df = updated_df.drop_duplicates(subset="CNPJ", keep="first")
+        CNPJModel.save_data(updated_df)
 
     @staticmethod
     def info_data():
@@ -96,7 +129,7 @@ class CNPJModel:
 
     @staticmethod
     def exportar_db(folder_path):
-        dfbanco = CNPJModel.load_data()
+        dfbanco = CNPJModel._filtrar_validos(CNPJModel.load_data())
         dfbanco = dfbanco[["CNPJ", "Nome"]]
         dfbanco["CNPJ"] = dfbanco["CNPJ"].apply(lambda x: str(x).zfill(14))
         destino = Path(folder_path) / "BANCOCNPJ.xlsx"
@@ -108,8 +141,9 @@ class CNPJModel:
         dfbanco = pd.read_excel(file_path, dtype=str)
         dfbanco = dfbanco[["CNPJ", "Nome"]]
         dfbanco["CNPJ"] = dfbanco["CNPJ"].apply(lambda x: str(x).zfill(14))
-        CNPJModel.add_new_data(dfbanco)
-        return len(dfbanco)
+        validos = CNPJModel._filtrar_validos(dfbanco)
+        CNPJModel.add_new_data(validos)
+        return len(validos)
 
 
 if __name__ == "__main__":

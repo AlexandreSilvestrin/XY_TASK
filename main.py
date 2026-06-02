@@ -14,6 +14,7 @@ from flask import Flask, jsonify, request, send_from_directory
 from flask_socketio import SocketIO
 
 from config.caminhos import setup as setup_data
+from config.single_instance import ensure_single_instance
 from config.version import __version__
 from routes.cnpj_routes import cnpj_bp
 from routes.dimob_routes import dimob_bp
@@ -200,6 +201,9 @@ def wait_for_server(url: str, timeout: float = 30) -> bool:
 # ---------------------------------------------------
 
 def main():
+    if not ensure_single_instance():
+        return
+
     setup_data()
 
     flask_thread = Thread(

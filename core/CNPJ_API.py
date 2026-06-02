@@ -91,19 +91,19 @@ def executar_pesquisa_cnpj(data, stop_event, emit_progress):
             emit_progress(i, cnpj, "")
             continue
 
-
-        emit_log(
-            module="cnpj",
-            status="sucesso",
-            file=cnpj,
-            message=f"CNPJ PESQUISADO",
-        )
-
         if stop_event.is_set():
             return
 
         nome = consultar_cnpj_api(cnpj, stop_event)
         emit_progress(i, cnpj, nome)
+
+        if nome != "NAO ENCONTRADO":
+            emit_log(
+                module="cnpj",
+                status="sucesso",
+                file=cnpj,
+                message="CNPJ pesquisado",
+            )
 
         if stop_event.is_set():
             emit_log(
