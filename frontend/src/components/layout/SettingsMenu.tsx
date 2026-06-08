@@ -3,6 +3,7 @@ import {
   useAppSettings,
   type AccentIntensity,
 } from '../../context/AppSettingsContext'
+import { useLicenses } from '../../context/LicenseContext'
 
 type SettingsMenuProps = {
   open: boolean
@@ -26,6 +27,7 @@ export function SettingsMenu({ open, collapsed, onClose }: SettingsMenuProps) {
     increaseFont,
     decreaseFont,
   } = useAppSettings()
+  const { openLicenseModal } = useLicenses()
   const menuRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -149,6 +151,19 @@ export function SettingsMenu({ open, collapsed, onClose }: SettingsMenuProps) {
                 A+
               </button>
             </div>
+          </section>
+
+          <section className="rounded-lg px-2 py-1">
+            <button
+              type="button"
+              onClick={() => {
+                openLicenseModal()
+                onClose()
+              }}
+              className="flex w-full items-center justify-center rounded-lg border border-intensity-2 px-3 py-2.5 text-xs font-semibold uppercase tracking-wide text-accent transition-colors hover:bg-intensity-fill-2"
+            >
+              Licença
+            </button>
           </section>
         </div>
       </div>

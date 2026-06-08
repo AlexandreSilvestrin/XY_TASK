@@ -25,33 +25,37 @@ def consultar_cnpj_api(cnpj: str, stop_event=None) -> str:
         if stop_event is not None and stop_event.is_set():
             return "NAO ENCONTRADO"
 
-        teste = requests.get(
-            f"https://receitaws.com.br/v1/cnpj/{cnpj}",
+        response_opencnpj = requests.get(
+            f"https://api.opencnpj.org/{cnpj}?dataset=receita",
             timeout=REQUEST_TIMEOUT,
         )
         if stop_event is not None and stop_event.is_set():
             return "NAO ENCONTRADO"
 
-        if teste.status_code == 200:
+        if response_opencnpj.status_code == 200:
             try:
-                dados_json = teste.json()
-                return dados_json["nome"]
-            except (KeyError, TypeError, ValueError):
-                return "NAO ENCONTRADO"
-
-        teste2 = requests.get(
-            f"https://brasilapi.com.br/api/cnpj/v1/{cnpj}",
-            timeout=REQUEST_TIMEOUT,
-        )
-        if stop_event is not None and stop_event.is_set():
-            return "NAO ENCONTRADO"
-
-        if teste2.status_code == 200:
-            try:
-                dados_json = teste2.json()
+                dados_json = response_opencnpj.json()
                 return dados_json["razao_social"]
             except (KeyError, TypeError, ValueError):
                 return "NAO ENCONTRADO"
+
+        if response_opencnpj.status_code == 404:
+                return "NAO ENCONTRADO"
+
+        #Faz a consulta no Brasil API
+        response_aws = requests.get(
+            f"https://api.opencnpj.org/{cnpj}?dataset=receita",
+        )
+
+        if response_aws.status_code == 200:
+            try:
+                dados_json = response_aws.json()
+                return dados_json["razao_social"]
+            except (KeyError, TypeError, ValueError):
+                return "NAO ENCONTRADO"
+
+        if response_aws.status_code == 404:
+            return "NAO ENCONTRADO"
 
         emit_log(
             module="cnpj",

@@ -1,16 +1,26 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { usePageOverlay } from '../../context/PageOverlayContext'
+import { useLicenses } from '../../context/LicenseContext'
+import { isLicensedPageId } from '../../lib/licenses'
 import { PAGE_COMPONENTS } from '../../pages'
 import AdicionarPorcentagemPage from '../../pages/AdicionarPorcentagemPage'
 import PesquisarCNPJPage from '../../pages/PesquisarCNPJPage'
 import type { PageId } from '../../types/navigation'
+import { LicenseModal } from './LicenseModal'
 import { ResizablePagesLogs } from './ResizablePagesLogs'
 import { Sidebar } from './Sidebar'
 
 export function AppShell() {
-  const { overlay, cnpjInitialRows, closeOverlay } = usePageOverlay()
+  const { overlay, cnpjInitialRows, requestCloseOverlay } = usePageOverlay()
+  const { isPageLicensed } = useLicenses()
   const [collapsed, setCollapsed] = useState(false)
   const [activePage, setActivePage] = useState<PageId>('home')
+
+  useEffect(() => {
+    if (!isPageLicensed(activePage)) {
+      setActivePage('home')
+    }
+  }, [activePage, isPageLicensed])
 
   const ActivePage = PAGE_COMPONENTS[activePage]
 
@@ -30,8 +40,8 @@ export function AppShell() {
         activePage={activePage}
         onToggleCollapse={() => setCollapsed((value) => !value)}
         onNavigate={(page) => {
-          if (overlay) closeOverlay()
-          setActivePage(page)
+          if (isLicensedPageId(page) && !isPageLicensed(page)) return
+          requestCloseOverlay(() => setActivePage(page))
         }}
       />
 
@@ -40,6 +50,8 @@ export function AppShell() {
           {mainContent}
         </ResizablePagesLogs>
       </div>
+
+      <LicenseModal />
     </div>
   )
 }

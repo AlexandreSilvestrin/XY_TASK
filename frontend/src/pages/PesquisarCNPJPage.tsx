@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { ApiError } from '../api/client'
 import {
   iniciarPesquisaCnpj,
@@ -54,8 +54,9 @@ function parseProgressEvent(data: unknown): CnpjProgressEvent | null {
 export default function PesquisarCNPJPage({
   initialRows = [],
 }: PesquisarCNPJPageProps) {
-  const { closeOverlay } = usePageOverlay()
+  const { closeOverlay, registerOverlayGuard } = usePageOverlay()
   const socket = useAppSocket()
+  const pendingCloseRef = useRef<(() => void) | null>(null)
 
   const [rows, setRows] = useState<CnpjRow[]>(() => normalizeInitialRows(initialRows))
   const [status, setStatus] = useState<CnpjSearchStatus>('parado')
@@ -81,6 +82,18 @@ export default function PesquisarCNPJPage({
     if (!researchStarted) return false
     return rows.some((row) => row.nome.trim() !== '')
   }, [researchStarted, rows])
+
+  useEffect(() => {
+    registerOverlayGuard({
+      hasUnsavedChanges: () => hasUnsavedChanges,
+      requestClose: (onConfirmed) => {
+        pendingCloseRef.current = onConfirmed
+        setConfirmCancelOpen(true)
+      },
+    })
+
+    return () => registerOverlayGuard(null)
+  }, [hasUnsavedChanges, registerOverlayGuard])
 
   const updateRow = useCallback((index: number, field: keyof CnpjRow, value: string) => {
     setRows((prev) =>
@@ -203,6 +216,7 @@ export default function PesquisarCNPJPage({
 
   function handleCancelar() {
     if (hasUnsavedChanges) {
+      pendingCloseRef.current = () => closeOverlay()
       setConfirmCancelOpen(true)
       return
     }
@@ -211,7 +225,14 @@ export default function PesquisarCNPJPage({
 
   function confirmCancel() {
     setConfirmCancelOpen(false)
-    closeOverlay()
+    const pending = pendingCloseRef.current
+    pendingCloseRef.current = null
+    pending?.()
+  }
+
+  function dismissCancelConfirm() {
+    setConfirmCancelOpen(false)
+    pendingCloseRef.current = null
   }
 
   const busy = loadingIniciar || loadingParar || loadingSalvar
@@ -308,7 +329,7 @@ export default function PesquisarCNPJPage({
         confirmLabel="Sim, cancelar"
         cancelLabel="Voltar"
         onConfirm={confirmCancel}
-        onCancel={() => setConfirmCancelOpen(false)}
+        onCancel={dismissCancelConfirm}
       />
     </>
   )

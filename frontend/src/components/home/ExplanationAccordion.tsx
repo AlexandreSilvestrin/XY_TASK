@@ -27,9 +27,11 @@ export function ExplanationAccordion({
         className="explanation-accordion__trigger"
       >
         <span className="explanation-accordion__title">{title}</span>
-        {canExpand && (
-          <ChevronIcon className={`explanation-accordion__chevron ${open ? 'is-open' : ''}`} />
-        )}
+        <ChevronIcon
+          className={`explanation-accordion__chevron ${open ? 'is-open' : ''} ${
+            disabled ? 'opacity-40' : ''
+          }`}
+        />
       </button>
 
       {canExpand && (

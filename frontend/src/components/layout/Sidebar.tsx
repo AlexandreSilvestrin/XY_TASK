@@ -1,4 +1,6 @@
 import { useState } from 'react'
+import { useLicenses } from '../../context/LicenseContext'
+import { isLicensedPageId } from '../../lib/licenses'
 import type { NavItem, PageId } from '../../types/navigation'
 import { SettingsMenu } from './SettingsMenu'
 
@@ -24,6 +26,7 @@ export function Sidebar({
   onNavigate,
 }: SidebarProps) {
   const [settingsOpen, setSettingsOpen] = useState(false)
+  const { isPageLicensed } = useLicenses()
 
   return (
     <aside
@@ -55,21 +58,29 @@ export function Sidebar({
       </div>
 
       <nav className="flex flex-1 flex-col gap-1 overflow-y-auto p-2">
-        {NAV_ITEMS.map((item) => (
+        {NAV_ITEMS.map((item) => {
+          const locked = isLicensedPageId(item.id) && !isPageLicensed(item.id)
+
+          return (
           <button
             key={item.id}
             type="button"
-            onClick={() => onNavigate(item.id)}
-            title={item.label}
+            onClick={() => !locked && onNavigate(item.id)}
+            disabled={locked}
+            title={locked ? `${item.label} (bloqueado)` : item.label}
             className={`group flex items-center gap-2 rounded-xl px-3 py-2.5 text-left text-sm font-semibold uppercase tracking-wide transition-all ${
-              activePage === item.id
+              locked
+                ? 'cursor-not-allowed border border-transparent text-foreground/35'
+                : activePage === item.id
                 ? 'border border-intensity-3 bg-intensity-fill-3 text-accent shadow-[inset_0_0_20px_-12px] shadow-intensity-shadow'
                 : 'border border-transparent text-foreground/80 hover:border-intensity-2 hover:bg-intensity-fill-1 hover:text-accent'
             } ${collapsed ? 'justify-center px-2' : ''}`}
           >
             <span
               className={`flex h-7 w-7 shrink-0 items-center justify-center rounded-md border text-xs font-bold ${
-                activePage === item.id
+                locked
+                  ? 'border-intensity-1 text-foreground/30'
+                  : activePage === item.id
                   ? 'border-accent bg-intensity-fill-3 text-accent'
                   : 'border-intensity-2 text-accent/80 group-hover:border-intensity-3'
               }`}
@@ -78,7 +89,8 @@ export function Sidebar({
             </span>
             {!collapsed && <span className="leading-tight">{item.label}</span>}
           </button>
-        ))}
+          )
+        })}
       </nav>
 
       <div className="relative overflow-visible border-t border-intensity-1 p-2">
