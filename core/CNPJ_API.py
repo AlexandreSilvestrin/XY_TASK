@@ -19,60 +19,64 @@ def _aguardar_interrompivel(segundos: int, stop_event) -> bool:
 
 def consultar_cnpj_api(cnpj: str, stop_event=None) -> str:
     max_tentativas = 3
-    tentativas = 0
 
-    while tentativas < max_tentativas:
+    for tentativa in range(max_tentativas):
+
         if stop_event is not None and stop_event.is_set():
             return "NAO ENCONTRADO"
 
-        response_opencnpj = requests.get(
-            f"https://api.opencnpj.org/{cnpj}?dataset=receita",
-            timeout=REQUEST_TIMEOUT,
-        )
+        # OpenCNPJ
+        try:
+            response = requests.get(
+                f"https://api.opencnpj.org/{cnpj}?dataset=receita",
+                timeout=REQUEST_TIMEOUT,
+            )
+
+            if response.status_code == 200:
+                dados = response.json()
+                return dados.get("razao_social", "NAO ENCONTRADO")
+
+        except requests.RequestException as e:
+            emit_log(
+                module="cnpj",
+                status="warning",
+                file=cnpj,
+                message=f"Erro OpenCNPJ: {e}"
+            )
+
         if stop_event is not None and stop_event.is_set():
             return "NAO ENCONTRADO"
 
-        if response_opencnpj.status_code == 200:
-            try:
-                dados_json = response_opencnpj.json()
-                return dados_json["razao_social"]
-            except (KeyError, TypeError, ValueError):
-                return "NAO ENCONTRADO"
+        # ReceitaWS
+        try:
+            response = requests.get(
+                f"https://receitaws.com.br/v1/cnpj/{cnpj}",
+                timeout=REQUEST_TIMEOUT,
+            )
 
-        if response_opencnpj.status_code == 404:
-                return "NAO ENCONTRADO"
+            if response.status_code == 200:
+                dados = response.json()
+                return dados.get("nome", "NAO ENCONTRADO")
 
-        #Faz a consulta no Brasil API
-        response_aws = requests.get(
-            f"https://api.opencnpj.org/{cnpj}?dataset=receita",
-        )
-
-        if response_aws.status_code == 200:
-            try:
-                dados_json = response_aws.json()
-                return dados_json["razao_social"]
-            except (KeyError, TypeError, ValueError):
-                return "NAO ENCONTRADO"
-
-        if response_aws.status_code == 404:
-            return "NAO ENCONTRADO"
+        except requests.RequestException as e:
+            emit_log(
+                module="cnpj",
+                status="warning",
+                file=cnpj,
+                message=f"Erro ReceitaWS: {e}"
+            )
 
         emit_log(
             module="cnpj",
             status="info",
             file=cnpj,
-            message="Tentando novamente em 30 segundos",
+            message=f"Tentativa {tentativa + 1}/{max_tentativas} falhou"
         )
-        if _aguardar_interrompivel(RETRY_WAIT_SECONDS, stop_event):
-            return "NAO ENCONTRADO"
-        tentativas += 1
 
-    emit_log(
-        module="cnpj",
-        status="error",
-        file=cnpj,
-        message="Execução parada ou encerrada após tentativas",
-    )
+        if tentativa < max_tentativas - 1:
+            if _aguardar_interrompivel(RETRY_WAIT_SECONDS, stop_event):
+                return "NAO ENCONTRADO"
+
     return "NAO ENCONTRADO"
 
 
