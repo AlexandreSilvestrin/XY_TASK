@@ -5,6 +5,7 @@ import NotasFaturamentoPage from './NotasFaturamentoPage'
 import ExcelParaPrnPage from './ExcelParaPrnPage'
 import ImportacaoDimobPage from './ImportacaoDimobPage'
 import RazaoPage from './RazaoPage'
+import ProvisoesPage from './ProvisoesPage'
 
 export const PAGE_COMPONENTS: Record<PageId, ComponentType> = {
   home: HomePage,
@@ -12,6 +13,7 @@ export const PAGE_COMPONENTS: Record<PageId, ComponentType> = {
   'excel-prn': ExcelParaPrnPage,
   'importacao-dimob': ImportacaoDimobPage,
   razao: RazaoPage,
+  provisoes: ProvisoesPage,
 }
 
 export {
@@ -20,4 +22,5 @@ export {
   ExcelParaPrnPage,
   ImportacaoDimobPage,
   RazaoPage,
+  ProvisoesPage,
 }

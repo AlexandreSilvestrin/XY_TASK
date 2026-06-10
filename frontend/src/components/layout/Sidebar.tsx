@@ -10,6 +10,7 @@ const NAV_ITEMS: NavItem[] = [
   { id: 'excel-prn', label: 'EXCEL PARA PRN', order: 3 },
   { id: 'razao', label: 'RAZÃO', order: 4 },
   { id: 'importacao-dimob', label: 'IMPORTAÇÃO DIMOB', order: 5 },
+  { id: 'provisoes', label: 'PROVISÕES', order: 6 },
 ]
 
 type SidebarProps = {

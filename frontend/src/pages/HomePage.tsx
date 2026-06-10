@@ -5,6 +5,7 @@ import { ExcelParaPrnExplanation } from '../components/home/ExcelParaPrnExplanat
 import { NotasFaturamentoExplanation } from '../components/home/NotasFaturamentoExplanation'
 import { ImportacaoDimobExplanation } from '../components/home/ImportacaoDimobExplanation'
 import { RazaoExplanation } from '../components/home/RazaoExplanation'
+import { ProvisoesExplanation } from '../components/home/ProvisoesExplanation'
 
 const FALLBACK_VERSION_LABEL = 'V.?.?.?'
 
@@ -56,6 +57,10 @@ export default function HomePage() {
 
         <ExplanationAccordion title="IMPORTAÇÃO DIMOB">
           <ImportacaoDimobExplanation />
+        </ExplanationAccordion>
+
+        <ExplanationAccordion title="PROVISÕES">
+          <ProvisoesExplanation />
         </ExplanationAccordion>
       </div>
 

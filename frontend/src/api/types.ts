@@ -2,7 +2,7 @@ export type SelectType = 'pasta' | 'arquivos'
 
 export type SelectTarget = 'entrada' | 'saida'
 
-export type AppModule = 'notas' | 'excel-prn' | 'importacao-dimob' | 'razao' | 'home'
+export type AppModule = 'notas' | 'excel-prn' | 'importacao-dimob' | 'razao' | 'provisoes' | 'home'
 
 export type SelectPayload = {
   type: SelectType
@@ -45,6 +45,12 @@ export type RazaoActionPayload = {
 
 export type DimobActionPayload = {
   module: 'importacao-dimob'
+  entrada: string
+  saida: string
+}
+
+export type ProvisoesActionPayload = {
+  module: 'provisoes'
   entrada: string
   saida: string
 }

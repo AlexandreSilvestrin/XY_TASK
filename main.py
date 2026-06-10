@@ -20,6 +20,7 @@ from routes.cnpj_routes import cnpj_bp
 from routes.dimob_routes import dimob_bp
 from routes.notas_routes import notas_bp
 from routes.prn_routes import prn_bp
+from routes.provisoes_routes import provisoes_bp
 from routes.razao_routes import razao_bp
 from services.cnpj_service import encerrar_pesquisa_cnpj
 from services.update_check import start_update_check
@@ -60,6 +61,7 @@ app.register_blueprint(notas_bp)
 app.register_blueprint(cnpj_bp)
 app.register_blueprint(razao_bp)
 app.register_blueprint(dimob_bp)
+app.register_blueprint(provisoes_bp)
 
 _shutdown_done = False
 

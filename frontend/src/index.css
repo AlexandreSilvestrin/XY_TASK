@@ -663,6 +663,42 @@
     color: var(--color-highlight-year);
   }
 
+  .provisoes-filename-pattern,
+  .provisoes-filename-example {
+    margin: 0;
+    border-radius: 0.5rem;
+    border: 1px solid var(--intensity-border-2);
+    background-color: color-mix(in oklab, var(--color-canvas) 80%, transparent);
+    padding: 0.875rem 1rem;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    word-break: break-word;
+  }
+
+  .provisoes-filename-pattern__fixed {
+    color: var(--color-accent);
+    font-weight: 600;
+  }
+
+  .provisoes-filename-pattern__sep {
+    color: var(--color-foreground);
+  }
+
+  .provisoes-filename-pattern__variable {
+    color: var(--color-highlight-year);
+    font-weight: 700;
+  }
+
+  .provisoes-filename-pattern__date {
+    color: var(--color-accent);
+    font-weight: 600;
+  }
+
+  .provisoes-filename-example {
+    color: var(--color-foreground);
+    font-weight: 600;
+  }
+
   .excel-preview {
     overflow-x: auto;
     border-radius: 0.375rem;

@@ -4,6 +4,7 @@ export type PageId =
   | 'excel-prn'
   | 'importacao-dimob'
   | 'razao'
+  | 'provisoes'
 
 export type NavItem = {
   id: PageId

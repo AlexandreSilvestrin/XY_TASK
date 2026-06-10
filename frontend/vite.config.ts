@@ -20,6 +20,7 @@ const apiRoutes = [
   '/geral_prn',
   '/transformar_razao',
   '/transformar_dimob',
+  '/transformar_provisoes',
   '/iniciar_pesquisa_cnpj',
   '/parar_pesquisa_cnpj',
   '/salvar_cnpj',

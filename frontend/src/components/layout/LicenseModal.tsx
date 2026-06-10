@@ -177,6 +177,7 @@ function emptyVisibility(): Record<LicensedPageId, boolean> {
     'excel-prn': false,
     razao: false,
     'importacao-dimob': false,
+    provisoes: false,
   }
 }
 
