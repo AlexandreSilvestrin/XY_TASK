@@ -1,6 +1,6 @@
 import { apiPost } from './client'
-import type { ExcelPrnActionPayload } from './types'
+import type { ActionApiResult, ExcelPrnActionPayload } from './types'
 
 export function geralPrn(payload: ExcelPrnActionPayload) {
-  return apiPost<unknown>('/geral_prn', payload)
+  return apiPost<ActionApiResult>('/geral_prn', payload)
 }

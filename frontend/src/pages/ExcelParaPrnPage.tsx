@@ -2,7 +2,11 @@ import { useMemo, useState } from 'react'
 import { ApiError } from '../api/client'
 import { geralPrn } from '../api/excelPrn'
 import { requestSelect } from '../api/select'
-import type { ExcelPrnActionPayload, SelectType } from '../api/types'
+import type {
+  ExcelPrnActionPayload,
+  PrnCentroCustoTipo,
+  SelectType,
+} from '../api/types'
 import { PathField } from '../components/shared/PathField'
 import { useSaidaPath } from '../hooks/useSaidaPath'
 import { validateEntradaSaida } from '../lib/validatePaths'
@@ -11,6 +15,8 @@ type SelectLoading = 'entrada-pasta' | 'entrada-arquivo' | 'saida' | null
 
 export default function ExcelParaPrnPage() {
   const [entrada, setEntrada] = useState('')
+  const [tipoCentroCusto, setTipoCentroCusto] = useState<PrnCentroCustoTipo>('sem-cc')
+  const [nomeArquivo, setNomeArquivo] = useState('')
   const { saida, setSaida, persistSaida, commitSaidaOnBlur } = useSaidaPath('excel-prn')
   const [loadingSelect, setLoadingSelect] = useState<SelectLoading>(null)
   const [loadingAction, setLoadingAction] = useState(false)
@@ -23,8 +29,10 @@ export default function ExcelParaPrnPage() {
       module: 'excel-prn',
       entrada,
       saida,
+      tipo_centro_custo: tipoCentroCusto,
+      nome_arquivo: nomeArquivo.trim(),
     }),
-    [entrada, saida],
+    [entrada, saida, tipoCentroCusto, nomeArquivo],
   )
 
   async function handleSelect(
@@ -66,10 +74,18 @@ export default function ExcelParaPrnPage() {
       return
     }
 
+    if (!nomeArquivo.trim()) {
+      setFeedback({ type: 'error', text: 'Informe o nome do arquivo.' })
+      return
+    }
+
     setLoadingAction(true)
     try {
-      await geralPrn(payload)
-      setFeedback({ type: 'success', text: 'Geral PRN enviado ao backend.' })
+      const result = await geralPrn(payload)
+      setFeedback({
+        type: 'success',
+        text: result.message ?? 'Geral PRN enviado ao backend.',
+      })
     } catch (error) {
       const message =
         error instanceof ApiError ? error.message : 'Falha ao executar Geral PRN.'
@@ -89,27 +105,80 @@ export default function ExcelParaPrnPage() {
         </h1>
 
         <div className="flex w-full max-w-3xl flex-col items-center gap-8 lg:max-w-none">
-          <PathField
-            label="Local dos arquivos"
-            value={entrada}
-            onChange={setEntrada}
-            placeholder="Caminho da pasta ou arquivo..."
-            disabled={busy && !loadingSelect?.startsWith('entrada')}
-            actions={[
-              {
-                id: 'entrada-pasta',
-                label: 'Selecionar pasta',
-                loading: loadingSelect === 'entrada-pasta',
-                onClick: () => handleSelect('entrada', 'pasta', 'entrada-pasta'),
-              },
-              {
-                id: 'entrada-arquivo',
-                label: 'Selecionar arquivo',
-                loading: loadingSelect === 'entrada-arquivo',
-                onClick: () => handleSelect('entrada', 'arquivos', 'entrada-arquivo'),
-              },
-            ]}
-          />
+          <div className="w-full">
+            <PathField
+              label="Local dos arquivos"
+              value={entrada}
+              onChange={setEntrada}
+              placeholder="Caminho da pasta ou arquivo..."
+              disabled={busy && !loadingSelect?.startsWith('entrada')}
+              actions={[
+                {
+                  id: 'entrada-pasta',
+                  label: 'Selecionar pasta',
+                  loading: loadingSelect === 'entrada-pasta',
+                  onClick: () => handleSelect('entrada', 'pasta', 'entrada-pasta'),
+                },
+                {
+                  id: 'entrada-arquivo',
+                  label: 'Selecionar arquivo',
+                  loading: loadingSelect === 'entrada-arquivo',
+                  onClick: () => handleSelect('entrada', 'arquivos', 'entrada-arquivo'),
+                },
+              ]}
+            />
+
+            <fieldset className="mt-4 flex flex-col items-center gap-4 sm:flex-row sm:flex-wrap sm:justify-center">
+              <legend className="sr-only">Centro de custo</legend>
+              <label className="flex cursor-pointer items-center gap-2 text-sm font-semibold uppercase tracking-wide text-foreground">
+                <input
+                  type="radio"
+                  name="prn-centro-custo"
+                  value="sem-cc"
+                  checked={tipoCentroCusto === 'sem-cc'}
+                  onChange={() => setTipoCentroCusto('sem-cc')}
+                  disabled={busy}
+                  className="h-4 w-4 accent-accent"
+                />
+                Sem centro de custo
+              </label>
+              <label className="flex cursor-pointer items-center gap-2 text-sm font-semibold uppercase tracking-wide text-foreground">
+                <input
+                  type="radio"
+                  name="prn-centro-custo"
+                  value="com-cc"
+                  checked={tipoCentroCusto === 'com-cc'}
+                  onChange={() => setTipoCentroCusto('com-cc')}
+                  disabled={busy}
+                  className="h-4 w-4 accent-accent"
+                />
+                Com centro de custo
+              </label>
+              <div className="flex w-full max-w-lg flex-col gap-1 sm:w-auto">
+                <label className="flex items-center gap-2">
+                  <span className="shrink-0 text-xs font-semibold uppercase tracking-wide text-muted">
+                    Nome do arquivo
+                  </span>
+                  <input
+                    type="text"
+                    value={nomeArquivo}
+                    onChange={(event) => setNomeArquivo(event.target.value)}
+                    disabled={busy}
+                    placeholder="FI02960296"
+                    aria-describedby="prn-nome-arquivo-hint"
+                    className="min-w-0 flex-1 rounded-xl border border-intensity-2 bg-surface/60 px-3 py-2.5 text-sm text-foreground outline-none transition-colors placeholder:text-muted/60 focus:border-accent focus:ring-2 focus:ring-intensity-ring disabled:cursor-not-allowed disabled:opacity-50"
+                  />
+                </label>
+                <p
+                  id="prn-nome-arquivo-hint"
+                  className="text-center text-xs text-muted sm:text-left"
+                >
+                  Digite apenas o nome, sem ponto. Ex.: <strong>FI02960296</strong> gera{' '}
+                  <strong>FI02960296.03</strong> conforme a data do arquivo.
+                </p>
+              </div>
+            </fieldset>
+          </div>
 
           <PathField
             label="Local para salvar"

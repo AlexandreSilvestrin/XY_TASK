@@ -1,246 +1,196 @@
 import pandas as pd
 import os
+import unicodedata
 
-class PRN:
-    def __init__(self, caminho, salvar) -> None:
-        self.caminho, self.salvar= caminho, salvar
+def _entrada_e_arquivo(caminho):
+    return os.path.isfile(caminho)
 
-    def printarInformacoes(self, conteudo , nomearq='', status='', mensagem= ''):
-        print(conteudo)
 
-    def verificar(self):
-        caminho = self.caminho
-        if os.path.isfile(caminho):
-            nome = os.path.splitext(os.path.basename(caminho))[0]
-            return self.transformar(self.caminho, nome, self.salvar)
-        elif os.path.isdir(caminho):
-            for arquivo in os.listdir(caminho):
-                caminho_completo = os.path.join(caminho, arquivo)
-                if arquivo.endswith('.xlsx'):
-                    arq = os.path.splitext(arquivo)[0]
-                    self.transformar(caminho_completo, arq, self.salvar)
-            else:
-                self.printarInformacoes("ARQUIVOS PROCESSADOS COM SUCESSO", nomearq="", status="ok", mensagem="ARQUIVOS PROCESSADOS COM SUCESSO")
-                return True
+def listar_arquivos_excel(caminho):
+    arquivos_excel = []
+    for item in os.listdir(caminho):
+        if item.endswith('.xlsx'):
+            arquivos_excel.append(os.path.join(caminho, item))
+    return arquivos_excel
+
+def campo(tipo='numerico', tamanho=0, valor='', alinhamento='esquerda'):
+    if tipo == 'numerico':
+        valor_str = str(valor).replace('.', '').replace(',', '').strip()
+
+        if alinhamento == 'direita':
+            return valor_str.rjust(tamanho, '0')
         else:
-            self.printarInformacoes("O caminho fornecido não é válido.", nomearq="", status="error", mensagem="O caminho fornecido não é válido.")
+            return valor_str.ljust(tamanho, '0')[:tamanho]
 
-    def transformar(self, arquivo, nomearq, salvar):
-        def campo01(valor=''):
-            valor = str(valor)
-            quant = 5 - len(valor)
-            return f'{quant*' '}{valor}'
+    elif tipo == 'texto':
+        valor_str = str(valor).strip()
 
-        def campo02(valor=''):
-            try:
-                valor = int(valor)
-            except:
-                pass
-            valor = str(valor)
-            quant = 18 - len(valor)
-            return f'{quant*' '}{valor}'
+        if alinhamento == 'direita':
+            return valor_str.rjust(tamanho)
+        else:
+            return valor_str.ljust(tamanho)[:tamanho]
 
-        def campo03(valor=''):
-            try:
-                valor = int(valor)
-            except:
-                pass
-            valor = str(valor)
-            quant = 18 - len(valor)
-            return f'{quant*' '}{valor}'
+    else:
+        return ' ' * tamanho
 
-        def campo04(valor=''):
-            try:
-                valor = int(valor)
-            except:
-                pass
-            valor = str(valor)
-            quant = 4 - len(valor)
-            return f'{quant*' '}{valor}'
+def gerar_prn(df):
+    linhas_finais =[]
+    for indice, linha in df.iterrows():
+        lista_linha = linha.values.tolist()
+        lista_linha += [''] * (17 - len(lista_linha))
+        print(lista_linha)
+        linha = [
+        campo('texto', 5, ''),  #campo 01
+        campo('texto', 18, lista_linha[1], 'direita'),  #campo 02 Codigo conta debito
+        campo('texto', 18, lista_linha[2], 'direita'),  #campo 03 Codigo conta credito
+        campo('texto', 5, lista_linha[3].strip(), 'direita'),  #campo 04 codigo historico
+        campo('texto', 12, lista_linha[4], 'direita'),  #campo 06 valor
+        campo('texto', 10, lista_linha[5], 'direita'),  #campo 07 data
+        campo('texto', 6, ''),  #campo 08
+        campo('texto', 143, lista_linha[7]),  #campo 09  NOME (complemento do historico)
+        campo('texto', 20, lista_linha[8]),  #campo 10
+        campo('texto', 20, lista_linha[9]),  #campo 11
+        campo('texto', 20, lista_linha[10]),  #campo 12
+        campo('texto', 15, lista_linha[11]),  #campo 13
+        campo('texto', 20, lista_linha[12]),  #campo 14
+        campo('texto', 15, lista_linha[13]),  #campo 15
+        campo('texto', 1, lista_linha[14]),  #campo 16
+        campo('texto', 4, lista_linha[15]),  #campo 17
+        campo('texto', 10, lista_linha[16]),  #campo 18
+    ]   
+        
+        linha_formatada = ''.join(linha).rstrip()
+        linhas_finais.append(linha_formatada)
 
-        def campo05(valor=''):
-            try:
-                valor = int(valor)
-            except:
-                pass
-            valor = str(valor)
-            quant = 1 - len(valor)
-            return f'{quant*' '}{valor}'
+    texto = '\n'.join(linhas_finais)
 
-        def campo06(valor=''):
-            if valor != '':
-                try:
-                    valor = round(valor)
-                except:
-                    pass
-                valor = str(valor)
-                quant = 12 - len(valor)
-                return f'{quant*'0'}{valor}'
-            else:
-                quant = 12 - len(valor)
-                return f'{quant*' '}{valor}'
+    return texto
+
+def remover_acentos(texto):
+    return ''.join(
+        c for c in unicodedata.normalize('NFKD', texto)
+        if not unicodedata.combining(c)
+    )
+
+def ler_arquivo(caminho):
+    df = pd.read_excel(caminho, header=None, dtype=str)
+    df.dropna(subset=[4], inplace=True)
+    df.fillna('', inplace=True)
+    df[7] = df[7].apply(lambda x: x.replace('°', ''))
+    df[5] = pd.to_datetime(df[5], errors='coerce')
+    mes = df[5].dt.month.astype(str).str.zfill(2)
+    df[5] = df[5].dt.strftime('%d/%m/%Y').fillna('')
+    mes = mes.iloc[0] if not mes.empty else '00'
+    return df, mes
 
 
-        def campo07(valor=''):
-            try:
-                valor = valor.strftime('%d/%m/%Y')
-            except:
-                pass
-            valor = str(valor)
-            quant = 10 - len(valor)
-            return f'{quant*' '}{valor}'
+def _resolver_arquivos(caminho):
+    if _entrada_e_arquivo(caminho):
+        return [caminho]
+    if os.path.isdir(caminho):
+        return listar_arquivos_excel(caminho)
+    return []
 
-        def campo08(valor=''):
-            try:
-                valor = int(valor)
-            except:
-                pass
-            valor = str(valor)
-            quant = 6 - len(valor)
-            return f'{quant*' '}{valor}'
 
-        def campo09(valor=''):
-            try:
-                valor = int(valor)
-            except:
-                pass
-            valor = str(valor)
-            quant = 143 - len(valor)
-            if quant < 0:
-                return f'{valor[:143]}'
-            return f'{valor}{quant*' '}'
+def _resolver_nome_saida(nomearquivo):
+    return (nomearquivo or '').strip()
 
-        def campo10(valor=''):
-            try:
-                valor = int(valor)
-            except:
-                pass
-            valor = str(valor)
-            quant = 20 - len(valor)
-            return f'{valor}{quant*' '}'
 
-        def campo11(valor=''):
-            try:
-                valor = int(valor)
-            except:
-                pass
-            valor = str(valor)
-            quant = 20 - len(valor)
-            return f'{valor}{quant*' '}'
+def _processar_arquivo(caminho_arquivo, salvar, nomearquivo='', tipo='sem CC'):
+    df, mes = ler_arquivo(caminho_arquivo)
+    texto = gerar_prn(df)
+    texto = remover_acentos(texto)
+    nome_base = _resolver_nome_saida(nomearquivo)
+    destino = os.path.join(salvar, f'{nome_base}.{mes}')
 
-        def campo12(valor=''):
-            try:
-                valor = int(valor)
-                valor = str(valor)
-                valor =  valor[:1]+ '.' + valor[1:3] + '.' + valor[-3:]
-            except:
-                pass
-            quant = 20 - len(valor)
-            return f'{quant*' '}{valor}'
+    with open(destino, 'w', encoding='UTF-8') as arq:
+        arq.write(texto)
 
-        def campo13(valor=''):
-            if valor != '':
-                try:
-                    valor = round(valor)
-                except:
-                    pass
-                valor = str(valor)
-                quant = 15 - len(valor)
-                return f'{quant*'0'}{valor}'
-            else:
-                quant = 15 - len(valor)
-                return f'{quant*' '}{valor}'
+    return destino
 
-        def campo14(valor=''):
-            try:
-                valor = int(valor)
-                valor = str(valor)
-                valor =  valor[:1]+ '.' + valor[1:3] + '.' + valor[-3:]
-            except:
-                pass
-            valor = str(valor)
-            quant = 20 - len(valor)
-            return f'{quant*' '}{valor}'
 
-        def campo15(valor=''):
-            if valor != '':
-                try:
-                    valor = round(valor)
-                except:
-                    pass
-                valor = str(valor)
-                quant = 15 - len(valor)
-                return f'{quant*'0'}{valor}'
-            else:
-                quant = 15 - len(valor)
-                return f'{quant*' '}{valor}'
+def gerar_arquivo(caminho, salvar, nomearquivo='', tipo='sem CC'):
+    arquivos = _resolver_arquivos(caminho)
+    if not arquivos:
+        return False
 
-        def campo16(valor=''):
-            valor = str(valor)
-            quant = 1 - len(valor)
-            return f'{quant*' '}{valor}'
+    os.makedirs(salvar, exist_ok=True)
 
-        def campo17(valor=''):
-            try:
-                valor = int(valor)
-            except:
-                pass
-            valor = str(valor)
-            quant = 4 - len(valor)
-            return f'{quant*' '}{valor}'
+    for caminho_arquivo in arquivos:
+        _processar_arquivo(caminho_arquivo, salvar, nomearquivo, tipo)
 
-        def campo18(valor=''):
-            try:
-                valor = int(valor)
-            except:
-                pass
-            valor = str(valor)
-            quant = 10 - len(valor)
-            return f'{quant*' '}{valor}'
+    return True
+
+
+class PRNweb:
+    def __init__(
+        self,
+        entrada,
+        saida,
+        emit_log,
+        tipo='sem CC',
+        nome_arquivo='',
+        log_module='excel-prn',
+    ):
+        self.entrada = entrada
+        self.saida = saida
+        self.emit_log = emit_log
+        self.tipo = tipo
+        self.nome_arquivo = nome_arquivo
+        self.log_module = log_module
+
+    def executar(self):
+        arquivos = _resolver_arquivos(self.entrada)
+        if not arquivos:
+            self.emit_log(
+                module=self.log_module,
+                status="error",
+                file=self.entrada,
+                message="Nenhum arquivo Excel encontrado para processar.",
+            )
+            return False
+
+        os.makedirs(self.saida, exist_ok=True)
+        processados = 0
 
         try:
-            df = pd.read_excel(arquivo, header=None)
-            df = df.fillna('')
+            for caminho_arquivo in arquivos:
+                nome_entrada = os.path.basename(caminho_arquivo)
+                destino = _processar_arquivo(
+                    caminho_arquivo,
+                    self.saida,
+                    self.nome_arquivo,
+                    self.tipo,
+                )
+                processados += 1
+                self.emit_log(
+                    module=self.log_module,
+                    status="success",
+                    file=nome_entrada,
+                    message=f"PRN gerado: {os.path.basename(destino)}",
+                )
 
-            if df.shape[1] < 18:
-                for i in range(df.shape[1], 18):
-                    df[i] = ''
-
-            df = df.reindex(columns=range(18))
-
-            df.columns = ['campo1','codigo debito', 'codigo credito', 'codigo historico', 'valor', 'data', 'campo8' , 'nome', 'campo10', 'campo11', 'centro', 'valor1', 'centroC', 'valorC', 'letra', 'nada', 'nada2', 'nada3']
-            df['data'] = df['data'].apply(lambda x: '' if pd.isnull(x) else x)
-            texto = ''
-
-            for indice, linha in df.iterrows():
-                lista_da_linha = linha.values.tolist()
-                campoo1, codigo_debito, codigo_credito, codigo_historico, valor, data, campoo8 , nome, campoo10, campoo11, centroD, valorD, centroC, valorC , letra, nada, nada2, nada3= lista_da_linha
-                texto = texto+f'{campo01(campoo1)}{campo02(codigo_debito)}{campo03(codigo_credito)}{campo04(codigo_historico)}{campo05()}{campo06(valor)}{campo07(data)}{campo08()}{campo09(nome)}{campo10(campoo10)}{campo11(campoo11)}{campo12(centroD)}{campo13(valorD)}{campo14(centroC)}{campo15(valorC)}{campo16(letra)}{campo17()}{campo18()}\n'
-
-
-            with open(f'{salvar}/{nomearq}.prn', 'w', encoding='UTF-8') as arq:
-                arq.write(texto)
-            
-            self.printarInformacoes('', nomearq, 'success', 'ARQUIVO GERADO COM SUCESSO')
+            self.emit_log(
+                module=self.log_module,
+                status="success",
+                file=self.entrada,
+                message=f"Processamento PRN concluído ({processados} arquivo(s)).",
+            )
             return True
-        except Exception as e:
-            self.printarInformacoes('', nomearq, 'error', f'ERRO AO GERAR ARQUIVO: {e}')
+        except Exception as exc:
+            self.emit_log(
+                module=self.log_module,
+                status="error",
+                file=os.path.basename(arquivos[processados])
+                if processados < len(arquivos)
+                else self.entrada,
+                message=str(exc),
+            )
+            raise
 
-class PRNweb(PRN):
 
-    def __init__(self, caminho, salvar, emit_log):
-        super().__init__(caminho, salvar)
-
-        self.emit_log = emit_log
-
-    def printarInformacoes(self, nada,nomearq, status, mensagem):
-        self.emit_log(
-            module="prn",
-            status=status,
-            file=nomearq,
-            message=mensagem
-        )
-
-if __name__ == "__main__": 
-    prn = PRN(r"C:\Users\Alexandre\Downloads\Fornecedores Com CC 08-2024.xlsx", r"C:\Users\Alexandre\Downloads")
-    prn.verificar()
+if __name__ == "__main__":
+    caminho = r"C:\Users\Alexandre\Downloads\Nova pasta"
+    salvar = r"C:\Users\Alexandre\Desktop\Saida\prnn"
+    nomearquivo = 'FI02960296'
+    gerar_arquivo(caminho, salvar, nomearquivo)

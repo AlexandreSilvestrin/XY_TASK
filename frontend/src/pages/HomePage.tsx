@@ -5,13 +5,11 @@ import { ExcelParaPrnExplanation } from '../components/home/ExcelParaPrnExplanat
 import { NotasFaturamentoExplanation } from '../components/home/NotasFaturamentoExplanation'
 import { ImportacaoDimobExplanation } from '../components/home/ImportacaoDimobExplanation'
 import { RazaoExplanation } from '../components/home/RazaoExplanation'
-import { useLicenses } from '../context/LicenseContext'
 
 const FALLBACK_VERSION_LABEL = 'V.?.?.?'
 
 export default function HomePage() {
   const [versionLabel, setVersionLabel] = useState(FALLBACK_VERSION_LABEL)
-  const { isPageLicensed } = useLicenses()
 
   useEffect(() => {
     let cancelled = false
@@ -44,31 +42,19 @@ export default function HomePage() {
       </header>
 
       <div className="explanation-page__list">
-        <ExplanationAccordion
-          title="NOTAS / FATURAMENTO"
-          disabled={!isPageLicensed('notas-faturamento')}
-        >
+        <ExplanationAccordion title="NOTAS / FATURAMENTO">
           <NotasFaturamentoExplanation />
         </ExplanationAccordion>
 
-        <ExplanationAccordion
-          title="EXCEL PARA PRN"
-          disabled={!isPageLicensed('excel-prn')}
-        >
+        <ExplanationAccordion title="EXCEL PARA PRN">
           <ExcelParaPrnExplanation />
         </ExplanationAccordion>
 
-        <ExplanationAccordion
-          title="RAZÃO"
-          disabled={!isPageLicensed('razao')}
-        >
+        <ExplanationAccordion title="RAZÃO">
           <RazaoExplanation />
         </ExplanationAccordion>
 
-        <ExplanationAccordion
-          title="IMPORTAÇÃO DIMOB"
-          disabled={!isPageLicensed('importacao-dimob')}
-        >
+        <ExplanationAccordion title="IMPORTAÇÃO DIMOB">
           <ImportacaoDimobExplanation />
         </ExplanationAccordion>
       </div>
