@@ -8,6 +8,7 @@ APP_NAME = "XY TASK"
 SEED_FILES = (
     "BANCOCNPJ.db",
     "GUIANOMES.db",
+    "codigos.json",
 )
 
 

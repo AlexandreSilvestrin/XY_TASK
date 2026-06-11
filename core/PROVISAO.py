@@ -1,22 +1,19 @@
 import calendar
 import json
 import os
-import sys
 from datetime import datetime
 from decimal import Decimal, ROUND_CEILING
 from pathlib import Path
 
 import pandas as pd
 
+from config.caminhos import get_data_dir
+
 LOG_MODULE = "provisoes"
 
 
 def _get_codigos_path() -> Path:
-    if getattr(sys, "frozen", False):
-        base = Path(sys._MEIPASS)
-    else:
-        base = Path(__file__).resolve().parent.parent
-    return base / "data" / "codigos.json"
+    return get_data_dir() / "codigos.json"
 
 
 def ultimo_dia_mes(mes):
