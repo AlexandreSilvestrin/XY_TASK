@@ -21,9 +21,13 @@ const apiRoutes = [
   '/transformar_razao',
   '/transformar_dimob',
   '/transformar_provisoes',
+  '/buscar_codigos_consorcio',
+  '/salvar_codigos_consorcio',
   '/iniciar_pesquisa_cnpj',
   '/parar_pesquisa_cnpj',
   '/salvar_cnpj',
+  '/buscar_banco_cnpj',
+  '/salvar_banco_cnpj',
 ]
 
 export default defineConfig({

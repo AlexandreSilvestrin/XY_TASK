@@ -1,19 +1,13 @@
 import calendar
-import json
 import os
 from datetime import datetime
 from decimal import Decimal, ROUND_CEILING
-from pathlib import Path
 
 import pandas as pd
 
-from config.caminhos import get_data_dir
+from models.codigos import CodigosModel
 
 LOG_MODULE = "provisoes"
-
-
-def _get_codigos_path() -> Path:
-    return get_data_dir() / "codigos.json"
 
 
 def ultimo_dia_mes(mes):
@@ -280,18 +274,34 @@ class ProvisoesWeb:
         self.log_module = log_module
 
     def executar(self):
-        codigos_path = _get_codigos_path()
-        if not codigos_path.exists():
+        if not CodigosModel.exists():
             self.emit_log(
                 module=self.log_module,
                 status="error",
-                file=str(codigos_path),
+                file=str(CodigosModel.filepath()),
                 message="Arquivo codigos.json não encontrado em data/codigos.json.",
             )
             return False
 
-        with codigos_path.open("r", encoding="utf-8") as file:
-            dicionario_codigos = json.load(file)
+        try:
+            dicionario_codigos = CodigosModel.to_dict()
+        except ValueError as exc:
+            self.emit_log(
+                module=self.log_module,
+                status="error",
+                file=str(CodigosModel.filepath()),
+                message=str(exc),
+            )
+            return False
+
+        if not dicionario_codigos:
+            self.emit_log(
+                module=self.log_module,
+                status="error",
+                file=str(CodigosModel.filepath()),
+                message="Nenhum consórcio cadastrado em codigos.json.",
+            )
+            return False
 
         os.makedirs(self.saida, exist_ok=True)
 
@@ -366,6 +376,4 @@ class ProvisoesWeb:
 if __name__ == "__main__":
     caminho = r"C:\Users\Alexandre\Downloads\Nova pasta"
     salvar = r"C:\Users\Alexandre\Desktop\Saida\prnn"
-    with _get_codigos_path().open("r", encoding="utf-8") as file:
-        codigos = json.load(file)
-    criar_provisao(caminho, salvar, codigos)
+    criar_provisao(caminho, salvar, CodigosModel.to_dict())

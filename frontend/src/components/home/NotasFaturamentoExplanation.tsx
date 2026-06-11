@@ -59,6 +59,12 @@ Serviços prestados
           no banco de dados com o nome preenchido.
         </p>
         <p>
+          Após a pesquisa, é possível ver a <strong>lista de CNPJs consultados</strong>{' '}
+          e <strong>alterar o nome diretamente na tabela</strong>, corrigindo o que
+          vier errado, antes de clicar em <strong>Salvar dados pesquisados</strong> para
+          gravar no banco.
+        </p>
+        <p>
           Se quiser um arquivo Excel com CNPJ e nomes que tem no banco, use o
           botão <strong>Exportar banco</strong>. Se quiser importar dados de
           algum Excel, clique em <strong>Importar banco</strong> e selecione o
@@ -68,6 +74,25 @@ Serviços prestados
           <strong>OBS:</strong> para importar, o arquivo Excel deve ter somente
           as colunas <strong>CNPJ</strong> e <strong>NOME</strong>, com os dados
           preenchidos abaixo.
+        </p>
+      </section>
+
+      <section className="explanation-content__section explanation-content__section--continued">
+        <h3 className="explanation-content__heading">Editar CNPJ</h3>
+        <p>
+          Pelo botão <strong>Editar CNPJ</strong>, na aba de notas, é possível
+          consultar um CNPJ que já esteja no banco e corrigir o nome manualmente.
+        </p>
+        <p>
+          Serve para arrumar registros que vieram errados na pesquisa ou na
+          importação, ou quando quiser ajustar o que foi inserido — por exemplo,
+          removendo alguma parte do nome que não deveria estar lá — antes de salvar
+          novamente no banco.
+        </p>
+        <p>
+          Informe o CNPJ, clique em <strong>Pesquisar</strong> para trazer o nome
+          atual do banco, edite o campo <strong>Nome</strong> e use{' '}
+          <strong>Salvar</strong> para atualizar ou incluir o registro.
         </p>
       </section>
     </div>

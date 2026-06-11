@@ -167,3 +167,97 @@ def salvar_cnpjs(payload):
             "success": False,
             "message": str(exc),
         }
+
+
+def buscar_banco_cnpj(payload):
+    cnpj = str(payload.get("cnpj", "")).strip()
+    if not cnpj:
+        return {
+            "success": False,
+            "message": "Informe o CNPJ para pesquisar.",
+        }
+
+    try:
+        registro = CNPJModel.get_by_cnpj(cnpj)
+        if not registro:
+            return {
+                "success": False,
+                "message": "CNPJ não encontrado no banco.",
+            }
+
+        return {
+            "success": True,
+            "data": registro,
+        }
+
+    except Exception as exc:
+        emit_log(
+            module="cnpj",
+            status="error",
+            file=cnpj,
+            message=str(exc),
+        )
+        return {
+            "success": False,
+            "message": str(exc),
+        }
+
+
+def salvar_banco_cnpj(payload):
+    cnpj = str(payload.get("cnpj", "")).strip()
+    nome = str(payload.get("nome", "")).strip()
+
+    if not cnpj:
+        return {
+            "success": False,
+            "message": "Informe o CNPJ para salvar.",
+        }
+
+    if not nome:
+        return {
+            "success": False,
+            "message": "Informe o nome para salvar.",
+        }
+
+    if nome.upper() == CNPJModel.NOME_NAO_ENCONTRADO:
+        return {
+            "success": False,
+            "message": "Informe um nome válido para salvar no banco.",
+        }
+
+    try:
+        action = CNPJModel.upsert_registro(cnpj, nome)
+        message = (
+            "CNPJ atualizado no banco."
+            if action == "updated"
+            else "CNPJ adicionado ao banco."
+        )
+        emit_log(
+            module="cnpj",
+            status="success",
+            file=CNPJModel._normalize_cnpj(cnpj),
+            message=message,
+        )
+        return {
+            "success": True,
+            "message": message,
+            "data": CNPJModel.get_by_cnpj(cnpj),
+        }
+
+    except ValueError as exc:
+        return {
+            "success": False,
+            "message": str(exc),
+        }
+
+    except Exception as exc:
+        emit_log(
+            module="cnpj",
+            status="error",
+            file=cnpj,
+            message=str(exc),
+        )
+        return {
+            "success": False,
+            "message": str(exc),
+        }

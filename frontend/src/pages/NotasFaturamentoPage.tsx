@@ -11,6 +11,7 @@ import { ApiError } from '../api/client'
 import { usePageOverlay } from '../context/PageOverlayContext'
 import type { NotasActionPayload } from '../api/types'
 import type { CnpjRow } from '../types/cnpj'
+import { EditarCnpjPanel } from '../components/notas/EditarCnpjPanel'
 import { FolderPathField } from '../components/notas/FolderPathField'
 import { useSaidaPath } from '../hooks/useSaidaPath'
 import { MONTHS, buildYearRange } from '../lib/dateOptions'
@@ -57,6 +58,7 @@ const SECONDARY_ACTIONS: ActionKey[] = ['geral_notas', 'gerar_faturamento']
 
 export default function NotasFaturamentoPage() {
   const { openPesquisarCnpj, openAdicionarPorcentagem } = usePageOverlay()
+  const [view, setView] = useState<'notas' | 'editar-cnpj'>('notas')
   const [entrada, setEntrada] = useState('')
   const { saida, setSaida, persistSaida, commitSaidaOnBlur } = useSaidaPath('notas')
   const [mes, setMes] = useState(CURRENT_MONTH)
@@ -194,6 +196,10 @@ export default function NotasFaturamentoPage() {
     loadingBankAction !== null ||
     loadingPesquisarCnpj
 
+  if (view === 'editar-cnpj') {
+    return <EditarCnpjPanel onClose={() => setView('notas')} />
+  }
+
   return (
     <div className="flex h-full min-h-0 w-full">
       <div className="flex min-w-0 flex-1 flex-col items-center gap-8 overflow-y-auto py-4 pr-6 sm:pr-10">
@@ -278,6 +284,11 @@ export default function NotasFaturamentoPage() {
 
       <aside className="flex w-64 shrink-0 flex-col gap-4 overflow-y-auto py-4 pl-5 pr-2 sm:w-72 lg:w-80 xl:w-[22rem]">
         <div className="flex flex-col gap-4">
+          <ActionButton
+            label="Editar CNPJ"
+            onClick={() => setView('editar-cnpj')}
+            disabled={busy}
+          />
           <ActionButton
             label="Pesquisar CNPJ"
             onClick={handleOpenPesquisarCnpj}

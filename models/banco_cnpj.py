@@ -97,6 +97,61 @@ class CNPJModel:
         return dict(zip(df["CNPJ"], df["Nome"], strict=False))
 
     @staticmethod
+    def _normalize_cnpj(cnpj) -> str:
+        digits = "".join(char for char in str(cnpj) if char.isdigit())
+        return digits.zfill(14) if digits else ""
+
+    @staticmethod
+    def get_by_cnpj(cnpj: str):
+        cnpj_digits = CNPJModel._normalize_cnpj(cnpj)
+        if len(cnpj_digits) != 14:
+            return None
+
+        df = CNPJModel._filtrar_validos(CNPJModel.load_data())
+        if df.empty:
+            return None
+
+        df = df.copy()
+        df["CNPJ"] = df["CNPJ"].apply(CNPJModel._normalize_cnpj)
+        match = df[df["CNPJ"] == cnpj_digits]
+        if match.empty:
+            return None
+
+        row = match.iloc[0]
+        return {
+            "cnpj": row["CNPJ"],
+            "nome": str(row["Nome"]).strip(),
+        }
+
+    @staticmethod
+    def upsert_registro(cnpj: str, nome: str) -> str:
+        cnpj_digits = CNPJModel._normalize_cnpj(cnpj)
+        nome = str(nome).strip()
+
+        if len(cnpj_digits) != 14:
+            raise ValueError("Informe um CNPJ válido com 14 dígitos.")
+
+        if not nome:
+            raise ValueError("Informe o nome para salvar.")
+
+        df = CNPJModel.load_data()
+        if df.empty:
+            CNPJModel.save_data(pd.DataFrame([{"CNPJ": cnpj_digits, "Nome": nome}]))
+            return "created"
+
+        df = df.copy()
+        df["CNPJ"] = df["CNPJ"].apply(CNPJModel._normalize_cnpj)
+        match = df.index[df["CNPJ"] == cnpj_digits]
+
+        if len(match) > 0:
+            df.loc[match[0], "Nome"] = nome
+            CNPJModel.save_data(CNPJModel._filtrar_validos(df))
+            return "updated"
+
+        CNPJModel.add_new_data(pd.DataFrame([{"CNPJ": cnpj_digits, "Nome": nome}]))
+        return "created"
+
+    @staticmethod
     def add_new_data(df):
         """Adiciona apenas linhas com CNPJ que ainda não existem no banco."""
         df = CNPJModel._filtrar_validos(df[["CNPJ", "Nome"]])

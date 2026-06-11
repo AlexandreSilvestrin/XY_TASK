@@ -834,6 +834,117 @@
   .porcentagem-table-input:focus {
     border-color: var(--intensity-border-2);
   }
+
+  .editar-cnpj-field {
+    width: 100%;
+    border-radius: 0.75rem;
+    border: 1px solid var(--intensity-border-2);
+    background-color: color-mix(in oklab, var(--color-surface) 70%, transparent);
+    padding: 0.625rem 0.875rem;
+    font-size: 0.875rem;
+    color: var(--color-foreground);
+    outline: none;
+    transition:
+      border-color 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+
+  .editar-cnpj-field:focus {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 2px var(--intensity-ring);
+  }
+
+  .editar-cnpj-field:disabled {
+    opacity: 0.55;
+  }
+
+  .codigos-provisoes-grid {
+    overflow-x: auto;
+  }
+
+  .codigos-provisoes-grid__header,
+  .codigos-provisoes-grid__row {
+    display: grid;
+    grid-template-columns: minmax(4.5rem, 1fr) minmax(4.5rem, 1fr) minmax(10rem, 1.6fr) minmax(
+        4.5rem,
+        1fr
+      ) minmax(4.5rem, 1fr);
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .codigos-provisoes-grid__header {
+    margin-bottom: 0.75rem;
+    min-width: 42rem;
+  }
+
+  .codigos-provisoes-grid__title {
+    margin: 0;
+    text-align: center;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  .codigos-provisoes-grid__title--span-2 {
+    grid-column: span 2;
+  }
+
+  .codigos-provisoes-grid__subtitle {
+    text-align: center;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  .codigos-provisoes-grid__subtitle--empty {
+    visibility: hidden;
+  }
+
+  .codigos-provisoes-grid__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 42rem;
+  }
+
+  .codigos-provisoes-grid__ordem {
+    margin: 0;
+    padding: 0.35rem 0.5rem;
+    text-align: center;
+    font-size: 0.72rem;
+    line-height: 1.35;
+    color: var(--color-foreground);
+  }
+
+  .codigos-provisoes-input {
+    width: 100%;
+    min-width: 0;
+    border-radius: 0.65rem;
+    border: 1px solid var(--intensity-border-2);
+    background-color: color-mix(in oklab, var(--color-surface) 70%, transparent);
+    padding: 0.5rem 0.625rem;
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--color-foreground);
+    outline: none;
+    transition:
+      border-color 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+
+  .codigos-provisoes-input:focus {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 2px var(--intensity-ring);
+  }
+
+  .codigos-provisoes-input:disabled {
+    opacity: 0.55;
+  }
 }
 
 @layer utilities {

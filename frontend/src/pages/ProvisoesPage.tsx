@@ -4,12 +4,14 @@ import { transformarProvisoes } from '../api/provisoes'
 import { requestSelect } from '../api/select'
 import type { ProvisoesActionPayload } from '../api/types'
 import { PathField } from '../components/shared/PathField'
+import { EditarCodigosProvisoesPanel } from '../components/provisoes/EditarCodigosProvisoesPanel'
 import { useSaidaPath } from '../hooks/useSaidaPath'
 import { validateEntradaSaida } from '../lib/validatePaths'
 
 type SelectLoading = 'entrada-pasta' | 'saida' | null
 
 export default function ProvisoesPage() {
+  const [view, setView] = useState<'provisoes' | 'editar-codigos'>('provisoes')
   const [entrada, setEntrada] = useState('')
   const { saida, setSaida, persistSaida, commitSaidaOnBlur } = useSaidaPath('provisoes')
   const [loadingSelect, setLoadingSelect] = useState<SelectLoading>(null)
@@ -77,6 +79,10 @@ export default function ProvisoesPage() {
 
   const busy = loadingSelect !== null || loadingAction
 
+  if (view === 'editar-codigos') {
+    return <EditarCodigosProvisoesPanel onClose={() => setView('provisoes')} />
+  }
+
   return (
     <div className="flex h-full min-h-0 w-full">
       <div className="flex min-w-0 flex-1 flex-col items-center gap-8 overflow-y-auto py-4 pr-6 sm:pr-10">
@@ -135,7 +141,12 @@ export default function ProvisoesPage() {
 
       <div className="w-px shrink-0 bg-intensity-fill-2" aria-hidden />
 
-      <aside className="flex w-64 shrink-0 flex-col overflow-y-auto py-4 pl-5 pr-2 sm:w-72 lg:w-80 xl:w-[22rem]">
+      <aside className="flex w-64 shrink-0 flex-col gap-4 overflow-y-auto py-4 pl-5 pr-2 sm:w-72 lg:w-80 xl:w-[22rem]">
+        <ActionButton
+          label="Editar códigos de provisões"
+          onClick={() => setView('editar-codigos')}
+          disabled={busy}
+        />
         <ActionButton
           label="Transformar provisões"
           onClick={handleTransformar}
