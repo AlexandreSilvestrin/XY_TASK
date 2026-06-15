@@ -16,7 +16,6 @@ type SelectLoading = 'entrada-pasta' | 'entrada-arquivo' | 'saida' | null
 export default function ExcelParaPrnPage() {
   const [entrada, setEntrada] = useState('')
   const [tipoCentroCusto, setTipoCentroCusto] = useState<PrnCentroCustoTipo>('sem-cc')
-  const [nomeArquivo, setNomeArquivo] = useState('')
   const { saida, setSaida, persistSaida, commitSaidaOnBlur } = useSaidaPath('excel-prn')
   const [loadingSelect, setLoadingSelect] = useState<SelectLoading>(null)
   const [loadingAction, setLoadingAction] = useState(false)
@@ -30,9 +29,8 @@ export default function ExcelParaPrnPage() {
       entrada,
       saida,
       tipo_centro_custo: tipoCentroCusto,
-      nome_arquivo: nomeArquivo.trim(),
     }),
-    [entrada, saida, tipoCentroCusto, nomeArquivo],
+    [entrada, saida, tipoCentroCusto],
   )
 
   async function handleSelect(
@@ -71,11 +69,6 @@ export default function ExcelParaPrnPage() {
     const validation = validateEntradaSaida(entrada, saida)
     if (!validation.ok) {
       setFeedback({ type: 'error', text: validation.message })
-      return
-    }
-
-    if (!nomeArquivo.trim()) {
-      setFeedback({ type: 'error', text: 'Informe o nome do arquivo.' })
       return
     }
 
@@ -154,29 +147,6 @@ export default function ExcelParaPrnPage() {
                 />
                 Com centro de custo
               </label>
-              <div className="flex w-full max-w-lg flex-col gap-1 sm:w-auto">
-                <label className="flex items-center gap-2">
-                  <span className="shrink-0 text-xs font-semibold uppercase tracking-wide text-muted">
-                    Nome do arquivo
-                  </span>
-                  <input
-                    type="text"
-                    value={nomeArquivo}
-                    onChange={(event) => setNomeArquivo(event.target.value)}
-                    disabled={busy}
-                    placeholder="FI02960296"
-                    aria-describedby="prn-nome-arquivo-hint"
-                    className="min-w-0 flex-1 rounded-xl border border-intensity-2 bg-surface/60 px-3 py-2.5 text-sm text-foreground outline-none transition-colors placeholder:text-muted/60 focus:border-accent focus:ring-2 focus:ring-intensity-ring disabled:cursor-not-allowed disabled:opacity-50"
-                  />
-                </label>
-                <p
-                  id="prn-nome-arquivo-hint"
-                  className="text-center text-xs text-muted sm:text-left"
-                >
-                  Digite apenas o nome, sem ponto. Ex.: <strong>FI02960296</strong> gera{' '}
-                  <strong>FI02960296.03</strong> conforme a data do arquivo.
-                </p>
-              </div>
             </fieldset>
           </div>
 

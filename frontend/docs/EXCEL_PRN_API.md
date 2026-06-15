@@ -54,8 +54,7 @@
   "module": "excel-prn",
   "entrada": "C:\\origem\\planilha.xlsx",
   "saida": "C:\\destino\\saida",
-  "tipo_centro_custo": "sem-cc",
-  "nome_arquivo": "FI02960296"
+  "tipo_centro_custo": "sem-cc"
 }
 ```
 
@@ -67,7 +66,8 @@
 | `entrada` | string | sim | caminho | Pasta ou arquivo `.xlsx` de origem |
 | `saida` | string | sim | caminho | Pasta de destino dos `.prn` |
 | `tipo_centro_custo` | string | sim | `sem-cc`, `com-cc` | Tipo de tratamento (com ou sem centro de custo) |
-| `nome_arquivo` | string | sim | texto livre | Nome base do arquivo PRN gerado |
+
+O nome do `.prn` gerado usa o **nome do Excel de entrada** (sem `.xlsx`) + extensão **`.prn`**. Ex.: `FI02960296.xlsx` → `FI02960296.prn`.
 
 ### Exemplo — Com centro de custo
 
@@ -76,12 +76,11 @@
   "module": "excel-prn",
   "entrada": "C:\\origem\\pasta_excel",
   "saida": "C:\\destino\\saida",
-  "tipo_centro_custo": "com-cc",
-  "nome_arquivo": "FI02960296"
+  "tipo_centro_custo": "com-cc"
 }
 ```
 
-> `tipo_centro_custo` define apenas o tipo de tratamento no backend. `nome_arquivo` é sempre enviado.
+> `tipo_centro_custo` define apenas o tipo de tratamento no backend.
 
 ### Resposta de sucesso (`200`)
 
@@ -97,7 +96,7 @@
 ```json
 {
   "success": false,
-  "message": "O campo 'nome_arquivo' é obrigatório."
+  "message": "Os campos 'entrada' e 'saida' são obrigatórios."
 }
 ```
 

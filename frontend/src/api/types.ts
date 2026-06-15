@@ -29,7 +29,6 @@ export type ExcelPrnActionPayload = {
   entrada: string
   saida: string
   tipo_centro_custo: PrnCentroCustoTipo
-  nome_arquivo: string
 }
 
 export type RazaoModo = 'resumo' | 'dfc'

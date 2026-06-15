@@ -138,22 +138,8 @@ export function ExcelParaPrnExplanation() {
       <p className="explanation-content__obs">
         <strong>obs:</strong> a pasta deve conter somente arquivos Excel (
         <strong>.xlsx</strong>) com padrão especificado e, quando for pasta, apenas
-        arquivos do <strong>mesmo consórcio</strong> — o nome informado será
-        atribuído a todos os arquivos processados.
+        arquivos do <strong>mesmo consórcio</strong>.
       </p>
-
-      <section className="explanation-content__section">
-        <h3 className="explanation-content__heading">Nome do arquivo gerado</h3>
-        <p>
-          Na tela, digite apenas o nome base, <strong>sem ponto e sem extensão</strong>.
-          Por exemplo, informe <strong>FI02960296</strong>.
-        </p>
-        <p>
-          O arquivo final será gerado como <strong>FI02960296.03</strong>. O sufixo{' '}
-          <strong>.03</strong> é adicionado automaticamente na transformação, de acordo
-          com o mês da data de cada planilha.
-        </p>
-      </section>
 
       <section className="explanation-content__section">
         <h3 className="explanation-content__heading">Padrão do Excel</h3>

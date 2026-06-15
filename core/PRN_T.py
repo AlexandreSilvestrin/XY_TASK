@@ -92,16 +92,16 @@ def _resolver_arquivos(caminho):
     return []
 
 
-def _resolver_nome_saida(nomearquivo):
-    return (nomearquivo or '').strip()
+def _nome_saida_do_arquivo(caminho_arquivo: str) -> str:
+    return os.path.splitext(os.path.basename(caminho_arquivo))[0]
 
 
-def _processar_arquivo(caminho_arquivo, salvar, nomearquivo='', tipo='sem CC'):
-    df, mes = ler_arquivo(caminho_arquivo)
+def _processar_arquivo(caminho_arquivo, salvar, tipo='sem CC'):
+    df, _mes = ler_arquivo(caminho_arquivo)
     texto = gerar_prn(df)
     texto = remover_acentos(texto)
-    nome_base = _resolver_nome_saida(nomearquivo)
-    destino = os.path.join(salvar, f'{nome_base}.{mes}')
+    nome_base = _nome_saida_do_arquivo(caminho_arquivo)
+    destino = os.path.join(salvar, f'{nome_base}.prn')
 
     with open(destino, 'w', encoding='UTF-8') as arq:
         arq.write(texto)
@@ -109,7 +109,7 @@ def _processar_arquivo(caminho_arquivo, salvar, nomearquivo='', tipo='sem CC'):
     return destino
 
 
-def gerar_arquivo(caminho, salvar, nomearquivo='', tipo='sem CC'):
+def gerar_arquivo(caminho, salvar, tipo='sem CC'):
     arquivos = _resolver_arquivos(caminho)
     if not arquivos:
         return False
@@ -117,7 +117,7 @@ def gerar_arquivo(caminho, salvar, nomearquivo='', tipo='sem CC'):
     os.makedirs(salvar, exist_ok=True)
 
     for caminho_arquivo in arquivos:
-        _processar_arquivo(caminho_arquivo, salvar, nomearquivo, tipo)
+        _processar_arquivo(caminho_arquivo, salvar, tipo)
 
     return True
 
@@ -129,14 +129,12 @@ class PRNweb:
         saida,
         emit_log,
         tipo='sem CC',
-        nome_arquivo='',
         log_module='excel-prn',
     ):
         self.entrada = entrada
         self.saida = saida
         self.emit_log = emit_log
         self.tipo = tipo
-        self.nome_arquivo = nome_arquivo
         self.log_module = log_module
 
     def executar(self):
@@ -159,7 +157,6 @@ class PRNweb:
                 destino = _processar_arquivo(
                     caminho_arquivo,
                     self.saida,
-                    self.nome_arquivo,
                     self.tipo,
                 )
                 processados += 1
@@ -192,5 +189,4 @@ class PRNweb:
 if __name__ == "__main__":
     caminho = r"C:\Users\Alexandre\Downloads\Nova pasta"
     salvar = r"C:\Users\Alexandre\Desktop\Saida\prnn"
-    nomearquivo = 'FI02960296'
-    gerar_arquivo(caminho, salvar, nomearquivo)
+    gerar_arquivo(caminho, salvar)

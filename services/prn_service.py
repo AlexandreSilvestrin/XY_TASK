@@ -55,18 +55,11 @@ def executar_prn(payload):
     entrada = str(payload.get("entrada", "")).strip()
     saida = str(payload.get("saida", "")).strip()
     tipo = _normalizar_tipo_centro_custo(payload.get("tipo_centro_custo"))
-    nome_arquivo = str(payload.get("nome_arquivo", "")).strip()
 
     if not entrada or not saida:
         return {
             "success": False,
             "message": "Os campos 'entrada' e 'saida' são obrigatórios.",
-        }
-
-    if not nome_arquivo:
-        return {
-            "success": False,
-            "message": "O campo 'nome_arquivo' é obrigatório.",
         }
 
     erro_entrada = _validar_entrada(entrada)
@@ -83,7 +76,6 @@ def executar_prn(payload):
             saida,
             emit_log,
             tipo=tipo,
-            nome_arquivo=nome_arquivo,
             log_module=LOG_MODULE,
         )
         resultado = prn.executar()
