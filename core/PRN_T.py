@@ -2,6 +2,7 @@ import pandas as pd
 import os
 import unicodedata
 
+
 def _entrada_e_arquivo(caminho):
     return os.path.isfile(caminho)
 
@@ -38,20 +39,22 @@ def gerar_prn(df):
     for indice, linha in df.iterrows():
         lista_linha = linha.values.tolist()
         lista_linha += [''] * (17 - len(lista_linha))
-        print(lista_linha)
+        valor = str(round(float(lista_linha[4])))
+        valor2 = str(round(float(lista_linha[11])))
         linha = [
         campo('texto', 5, ''),  #campo 01
         campo('texto', 18, lista_linha[1], 'direita'),  #campo 02 Codigo conta debito
         campo('texto', 18, lista_linha[2], 'direita'),  #campo 03 Codigo conta credito
-        campo('texto', 5, lista_linha[3].strip(), 'direita'),  #campo 04 codigo historico
-        campo('texto', 12, lista_linha[4], 'direita'),  #campo 06 valor
+        campo('texto', 1, ''),  #campo 04 codigo historico
+        campo('texto', 4, lista_linha[3].strip(), 'esquerda'),  #campo 04 codigo historico
+        campo('numerico', 12, valor, 'direita'),  #campo 06 valor
         campo('texto', 10, lista_linha[5], 'direita'),  #campo 07 data
         campo('texto', 6, ''),  #campo 08
         campo('texto', 143, lista_linha[7]),  #campo 09  NOME (complemento do historico)
-        campo('texto', 20, lista_linha[8]),  #campo 10
+        campo('texto', 20, lista_linha[8]),  #campo 10 
         campo('texto', 20, lista_linha[9]),  #campo 11
-        campo('texto', 20, lista_linha[10]),  #campo 12
-        campo('texto', 15, lista_linha[11]),  #campo 13
+        campo('texto', 20, lista_linha[10], 'direita'),  #campo 12 #codigo CC
+        campo('numerico', 15, valor2, 'direita'),  #campo 13 #valor CC
         campo('texto', 20, lista_linha[12]),  #campo 14
         campo('texto', 15, lista_linha[13]),  #campo 15
         campo('texto', 1, lista_linha[14]),  #campo 16
@@ -96,7 +99,7 @@ def _nome_saida_do_arquivo(caminho_arquivo: str) -> str:
     return os.path.splitext(os.path.basename(caminho_arquivo))[0]
 
 
-def _processar_arquivo(caminho_arquivo, salvar, tipo='sem CC'):
+def _processar_arquivo(caminho_arquivo, salvar):
     df, _mes = ler_arquivo(caminho_arquivo)
     texto = gerar_prn(df)
     texto = remover_acentos(texto)
@@ -109,7 +112,7 @@ def _processar_arquivo(caminho_arquivo, salvar, tipo='sem CC'):
     return destino
 
 
-def gerar_arquivo(caminho, salvar, tipo='sem CC'):
+def gerar_arquivo(caminho, salvar):
     arquivos = _resolver_arquivos(caminho)
     if not arquivos:
         return False
@@ -117,7 +120,7 @@ def gerar_arquivo(caminho, salvar, tipo='sem CC'):
     os.makedirs(salvar, exist_ok=True)
 
     for caminho_arquivo in arquivos:
-        _processar_arquivo(caminho_arquivo, salvar, tipo)
+        _processar_arquivo(caminho_arquivo, salvar)
 
     return True
 
@@ -128,13 +131,11 @@ class PRNweb:
         entrada,
         saida,
         emit_log,
-        tipo='sem CC',
         log_module='excel-prn',
     ):
         self.entrada = entrada
         self.saida = saida
         self.emit_log = emit_log
-        self.tipo = tipo
         self.log_module = log_module
 
     def executar(self):
@@ -157,7 +158,6 @@ class PRNweb:
                 destino = _processar_arquivo(
                     caminho_arquivo,
                     self.saida,
-                    self.tipo,
                 )
                 processados += 1
                 self.emit_log(

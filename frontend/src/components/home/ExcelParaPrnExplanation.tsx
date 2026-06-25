@@ -5,98 +5,54 @@ type PrnExampleRow = {
   e?: string
   f?: string
   h?: string
-  spacer?: boolean
+  k?: string
+  l?: string
 }
 
 const EXCEL_EXAMPLE_ROWS: PrnExampleRow[] = [
   {
-    b: '103',
-    c: '9',
-    d: '1',
-    e: '855527',
-    f: '31/01/2026',
-    h: 'PROVISÃO DE FÉRIAS REF. 01/2026',
+    b: '402',
+    c: '735',
+    d: '314',
+    e: '28213',
+    f: '28/02/2026',
+    h: 'DNIT-1 - CONSORCIO PPV',
+    k: '1.10.020',
+    l: '28213',
   },
   {
-    b: '104',
-    c: '10',
-    d: '1',
-    e: '68440',
-    f: '31/01/2026',
-    h: 'FGTS S/ PROVISÃO DE FÉRIAS REF. 01/2026',
+    b: '402',
+    c: '664',
+    d: '314',
+    e: '54767',
+    f: '28/02/2026',
+    h: 'DNIT-2 - CONSORCIO PIAF',
+    k: '1.10.088',
+    l: '54767',
   },
   {
-    b: '105',
-    c: '11',
-    d: '1',
-    e: '245394',
-    f: '31/01/2026',
-    h: 'INSS S/ PROVISÃO DE FÉRIAS REF. 01/2026',
+    b: '402',
+    c: '1314',
+    d: '314',
+    e: '802214',
+    f: '28/02/2026',
+    h: 'ARTESP-8 - CONSORCIO LBR MODERA',
+    k: '1.10.167',
+    l: '802214',
   },
   {
-    b: '179',
-    c: '240',
-    d: '1',
-    e: '2788159',
-    f: '31/01/2026',
-    h: 'PROVISÃO DE 13º SALÁRIO REF. 01/2026',
-  },
-  {
-    b: '180',
-    c: '242',
-    d: '1',
-    e: '223052',
-    f: '31/01/2026',
-    h: 'FGTS S/ PROVISÃO DE 13º SALÁRIO REF. 01/2026',
-  },
-  {
-    b: '181',
-    c: '241',
-    d: '1',
-    e: '838982',
-    f: '31/01/2026',
-    h: 'INSS S/ PROVISÃO DE 13º SALÁRIO REF. 01/2026',
-  },
-  { spacer: true },
-  {
-    b: '9',
-    c: '103',
-    f: '31/01/2026',
-    h: 'BAIXA PROVISÃO DE FÉRIAS REF. 01/2026',
-  },
-  {
-    b: '10',
-    c: '104',
-    f: '31/01/2026',
-    h: 'BAIXA FGTS S/ PROVISÃO DE FÉRIAS REF. 01/2026',
-  },
-  {
-    b: '11',
-    c: '105',
-    f: '31/01/2026',
-    h: 'BAIXA INSS S/ PROVISÃO DE FÉRIAS REF. 01/2026',
-  },
-  {
-    b: '240',
-    c: '179',
-    f: '31/01/2026',
-    h: 'BAIXA PROVISÃO DE 13º SALÁRIO REF. 01/2026',
-  },
-  {
-    b: '242',
-    c: '180',
-    f: '31/01/2026',
-    h: 'BAIXA FGTS S/ PROVISÃO DE 13º SALÁRIO REF. 01/2026',
-  },
-  {
-    b: '241',
-    c: '181',
-    f: '31/01/2026',
-    h: 'BAIXA INSS S/ PROVISÃO DE 13º SALÁRIO REF. 01/2026',
+    b: '402',
+    c: '562',
+    d: '314',
+    e: '150000',
+    f: '28/02/2026',
+    h: 'CDHU-9 - CONSORCIO EXEMPLO',
+    k: '1.10.200',
+    l: '150000',
   },
 ]
 
-const COL_LABELS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'] as const
+const COL_LABELS = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L'] as const
 
 const COLUMN_DESCRIPTIONS = [
   { col: 'A', label: 'Vazia' },
@@ -107,6 +63,10 @@ const COLUMN_DESCRIPTIONS = [
   { col: 'F', label: 'Data' },
   { col: 'G', label: 'Vazia' },
   { col: 'H', label: 'Descrição' },
+  { col: 'I', label: 'Vazia' },
+  { col: 'J', label: 'Vazia' },
+  { col: 'K', label: 'Código centro de custo' },
+  { col: 'L', label: 'Valor centro de custo' },
 ] as const
 
 function renderCell(value: string | undefined, type: 'code' | 'value' | 'date' | 'text') {
@@ -144,10 +104,6 @@ export function ExcelParaPrnExplanation() {
       <section className="explanation-content__section">
         <h3 className="explanation-content__heading">Padrão do Excel</h3>
 
-        <p className="explanation-content__lead">
-          Modelo <strong>Sem centro de custo</strong>
-        </p>
-
         <p className="explanation-content__column-order">
           {COLUMN_DESCRIPTIONS.map(({ col, label }, index) => (
             <span key={col}>
@@ -159,7 +115,11 @@ export function ExcelParaPrnExplanation() {
           ))}
         </p>
 
-        <div className="excel-preview" role="img" aria-label="Exemplo de planilha Excel para PRN">
+        <div
+          className="excel-preview prn-excel-preview"
+          role="img"
+          aria-label="Exemplo de planilha Excel para PRN"
+        >
           <table className="excel-preview__table">
             <thead>
               <tr>
@@ -171,26 +131,22 @@ export function ExcelParaPrnExplanation() {
               </tr>
             </thead>
             <tbody>
-              {EXCEL_EXAMPLE_ROWS.map((row, index) =>
-                row.spacer ? (
-                  <tr key={`spacer-${index}`}>
-                    {COL_LABELS.map((col) => (
-                      <td key={col} className="excel-preview__empty" />
-                    ))}
-                  </tr>
-                ) : (
-                  <tr key={index}>
-                    <td className="excel-preview__empty" />
-                    {renderCell(row.b, 'code')}
-                    {renderCell(row.c, 'code')}
-                    {renderCell(row.d, 'code')}
-                    {renderCell(row.e, 'value')}
-                    {renderCell(row.f, 'date')}
-                    <td className="excel-preview__empty" />
-                    {renderCell(row.h, 'text')}
-                  </tr>
-                ),
-              )}
+              {EXCEL_EXAMPLE_ROWS.map((row, index) => (
+                <tr key={index}>
+                  <td className="excel-preview__empty" />
+                  {renderCell(row.b, 'code')}
+                  {renderCell(row.c, 'code')}
+                  {renderCell(row.d, 'code')}
+                  {renderCell(row.e, 'value')}
+                  {renderCell(row.f, 'date')}
+                  <td className="excel-preview__empty" />
+                  {renderCell(row.h, 'text')}
+                  <td className="excel-preview__empty" />
+                  <td className="excel-preview__empty" />
+                  {renderCell(row.k, 'code')}
+                  {renderCell(row.l, 'value')}
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>
@@ -199,6 +155,10 @@ export function ExcelParaPrnExplanation() {
           <li>
             Linhas que tiverem valores vazios serão removidas automaticamente — não há
             problema em mantê-las na planilha.
+          </li>
+          <li>
+            Acentos nos nomes e descrições são removidos automaticamente — não há
+            problema em mantê-los na planilha.
           </li>
           <li>
             O tamanho dos espaços e a largura das colunas no Excel também não interferem
@@ -210,15 +170,6 @@ export function ExcelParaPrnExplanation() {
       <p className="explanation-content__footnote">
         Algumas informações foram tiradas de layout de importação de movimentos.
       </p>
-
-      <section className="explanation-content__section explanation-content__section--continued">
-        <h3 className="explanation-content__heading">Modelo Com centro de custo</h3>
-        <p>
-          O modelo <strong>Com centro de custo</strong> ainda está em processo de
-          definição. De acordo com o que for enviado, esta explicação e o tratamento
-          serão atualizados.
-        </p>
-      </section>
     </div>
   )
 }

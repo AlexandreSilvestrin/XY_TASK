@@ -22,13 +22,10 @@ export type NotasActionPayload = {
   ano: number
 }
 
-export type PrnCentroCustoTipo = 'sem-cc' | 'com-cc'
-
 export type ExcelPrnActionPayload = {
   module: 'excel-prn'
   entrada: string
   saida: string
-  tipo_centro_custo: PrnCentroCustoTipo
 }
 
 export type RazaoModo = 'resumo' | 'dfc'

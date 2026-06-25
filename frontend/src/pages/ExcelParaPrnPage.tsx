@@ -2,11 +2,7 @@ import { useMemo, useState } from 'react'
 import { ApiError } from '../api/client'
 import { geralPrn } from '../api/excelPrn'
 import { requestSelect } from '../api/select'
-import type {
-  ExcelPrnActionPayload,
-  PrnCentroCustoTipo,
-  SelectType,
-} from '../api/types'
+import type { ExcelPrnActionPayload, SelectType } from '../api/types'
 import { PathField } from '../components/shared/PathField'
 import { useSaidaPath } from '../hooks/useSaidaPath'
 import { validateEntradaSaida } from '../lib/validatePaths'
@@ -15,7 +11,6 @@ type SelectLoading = 'entrada-pasta' | 'entrada-arquivo' | 'saida' | null
 
 export default function ExcelParaPrnPage() {
   const [entrada, setEntrada] = useState('')
-  const [tipoCentroCusto, setTipoCentroCusto] = useState<PrnCentroCustoTipo>('sem-cc')
   const { saida, setSaida, persistSaida, commitSaidaOnBlur } = useSaidaPath('excel-prn')
   const [loadingSelect, setLoadingSelect] = useState<SelectLoading>(null)
   const [loadingAction, setLoadingAction] = useState(false)
@@ -28,9 +23,8 @@ export default function ExcelParaPrnPage() {
       module: 'excel-prn',
       entrada,
       saida,
-      tipo_centro_custo: tipoCentroCusto,
     }),
-    [entrada, saida, tipoCentroCusto],
+    [entrada, saida],
   )
 
   async function handleSelect(
@@ -98,57 +92,27 @@ export default function ExcelParaPrnPage() {
         </h1>
 
         <div className="flex w-full max-w-3xl flex-col items-center gap-8 lg:max-w-none">
-          <div className="w-full">
-            <PathField
-              label="Local dos arquivos"
-              value={entrada}
-              onChange={setEntrada}
-              placeholder="Caminho da pasta ou arquivo..."
-              disabled={busy && !loadingSelect?.startsWith('entrada')}
-              actions={[
-                {
-                  id: 'entrada-pasta',
-                  label: 'Selecionar pasta',
-                  loading: loadingSelect === 'entrada-pasta',
-                  onClick: () => handleSelect('entrada', 'pasta', 'entrada-pasta'),
-                },
-                {
-                  id: 'entrada-arquivo',
-                  label: 'Selecionar arquivo',
-                  loading: loadingSelect === 'entrada-arquivo',
-                  onClick: () => handleSelect('entrada', 'arquivos', 'entrada-arquivo'),
-                },
-              ]}
-            />
-
-            <fieldset className="mt-4 flex flex-col items-center gap-4 sm:flex-row sm:flex-wrap sm:justify-center">
-              <legend className="sr-only">Centro de custo</legend>
-              <label className="flex cursor-pointer items-center gap-2 text-sm font-semibold uppercase tracking-wide text-foreground">
-                <input
-                  type="radio"
-                  name="prn-centro-custo"
-                  value="sem-cc"
-                  checked={tipoCentroCusto === 'sem-cc'}
-                  onChange={() => setTipoCentroCusto('sem-cc')}
-                  disabled={busy}
-                  className="h-4 w-4 accent-accent"
-                />
-                Sem centro de custo
-              </label>
-              <label className="flex cursor-pointer items-center gap-2 text-sm font-semibold uppercase tracking-wide text-foreground">
-                <input
-                  type="radio"
-                  name="prn-centro-custo"
-                  value="com-cc"
-                  checked={tipoCentroCusto === 'com-cc'}
-                  onChange={() => setTipoCentroCusto('com-cc')}
-                  disabled={busy}
-                  className="h-4 w-4 accent-accent"
-                />
-                Com centro de custo
-              </label>
-            </fieldset>
-          </div>
+          <PathField
+            label="Local dos arquivos"
+            value={entrada}
+            onChange={setEntrada}
+            placeholder="Caminho da pasta ou arquivo..."
+            disabled={busy && !loadingSelect?.startsWith('entrada')}
+            actions={[
+              {
+                id: 'entrada-pasta',
+                label: 'Selecionar pasta',
+                loading: loadingSelect === 'entrada-pasta',
+                onClick: () => handleSelect('entrada', 'pasta', 'entrada-pasta'),
+              },
+              {
+                id: 'entrada-arquivo',
+                label: 'Selecionar arquivo',
+                loading: loadingSelect === 'entrada-arquivo',
+                onClick: () => handleSelect('entrada', 'arquivos', 'entrada-arquivo'),
+              },
+            ]}
+          />
 
           <PathField
             label="Local para salvar"

@@ -710,6 +710,10 @@
     min-width: 52rem;
   }
 
+  .prn-excel-preview .excel-preview__table {
+    min-width: 56rem;
+  }
+
   .excel-preview__header-cell {
     font-size: 0.6875rem;
     font-weight: 600;

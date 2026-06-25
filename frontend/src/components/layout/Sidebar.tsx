@@ -41,8 +41,8 @@ export function Sidebar({
             <p className="text-[0.65rem] font-semibold uppercase tracking-[0.28em] text-accent">
               XY Task
             </p>
-            <h1 className="text-lg font-bold leading-tight text-foreground sm:text-xl">
-              ETL Contábil
+            <h1 className="text-base font-bold leading-snug text-foreground sm:text-lg">
+              Plantcont / Luiza Assessoria
             </h1>
           </div>
         ) : null}

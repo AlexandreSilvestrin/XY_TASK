@@ -7,13 +7,6 @@ from websocket.emitter import emit_log
 LOG_MODULE = "excel-prn"
 
 
-def _normalizar_tipo_centro_custo(raw) -> str:
-    value = str(raw or "sem-cc").strip().lower().replace("_", "-")
-    if value in {"com-cc", "com cc", "comcc"}:
-        return "com CC"
-    return "sem CC"
-
-
 def _validar_entrada(entrada: str) -> str | None:
     path = Path(entrada)
 
@@ -54,7 +47,6 @@ def _validar_saida(saida: str) -> str | None:
 def executar_prn(payload):
     entrada = str(payload.get("entrada", "")).strip()
     saida = str(payload.get("saida", "")).strip()
-    tipo = _normalizar_tipo_centro_custo(payload.get("tipo_centro_custo"))
 
     if not entrada or not saida:
         return {
@@ -71,13 +63,7 @@ def executar_prn(payload):
         return {"success": False, "message": erro_saida}
 
     try:
-        prn = PRNweb(
-            entrada,
-            saida,
-            emit_log,
-            tipo=tipo,
-            log_module=LOG_MODULE,
-        )
+        prn = PRNweb(entrada, saida, emit_log, log_module=LOG_MODULE)
         resultado = prn.executar()
 
         if resultado is False:

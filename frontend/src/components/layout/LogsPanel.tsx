@@ -15,13 +15,15 @@ export function LogsPanel({ className = '' }: LogsPanelProps) {
       <div className="flex shrink-0 items-center justify-between border-b border-intensity-1 px-5 py-2.5">
         <h2 className="font-display text-xl font-bold text-accent">Logs</h2>
         <div className="flex items-center gap-3">
-          <span
-            className={`text-[0.65rem] font-medium uppercase tracking-[0.18em] ${
+          <p
+            className={`max-w-xs text-right text-xs leading-snug ${
               isConnected ? 'text-muted' : 'text-red-400'
             }`}
           >
-            {isConnected ? 'ETL · ao vivo' : 'Backend offline'}
-          </span>
+            {isConnected
+              ? 'Apenas informações sobre os processamentos em execução.'
+              : 'Servidor indisponível. Os logs não serão atualizados.'}
+          </p>
           <button
             type="button"
             onClick={clearLogs}

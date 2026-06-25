@@ -53,8 +53,7 @@
 {
   "module": "excel-prn",
   "entrada": "C:\\origem\\planilha.xlsx",
-  "saida": "C:\\destino\\saida",
-  "tipo_centro_custo": "sem-cc"
+  "saida": "C:\\destino\\saida"
 }
 ```
 
@@ -65,22 +64,8 @@
 | `module` | string | sim | `excel-prn` | Identificador do módulo |
 | `entrada` | string | sim | caminho | Pasta ou arquivo `.xlsx` de origem |
 | `saida` | string | sim | caminho | Pasta de destino dos `.prn` |
-| `tipo_centro_custo` | string | sim | `sem-cc`, `com-cc` | Tipo de tratamento (com ou sem centro de custo) |
 
 O nome do `.prn` gerado usa o **nome do Excel de entrada** (sem `.xlsx`) + extensão **`.prn`**. Ex.: `FI02960296.xlsx` → `FI02960296.prn`.
-
-### Exemplo — Com centro de custo
-
-```json
-{
-  "module": "excel-prn",
-  "entrada": "C:\\origem\\pasta_excel",
-  "saida": "C:\\destino\\saida",
-  "tipo_centro_custo": "com-cc"
-}
-```
-
-> `tipo_centro_custo` define apenas o tipo de tratamento no backend.
 
 ### Resposta de sucesso (`200`)
 
