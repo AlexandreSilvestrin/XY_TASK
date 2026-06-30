@@ -5,6 +5,7 @@ export type PageId =
   | 'importacao-dimob'
   | 'razao'
   | 'provisoes'
+  | 'apuracao-pis-cofins'
 
 export type NavItem = {
   id: PageId

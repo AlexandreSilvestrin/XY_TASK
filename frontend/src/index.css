@@ -699,6 +699,38 @@
     font-weight: 600;
   }
 
+  .apuracao-nome-example {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+    margin: 0;
+    border-radius: 0.5rem;
+    border: 1px solid var(--intensity-border-2);
+    background-color: color-mix(in oklab, var(--color-canvas) 80%, transparent);
+    padding: 0.875rem 1rem;
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    word-break: break-word;
+  }
+
+  .apuracao-nome-example__origem {
+    color: var(--color-muted);
+    text-decoration: line-through;
+    text-decoration-color: color-mix(in oklab, var(--color-muted) 60%, transparent);
+  }
+
+  .apuracao-nome-example__arrow {
+    color: var(--color-accent);
+    font-weight: 700;
+  }
+
+  .apuracao-nome-example__destino {
+    color: var(--color-foreground);
+    font-weight: 700;
+    letter-spacing: 0.04em;
+  }
+
   .excel-preview {
     overflow-x: auto;
     border-radius: 0.375rem;
@@ -947,6 +979,96 @@
   }
 
   .codigos-provisoes-input:disabled {
+    opacity: 0.55;
+  }
+
+  .codigos-apuracao-grid {
+    overflow-x: auto;
+  }
+
+  .codigos-apuracao-grid__header,
+  .codigos-apuracao-grid__row {
+    display: grid;
+    grid-template-columns:
+      minmax(3rem, 0.5fr)
+      minmax(8rem, 1.4fr)
+      repeat(4, minmax(4.5rem, 1fr))
+      minmax(7.5rem, auto);
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .codigos-apuracao-grid__header {
+    margin-bottom: 0.75rem;
+    min-width: 52rem;
+  }
+
+  .codigos-apuracao-grid__subtitle {
+    text-align: center;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  .codigos-apuracao-grid__subtitle--wide {
+    text-align: left;
+    padding-left: 0.25rem;
+  }
+
+  .codigos-apuracao-grid__subtitle--actions {
+    visibility: hidden;
+  }
+
+  .codigos-apuracao-grid__body {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    min-width: 52rem;
+  }
+
+  .codigos-apuracao-grid__ordem {
+    margin: 0;
+    padding: 0.35rem 0.5rem;
+    text-align: center;
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--color-accent);
+  }
+
+  .codigos-apuracao-grid__actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.35rem;
+  }
+
+  .codigos-apuracao-input {
+    width: 100%;
+    min-width: 0;
+    border-radius: 0.65rem;
+    border: 1px solid var(--intensity-border-2);
+    background-color: color-mix(in oklab, var(--color-surface) 70%, transparent);
+    padding: 0.5rem 0.625rem;
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--color-foreground);
+    outline: none;
+    transition:
+      border-color 0.15s ease,
+      box-shadow 0.15s ease;
+  }
+
+  .codigos-apuracao-input--wide {
+    text-align: left;
+  }
+
+  .codigos-apuracao-input:focus {
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 2px var(--intensity-ring);
+  }
+
+  .codigos-apuracao-input:disabled {
     opacity: 0.55;
   }
 }

@@ -1,0 +1,735 @@
+{
+    "LBR":{
+        "ASSESSOR CE": {
+            "LBR": {
+                "PIS_B": 20,
+                "PIS_C": 182,
+                "COFINS_B": 20,
+                "COFINS_C": 183
+            },
+            "PROGETTO": {
+                "PIS_B": 279,
+                "PIS_C": 184,
+                "COFINS_B": 279,
+                "COFINS_C": 185
+            },
+            "PRISMA": {
+                "PIS_B": 21,
+                "PIS_C": 249,
+                "COFINS_B": 21,
+                "COFINS_C": 250
+            },
+            "EHP": {
+                "PIS_B": 246,
+                "PIS_C": 280,
+                "COFINS_B": 246,
+                "COFINS_C": 281
+            }
+        },
+        "CONSERVACAO LH": {
+            "LBR": {
+                "PIS_B": 20,
+                "PIS_C": 182,
+                "COFINS_B": 20,
+                "COFINS_C": 183
+            },
+            "HAGAPLAN": {
+                "PIS_B": 21,
+                "PIS_C": 184,
+                "COFINS_B": 21,
+                "COFINS_C": 185
+            }
+        },
+        "ESTATISTICA LR": {
+            "LBR": {
+                "PIS_B": 21,
+                "PIS_C": 184,
+                "COFINS_B": 21,
+                "COFINS_C": 185
+            },
+            "REP": {
+                "PIS_B": 20,
+                "PIS_C": 182,
+                "COFINS_B": 20,
+                "COFINS_C": 183
+            }
+        },
+        "ESTRUTURA SP": {
+            "LBR": {
+                "PIS_B": 20,
+                "PIS_C": 182,
+                "COFINS_B": 20,
+                "COFINS_C": 183
+            },
+            "SONDOTECNICA": {
+                "PIS_B": 21,
+                "PIS_C": 184,
+                "COFINS_B": 21,
+                "COFINS_C": 185
+            },
+            "ENGEMAP": {
+                "PIS_B": 246,
+                "PIS_C": 249,
+                "COFINS_B": 246,
+                "COFINS_C": 250
+            }
+        },
+        "GERENCIADOR ESCOLAR": {
+            "LBR": {
+                "PIS_B": 21,
+                "PIS_C": 184,
+                "COFINS_B": 21,
+                "COFINS_C": 185
+            },
+            "FUTURE ATP": {
+                "PIS_B": 20,
+                "PIS_C": 182,
+                "COFINS_B": 20,
+                "COFINS_C": 183
+            },
+            "CONSENGE": {
+                "PIS_B": 22,
+                "PIS_C": 208,
+                "COFINS_B": 22,
+                "COFINS_C": 209
+            }
+        },
+        "GERENCIADOR HABITA LP": {
+            "LBR": {
+                "PIS_B": 20,
+                "PIS_C": 182,
+                "COFINS_B": 20,
+                "COFINS_C": 183
+            },
+            "PLANSERVI": {
+                "PIS_B": 21,
+                "PIS_C": 184,
+                "COFINS_B": 21,
+                "COFINS_C": 185
+            }
+        },
+        "GERENCIADOR HABITACIONAL": {
+            "LBR": {
+                "PIS_B": 20,
+                "PIS_C": 182,
+                "COFINS_B": 20,
+                "COFINS_C": 183
+            },
+            "GOS": {
+                "PIS_B": 21,
+                "PIS_C": 184,
+                "COFINS_B": 21,
+                "COFINS_C": 185
+            },
+            "JOHELY": {
+                "PIS_B": 246,
+                "PIS_C": 249,
+                "COFINS_B": 246,
+                "COFINS_C": 250
+            },
+            "GLOBO": {
+                "PIS_B": 279,
+                "PIS_C": 280,
+                "COFINS_B": 279,
+                "COFINS_C": 281
+            },
+            "ENGEPLAN": {
+                "PIS_B": 321,
+                "PIS_C": 325,
+                "COFINS_B": 321,
+                "COFINS_C": 326
+            }
+        },
+        "GERENCIADOR LPR": {
+            "LBR": {
+                "PIS_B": 20,
+                "PIS_C": 182,
+                "COFINS_B": 20,
+                "COFINS_C": 183
+            },
+            "PLANSERVI": {
+                "PIS_B": 21,
+                "PIS_C": 184,
+                "COFINS_B": 21,
+                "COFINS_C": 185
+            }
+        },
+        "GERENCIADOR MOB URB": {
+            "LBR": {
+                "PIS_B": 20,
+                "PIS_C": 182,
+                "COFINS_B": 20,
+                "COFINS_C": 183
+            },
+            "MODERA": {
+                "PIS_B": 246,
+                "PIS_C": 249,
+                "COFINS_B": 246,
+                "COFINS_C": 250
+            },
+            "MOBTEC": {
+                "PIS_B": 21,
+                "PIS_C": 184,
+                "COFINS_B": 21,
+                "COFINS_C": 185
+            }
+        },
+        "GESTOR LMC": {
+            "LBR": {
+                "PIS_B": 20,
+                "PIS_C": 182,
+                "COFINS_B": 20,
+                "COFINS_C": 183
+            },
+            "MODERA": {
+                "PIS_B": 21,
+                "PIS_C": 184,
+                "COFINS_B": 21,
+                "COFINS_C": 185
+            },
+            "C3": {
+                "PIS_B": 246,
+                "PIS_C": 249,
+                "COFINS_B": 246,
+                "COFINS_C": 250
+            }
+        },
+        "GESTAO LMS": {
+            "LBR": {
+                "PIS_B": 20,
+                "PIS_C": 182,
+                "COFINS_B": 20,
+                "COFINS_C": 183
+            },
+            "MENG": {
+                "PIS_B": 21,
+                "PIS_C": 184,
+                "COFINS_B": 21,
+                "COFINS_C": 185
+            },
+            "SINALRONDA": {
+                "PIS_B": 246,
+                "PIS_C": 249,
+                "COFINS_B": 246,
+                "COFINS_C": 250
+            }
+        },
+        "HABITACAO SP": {
+            "LBR": {
+                "PIS_B": 20,
+                "PIS_C": 182,
+                "COFINS_B": 20,
+                "COFINS_C": 183
+            },
+            "BONIN": {
+                "PIS_B": 21,
+                "PIS_C": 184,
+                "COFINS_B": 21,
+                "COFINS_C": 185
+            }
+        },
+        "INFRA L2M": {
+            "LBR": {
+                "PIS_B": 20,
+                "PIS_C": 182,
+                "COFINS_B": 20,
+                "COFINS_C": 183
+            },
+            "MODERA": {
+                "PIS_B": 246,
+                "PIS_C": 249,
+                "COFINS_B": 246,
+                "COFINS_C": 250
+            },
+            "MOBTEC": {
+                "PIS_B": 21,
+                "PIS_C": 184,
+                "COFINS_B": 21,
+                "COFINS_C": 185
+            }
+        },
+        "LBR BONIN J.A.GARRELHAS": {
+            "LBR": {
+                "PIS_B": 20,
+                "PIS_C": 182,
+                "COFINS_B": 20,
+                "COFINS_C": 183
+            },
+            "J.A GARRELHAS": {
+                "PIS_B": 21,
+                "PIS_C": 184,
+                "COFINS_B": 21,
+                "COFINS_C": 185
+            },
+            "BONIN": {
+                "PIS_B": 246,
+                "PIS_C": 249,
+                "COFINS_B": 246,
+                "COFINS_C": 250
+            }
+        },
+        "LBR COBRAPE MMP": {
+            "LBR": {
+                "PIS_B": 20,
+                "PIS_C": 182,
+                "COFINS_B": 20,
+                "COFINS_C": 183
+            },
+            "COBRAPE": {
+                "PIS_B": 21,
+                "PIS_C": 184,
+                "COFINS_B": 21,
+                "COFINS_C": 185
+            },
+            "MMP": {
+                "PIS_B": 246,
+                "PIS_C": 249,
+                "COFINS_B": 246,
+                "COFINS_C": 250
+            }
+        },
+        "LBR EHP": {
+            "LBR": {
+                "PIS_B": 20,
+                "PIS_C": 182,
+                "COFINS_B": 20,
+                "COFINS_C": 183
+            },
+            "EHP": {
+                "PIS_B": 21,
+                "PIS_C": 184,
+                "COFINS_B": 21,
+                "COFINS_C": 185
+            }
+        },
+        "LBR GERIBELLO NOVA ENGEVIX": {
+            "LBR": {
+                "PIS_B": 20,
+                "PIS_C": 182,
+                "COFINS_B": 20,
+                "COFINS_C": 183
+            },
+            "GERIBELLO": {
+                "PIS_B": 21,
+                "PIS_C": 184,
+                "COFINS_B": 21,
+                "COFINS_C": 185
+            },
+            "NOVA ENGEVIX ENGENHARIA": {
+                "PIS_B": 246,
+                "PIS_C": 249,
+                "COFINS_B": 246,
+                "COFINS_C": 250
+            }
+        },
+        "LBR HAGAPLAN PLANAL AMBIENTE BRASIL": {
+            "LBR": {
+                "PIS_B": 20,
+                "PIS_C": 182,
+                "COFINS_B": 20,
+                "COFINS_C": 183
+            },
+            "HAGAPLAN": {
+                "PIS_B": 21,
+                "PIS_C": 184,
+                "COFINS_B": 21,
+                "COFINS_C": 185
+            },
+            "PLANAL": {
+                "PIS_B": 246,
+                "PIS_C": 249,
+                "COFINS_B": 246,
+                "COFINS_C": 250
+            },
+            "AMB. BRASIL": {
+                "PIS_B": 275,
+                "PIS_C": 279,
+                "COFINS_B": 275,
+                "COFINS_C": 280
+            }
+        },
+        "LBR HAGAPLAN TIGGA": {
+            "LBR": {
+                "PIS_B": 20,
+                "PIS_C": 182,
+                "COFINS_B": 20,
+                "COFINS_C": 183
+            },
+            "HAGAPLAN": {
+                "PIS_B": 21,
+                "PIS_C": 184,
+                "COFINS_B": 21,
+                "COFINS_C": 185
+            },
+            "TIGGA": {
+                "PIS_B": 246,
+                "PIS_C": 249,
+                "COFINS_B": 246,
+                "COFINS_C": 250
+            }
+        },
+        "LBR MENG": {
+            "LBR": {
+                "PIS_B": 20,
+                "PIS_C": 182,
+                "COFINS_B": 20,
+                "COFINS_C": 183
+            },
+            "MENG": {
+                "PIS_B": 21,
+                "PIS_C": 184,
+                "COFINS_B": 21,
+                "COFINS_C": 185
+            }
+        },
+        "LBR MODERA MULTIPLANO": {
+            "LBR": {
+                "PIS_B": 20,
+                "PIS_C": 182,
+                "COFINS_B": 20,
+                "COFINS_C": 183
+            },
+            "MODERA": {
+                "PIS_B": 246,
+                "PIS_C": 249,
+                "COFINS_B": 246,
+                "COFINS_C": 250
+            },
+            "MULTIPLANO": {
+                "PIS_B": 21,
+                "PIS_C": 184,
+                "COFINS_B": 21,
+                "COFINS_C": 185
+            }
+        },
+        "LBR MODERA": {
+            "LBR": {
+                "PIS_B": 20,
+                "PIS_C": 182,
+                "COFINS_B": 20,
+                "COFINS_C": 183
+            },
+            "MODERA": {
+                "PIS_B": 21,
+                "PIS_C": 184,
+                "COFINS_B": 21,
+                "COFINS_C": 185
+            }
+        },
+        "LBR REGULARIZA SP": {
+            "LBR": {
+                "PIS_B": 20,
+                "PIS_C": 182,
+                "COFINS_B": 20,
+                "COFINS_C": 183
+            },
+            "CAA": {
+                "PIS_B": 21,
+                "PIS_C": 184,
+                "COFINS_B": 21,
+                "COFINS_C": 185
+            },
+            "REP": {
+                "PIS_B": 246,
+                "PIS_C": 249,
+                "COFINS_B": 246,
+                "COFINS_C": 250
+            },
+            "LETTIERI": {
+                "PIS_B": 279,
+                "PIS_C": 280,
+                "COFINS_B": 279,
+                "COFINS_C": 281
+            }
+        },
+        "SUPERVISOR PONTE DE GUARATUBA PR": {
+            "LBR": {
+                "PIS_B": 20,
+                "PIS_C": 182,
+                "COFINS_B": 20,
+                "COFINS_C": 183
+            },
+            "STRATA": {
+                "PIS_B": 21,
+                "PIS_C": 184,
+                "COFINS_B": 21,
+                "COFINS_C": 185
+            }
+        },
+        "SUPERVISOR RT": {
+            "LBR": {
+                "PIS_B": 20,
+                "PIS_C": 182,
+                "COFINS_B": 20,
+                "COFINS_C": 183
+            },
+            "PLANAL": {
+                "PIS_B": 21,
+                "PIS_C": 184,
+                "COFINS_B": 21,
+                "COFINS_C": 185
+            },
+            "HIDROCONSULT": {
+                "PIS_B": 246,
+                "PIS_C": 249,
+                "COFINS_B": 246,
+                "COFINS_C": 250
+            }
+        },
+        "URBHIS": {
+            "LBR": {
+                "PIS_B": 20,
+                "PIS_C": 182,
+                "COFINS_B": 20,
+                "COFINS_C": 183
+            },
+            "BONIN": {
+                "PIS_B": 21,
+                "PIS_C": 184,
+                "COFINS_B": 21,
+                "COFINS_C": 185
+            },
+            "GERENCIAL": {
+                "PIS_B": 246,
+                "PIS_C": 249,
+                "COFINS_B": 246,
+                "COFINS_C": 250
+            }
+        },
+        "LBR PLANAL": {}
+        },
+    "SONDOTECNICA":{
+        "EAG SP": {
+            "SONDOTECNICA": {
+                "PIS_B": 2517,
+                "PIS_C": 2708,
+                "COFINS_B": 2517,
+                "COFINS_C": 2711
+            },
+            "CAA": {
+                "PIS_B": 2510,
+                "PIS_C": 2707,
+                "COFINS_B": 2510,
+                "COFINS_C": 2710
+            }
+        },
+        "FISCALIZACAO TERMINAIS": {
+            "SONDOTECNICA": {
+                "PIS_B": 2437,
+                "PIS_C": 2708,
+                "COFINS_B": 2437,
+                "COFINS_C": 2711
+            },
+            "JHE": {
+                "PIS_B": 2436,
+                "PIS_C": 2707,
+                "COFINS_B": 2436,
+                "COFINS_C": 2710
+            },
+            "GEOMETRICA": {
+                "PIS_B": 13,
+                "PIS_C": 2709,
+                "COFINS_B": 13,
+                "COFINS_C": 2712
+            }
+        },
+        "GERENCIADOR SGP": {
+            "SONDOTECNICA": {
+                "PIS_B": 2437,
+                "PIS_C": 2708,
+                "COFINS_B": 2437,
+                "COFINS_C": 2711
+            },
+            "GOS": {
+                "PIS_B": 2436,
+                "PIS_C": 2707,
+                "COFINS_B": 2436,
+                "COFINS_C": 2710
+            },
+            "PROGETTO": {
+                "PIS_B": 13,
+                "PIS_C": 2709,
+                "COFINS_B": 13,
+                "COFINS_C": 2712
+            }
+        },
+        "INFRA SP": {
+            "SONDOTECNICA": {
+                "PIS_B": 2517,
+                "PIS_C": 2708,
+                "COFINS_B": 2517,
+                "COFINS_C": 2711
+            },
+            "GERIBELLO": {
+                "PIS_B": 2510,
+                "PIS_C": 2707,
+                "COFINS_B": 2510,
+                "COFINS_C": 2710
+            },
+            "PLANSERVI": {
+                "PIS_B": 30,
+                "PIS_C": 2709,
+                "COFINS_B": 30,
+                "COFINS_C": 2712
+            }
+        },
+        "REGULARIZACAO SONDOTECNICA ENCIBRA": {
+            "SONDOTECNICA": {
+                "PIS_B": 2517,
+                "PIS_C": 2708,
+                "COFINS_B": 2517,
+                "COFINS_C": 2711
+            },
+            "ENCIBRA": {
+                "PIS_B": 2510,
+                "PIS_C": 2707,
+                "COFINS_B": 2510,
+                "COFINS_C": 2710
+            }
+        },
+        "SANEAR LITORAL NORTE": {
+            "SONDOTECNICA": {
+                "PIS_B": 2517,
+                "PIS_C": 2708,
+                "COFINS_B": 2517,
+                "COFINS_C": 2711
+            },
+            "VIZCA ENGENHARIA": {
+                "PIS_B": 2510,
+                "PIS_C": 2707,
+                "COFINS_B": 2510,
+                "COFINS_C": 2710
+            },
+            "CRA ENGENHARIRA": {
+                "PIS_B": 30,
+                "PIS_C": 2709,
+                "COFINS_B": 30,
+                "COFINS_C": 2712
+            }
+        },
+        "SONDOTECNICA ENCIBRA": {
+            "SONDOTECNICA": {
+                "PIS_B": 2517,
+                "PIS_C": 2708,
+                "COFINS_B": 2517,
+                "COFINS_C": 2711
+            },
+            "ENCIBRA": {
+                "PIS_B": 2510,
+                "PIS_C": 2707,
+                "COFINS_B": 2510,
+                "COFINS_C": 2710
+            }
+        },
+        "STEMM LINHA 2": {
+            "SONDOTECNICA": {
+                "PIS_B": 2828,
+                "PIS_C": 2708,
+                "COFINS_B": 2828,
+                "COFINS_C": 2711
+            },
+            "TUV RHEINLAND": {
+                "PIS_B": 2829,
+                "PIS_C": 2707,
+                "COFINS_B": 2829,
+                "COFINS_C": 2710
+            },
+            "PINI": {
+                "PIS_B": 2830,
+                "PIS_C": 2709,
+                "COFINS_B": 2830,
+                "COFINS_C": 2712
+            },
+            "METROENG": {
+                "PIS_B": 2832,
+                "PIS_C": 2798,
+                "COFINS_B": 2832,
+                "COFINS_C": 2799
+            },
+            "MULTIPLANO": {
+                "PIS_B": 2831,
+                "PIS_C": 2800,
+                "COFINS_B": 2831,
+                "COFINS_C": 2801
+            }
+        },
+        "URBAN SP": {
+            "SONDOTECNICA": {
+                "PIS_B": 2517,
+                "PIS_C": 2708,
+                "COFINS_B": 2517,
+                "COFINS_C": 2711
+            },
+            "PLANSERVI": {
+                "PIS_B": 30,
+                "PIS_C": 2709,
+                "COFINS_B": 30,
+                "COFINS_C": 2712
+            },
+            "GOS": {
+                "PIS_B": 2510,
+                "PIS_C": 2707,
+                "COFINS_B": 2510,
+                "COFINS_C": 2710
+            }
+        },
+        "SONDOTECNICA ALPHAGEOS":{
+            "SONDOTECNICA": {
+                "PIS_B": 2517,
+                "PIS_C": 2708,
+                "COFINS_B": 2517,
+                "COFINS_C": 2711
+            },
+            "ALPHAGEOS":{
+                "PIS_B": 2510,
+                "PIS_C": 2707,
+                "COFINS_B": 2510,
+                "COFINS_C": 2710
+            }
+        }
+    },
+    "PLANSERVI":{
+        "SPAT DR 10": {
+            "PLANSERVI": {
+                "PIS_B": 21,
+                "PIS_C": 184,
+                "COFINS_B": 21,
+                "COFINS_C": 185
+            },
+            "REP": {
+                "PIS_B": 22,
+                "PIS_C": 208,
+                "COFINS_B": 22,
+                "COFINS_C": 209
+            }
+        },
+        "SPAT DR 13": {
+            "PLANSERVI": {
+                "PIS_B": 280,
+                "PIS_C": 297,
+                "COFINS_B": 281,
+                "COFINS_C": 299
+            },
+            "REP": {
+                "PIS_B": 280,
+                "PIS_C": 298,
+                "COFINS_B": 281,
+                "COFINS_C": 300
+            }
+        },
+        "PR 2020": {
+            "PLANSERVI": {
+                "PIS_B": 21,
+                "PIS_C": 184,
+                "COFINS_B": 21,
+                "COFINS_C": 185
+            },
+            "REP": {
+                "PIS_B": 22,
+                "PIS_C": 208,
+                "COFINS_B": 22,
+                "COFINS_C": 209
+            }
+        }
+    }
+}

@@ -6,6 +6,7 @@ export type LicensedPageId =
   | 'razao'
   | 'importacao-dimob'
   | 'provisoes'
+  | 'apuracao-pis-cofins'
 
 export const LICENSED_PAGE_IDS: LicensedPageId[] = [
   'notas-faturamento',
@@ -13,6 +14,7 @@ export const LICENSED_PAGE_IDS: LicensedPageId[] = [
   'razao',
   'importacao-dimob',
   'provisoes',
+  'apuracao-pis-cofins',
 ]
 
 export const LICENSE_KEYS: Record<LicensedPageId, string> = {
@@ -21,6 +23,7 @@ export const LICENSE_KEYS: Record<LicensedPageId, string> = {
   razao: 'RAZAO-1P7XA',
   'importacao-dimob': 'DIMOB-9L3MN',
   provisoes: 'PROVISOES-6R2KP',
+  'apuracao-pis-cofins': 'APURACAO-4K9PL',
 }
 
 export const LICENSE_FIELD_LABELS: Record<LicensedPageId, string> = {
@@ -29,6 +32,7 @@ export const LICENSE_FIELD_LABELS: Record<LicensedPageId, string> = {
   razao: 'RAZÃO',
   'importacao-dimob': 'DIMOB',
   provisoes: 'PROVISÕES',
+  'apuracao-pis-cofins': 'APURAÇÃO PIS/COFINS',
 }
 
 export function isLicensedPageId(page: PageId): page is LicensedPageId {
@@ -44,6 +48,7 @@ export function emptyStoredLicenses(): StoredLicenses {
     razao: '',
     'importacao-dimob': '',
     provisoes: '',
+    'apuracao-pis-cofins': '',
   }
 }
 

@@ -6,6 +6,7 @@ import ExcelParaPrnPage from './ExcelParaPrnPage'
 import ImportacaoDimobPage from './ImportacaoDimobPage'
 import RazaoPage from './RazaoPage'
 import ProvisoesPage from './ProvisoesPage'
+import ApuracaoPisCofinsPage from './ApuracaoPisCofinsPage'
 
 export const PAGE_COMPONENTS: Record<PageId, ComponentType> = {
   home: HomePage,
@@ -14,6 +15,7 @@ export const PAGE_COMPONENTS: Record<PageId, ComponentType> = {
   'importacao-dimob': ImportacaoDimobPage,
   razao: RazaoPage,
   provisoes: ProvisoesPage,
+  'apuracao-pis-cofins': ApuracaoPisCofinsPage,
 }
 
 export {
@@ -23,4 +25,5 @@ export {
   ImportacaoDimobPage,
   RazaoPage,
   ProvisoesPage,
+  ApuracaoPisCofinsPage,
 }

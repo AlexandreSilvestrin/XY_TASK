@@ -178,6 +178,7 @@ function emptyVisibility(): Record<LicensedPageId, boolean> {
     razao: false,
     'importacao-dimob': false,
     provisoes: false,
+    'apuracao-pis-cofins': false,
   }
 }
 

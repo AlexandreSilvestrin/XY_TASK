@@ -2,6 +2,7 @@ import { AppSettingsProvider } from './context/AppSettingsContext'
 import { AppSocketProvider } from './context/AppSocketContext'
 import { LicenseProvider } from './context/LicenseContext'
 import { LogsProvider } from './context/LogsContext'
+import { LogsPanelVisibilityProvider } from './context/LogsPanelVisibilityContext'
 import { PageOverlayProvider } from './context/PageOverlayContext'
 import { AppShell } from './components/layout/AppShell'
 
@@ -11,9 +12,11 @@ export default function App() {
       <LicenseProvider>
         <AppSocketProvider>
           <LogsProvider>
-            <PageOverlayProvider>
-              <AppShell />
-            </PageOverlayProvider>
+            <LogsPanelVisibilityProvider>
+              <PageOverlayProvider>
+                <AppShell />
+              </PageOverlayProvider>
+            </LogsPanelVisibilityProvider>
           </LogsProvider>
         </AppSocketProvider>
       </LicenseProvider>

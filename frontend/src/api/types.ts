@@ -2,7 +2,7 @@ export type SelectType = 'pasta' | 'arquivos'
 
 export type SelectTarget = 'entrada' | 'saida'
 
-export type AppModule = 'notas' | 'excel-prn' | 'importacao-dimob' | 'razao' | 'provisoes' | 'home'
+export type AppModule = 'notas' | 'excel-prn' | 'importacao-dimob' | 'razao' | 'provisoes' | 'apuracao-pis-cofins' | 'home'
 
 export type SelectPayload = {
   type: SelectType
@@ -49,6 +49,14 @@ export type ProvisoesActionPayload = {
   module: 'provisoes'
   entrada: string
   saida: string
+}
+
+export type ApuracaoActionPayload = {
+  module: 'apuracao-pis-cofins'
+  entrada: string
+  saida: string
+  empresa: 'LBR' | 'SONDOTECNICA' | 'PLANSERVI'
+  data: string
 }
 
 export type ActionApiResult = {

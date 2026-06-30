@@ -11,6 +11,7 @@ const NAV_ITEMS: NavItem[] = [
   { id: 'razao', label: 'RAZÃO', order: 4 },
   { id: 'importacao-dimob', label: 'IMPORTAÇÃO DIMOB', order: 5 },
   { id: 'provisoes', label: 'PROVISÕES', order: 6 },
+  { id: 'apuracao-pis-cofins', label: 'APURAÇÃO PIS / COFINS', order: 7 },
 ]
 
 type SidebarProps = {

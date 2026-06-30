@@ -9,6 +9,7 @@ SEED_FILES = (
     "BANCOCNPJ.db",
     "GUIANOMES.db",
     "codigos.json",
+    "DADOS_APURACAO.json",
 )
 
 

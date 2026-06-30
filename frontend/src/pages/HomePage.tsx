@@ -6,6 +6,7 @@ import { NotasFaturamentoExplanation } from '../components/home/NotasFaturamento
 import { ImportacaoDimobExplanation } from '../components/home/ImportacaoDimobExplanation'
 import { RazaoExplanation } from '../components/home/RazaoExplanation'
 import { ProvisoesExplanation } from '../components/home/ProvisoesExplanation'
+import { ApuracaoPisCofinsExplanation } from '../components/home/ApuracaoPisCofinsExplanation'
 
 const FALLBACK_VERSION_LABEL = 'V.?.?.?'
 
@@ -61,6 +62,10 @@ export default function HomePage() {
 
         <ExplanationAccordion title="PROVISÕES">
           <ProvisoesExplanation />
+        </ExplanationAccordion>
+
+        <ExplanationAccordion title="APURAÇÃO PIS / COFINS">
+          <ApuracaoPisCofinsExplanation />
         </ExplanationAccordion>
       </div>
 

@@ -90,49 +90,51 @@ export function ResizablePagesLogs({ children, showLogs = true }: ResizablePages
     }
   }, [startDrag])
 
-  if (!showLogs) {
-    return (
-      <div className="flex min-h-0 flex-1 flex-col overflow-hidden">
-        <main className="flex min-h-0 flex-1 flex-col overflow-hidden bg-canvas">
-          <div className="min-h-0 flex-1 overflow-auto">{children}</div>
-        </main>
-      </div>
-    )
-  }
-
   return (
     <div ref={containerRef} className="flex min-h-0 flex-1 flex-col overflow-hidden">
       <main className="flex min-h-0 flex-1 flex-col overflow-hidden bg-canvas">
-        <div className="shrink-0 border-b border-intensity-1 px-5 py-3">
-          <h2 className="font-display text-xl font-bold text-accent">Pages</h2>
-        </div>
-        <div className="min-h-0 flex-1 overflow-auto px-6 py-6 sm:px-10 lg:px-14">
+        {showLogs ? (
+          <div className="shrink-0 border-b border-intensity-1 px-5 py-3">
+            <h2 className="font-display text-xl font-bold text-accent">Pages</h2>
+          </div>
+        ) : null}
+        <div
+          className={
+            showLogs
+              ? 'min-h-0 flex-1 overflow-auto px-6 py-6 sm:px-10 lg:px-14'
+              : 'min-h-0 flex-1 overflow-auto'
+          }
+        >
           {children}
         </div>
       </main>
 
-      <div
-        role="separator"
-        aria-orientation="horizontal"
-        aria-valuenow={logsHeight}
-        aria-label="Redimensionar área de logs"
-        onPointerDown={(event) => {
-          event.preventDefault()
-          ;(event.currentTarget as HTMLDivElement).setPointerCapture(event.pointerId)
-          startDrag(event.clientY)
-        }}
-        className="group relative z-10 h-2 shrink-0 cursor-row-resize touch-none"
-      >
-        <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-intensity-fill-2 transition-colors group-hover:bg-intensity-fill-3 group-active:bg-accent" />
-        <div className="absolute left-1/2 top-1/2 h-1 w-10 -translate-x-1/2 -translate-y-1/2 rounded-full bg-intensity-fill-2 opacity-0 transition-opacity group-hover:opacity-100" />
-      </div>
+      {showLogs ? (
+        <>
+          <div
+            role="separator"
+            aria-orientation="horizontal"
+            aria-valuenow={logsHeight}
+            aria-label="Redimensionar área de logs"
+            onPointerDown={(event) => {
+              event.preventDefault()
+              ;(event.currentTarget as HTMLDivElement).setPointerCapture(event.pointerId)
+              startDrag(event.clientY)
+            }}
+            className="group relative z-10 h-2 shrink-0 cursor-row-resize touch-none"
+          >
+            <div className="absolute inset-x-0 top-1/2 h-px -translate-y-1/2 bg-intensity-fill-2 transition-colors group-hover:bg-intensity-fill-3 group-active:bg-accent" />
+            <div className="absolute left-1/2 top-1/2 h-1 w-10 -translate-x-1/2 -translate-y-1/2 rounded-full bg-intensity-fill-2 opacity-0 transition-opacity group-hover:opacity-100" />
+          </div>
 
-      <div
-        className="shrink-0 overflow-hidden"
-        style={{ height: logsHeight }}
-      >
-        <LogsPanel className="h-full" />
-      </div>
+          <div
+            className="shrink-0 overflow-hidden"
+            style={{ height: logsHeight }}
+          >
+            <LogsPanel className="h-full" />
+          </div>
+        </>
+      ) : null}
     </div>
   )
 }

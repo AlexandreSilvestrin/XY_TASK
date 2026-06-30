@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { usePageOverlay } from '../../context/PageOverlayContext'
+import { useLogsPanelVisibility } from '../../context/LogsPanelVisibilityContext'
 import { useLicenses } from '../../context/LicenseContext'
 import { isLicensedPageId } from '../../lib/licenses'
 import { PAGE_COMPONENTS } from '../../pages'
@@ -12,6 +13,7 @@ import { Sidebar } from './Sidebar'
 
 export function AppShell() {
   const { overlay, cnpjInitialRows, requestCloseOverlay } = usePageOverlay()
+  const { isHidden: logsPanelHidden } = useLogsPanelVisibility()
   const { isPageLicensed } = useLicenses()
   const [collapsed, setCollapsed] = useState(false)
   const [activePage, setActivePage] = useState<PageId>('home')
@@ -46,7 +48,7 @@ export function AppShell() {
       />
 
       <div className="flex min-h-0 min-w-0 flex-1 flex-col overflow-hidden">
-        <ResizablePagesLogs showLogs={activePage !== 'home'}>
+        <ResizablePagesLogs showLogs={activePage !== 'home' && !logsPanelHidden}>
           {mainContent}
         </ResizablePagesLogs>
       </div>

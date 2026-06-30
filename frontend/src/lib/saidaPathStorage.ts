@@ -4,7 +4,7 @@ const STORAGE_PREFIX = 'xy-task-saida-'
 
 export type SaidaPersistModule = Extract<
   AppModule,
-  'notas' | 'excel-prn' | 'importacao-dimob' | 'razao' | 'provisoes'
+  'notas' | 'excel-prn' | 'importacao-dimob' | 'razao' | 'provisoes' | 'apuracao-pis-cofins'
 >
 
 function storageKey(module: SaidaPersistModule): string {

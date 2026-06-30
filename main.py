@@ -16,6 +16,7 @@ from flask_socketio import SocketIO
 from config.caminhos import setup as setup_data
 from config.single_instance import ensure_single_instance
 from config.version import __version__
+from routes.apuracao_routes import apuracao_bp
 from routes.cnpj_routes import cnpj_bp
 from routes.dimob_routes import dimob_bp
 from routes.notas_routes import notas_bp
@@ -62,6 +63,7 @@ app.register_blueprint(cnpj_bp)
 app.register_blueprint(razao_bp)
 app.register_blueprint(dimob_bp)
 app.register_blueprint(provisoes_bp)
+app.register_blueprint(apuracao_bp)
 
 _shutdown_done = False
 
