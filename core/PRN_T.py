@@ -19,9 +19,9 @@ def campo(tipo='numerico', tamanho=0, valor='', alinhamento='esquerda'):
         valor_str = str(valor).replace('.', '').replace(',', '').strip()
 
         if alinhamento == 'direita':
-            return valor_str.rjust(tamanho, '0')
+            return valor_str.rjust(tamanho, ' ')
         else:
-            return valor_str.ljust(tamanho, '0')[:tamanho]
+            return valor_str.ljust(tamanho, ' ')[:tamanho]
 
     elif tipo == 'texto':
         valor_str = str(valor).strip()
@@ -39,8 +39,14 @@ def gerar_prn(df):
     for indice, linha in df.iterrows():
         lista_linha = linha.values.tolist()
         lista_linha += [''] * (17 - len(lista_linha))
-        valor = str(round(float(lista_linha[4])))
-        valor2 = str(round(float(lista_linha[11])))
+        if lista_linha[4].strip() == '':
+            valor = ''
+        else:
+            valor = str(round(float(lista_linha[4])))
+        if lista_linha[11].strip() == '':
+            valor2 = ''
+        else:
+            valor2 = str(round(float(lista_linha[11])))
         linha = [
         campo('texto', 5, ''),  #campo 01
         campo('texto', 18, lista_linha[1], 'direita'),  #campo 02 Codigo conta debito
@@ -187,6 +193,6 @@ class PRNweb:
 
 
 if __name__ == "__main__":
-    caminho = r"C:\Users\Alexandre\Downloads\Nova pasta"
-    salvar = r"C:\Users\Alexandre\Desktop\Saida\prnn"
+    caminho = r"C:\Users\Alexandre\Downloads\TRANSFORMAR\TRANSFORMAR"
+    salvar = r"C:\Users\Alexandre\Desktop\saida prn"
     gerar_arquivo(caminho, salvar)
