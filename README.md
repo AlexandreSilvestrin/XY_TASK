@@ -1,5 +1,22 @@
 # XY Task
 
+> [!NOTE]
+> **Este projeto é a evolução do Programa Automação.**
+>
+> Esta versão foi desenvolvida como uma continuação do sistema original, preservando suas principais funcionalidades e modernizando toda a aplicação.
+>
+> Principais melhorias:
+>
+> - Interface completamente redesenhada utilizando **React**;
+> - Backend reestruturado em **Flask**;
+> - Arquitetura mais organizada e preparada para futuras expansões;
+> - Inclusão de novas funcionalidades solicitadas durante a utilização do sistema.
+> - **Sistema de atualização automática (Auto Update)** para distribuição simplificada de novas versões.
+>
+> O repositório original permanece disponível apenas como histórico do desenvolvimento do projeto.
+>
+> ➜ **Versão anterior:** https://github.com/AlexandreSilvestrin/Programa-automacao
+
 Aplicativo desktop para automação contábil (**Plantcont / Luiza Assessoria**). Une uma interface web moderna com processamento Python pesado (Excel, PDF, banco de dados, etc.).
 
 Ao abrir, o programa:
