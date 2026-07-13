@@ -250,20 +250,24 @@ def criar_provisao(local_arquivos, local_salvar, dicionario_codigos):
     arquivos = os.listdir(local_arquivos)
     lista_arquivos_filtrados = filtrar_arquivos(arquivos)
     gerados = []
+    erros = []
 
     for codigo, arquivo1, arquivo2, mes_maior in lista_arquivos_filtrados:
-        destino = _gerar_provisao_par(
-            local_arquivos,
-            local_salvar,
-            codigo,
-            arquivo1,
-            arquivo2,
-            mes_maior,
-            dicionario_codigos,
-        )
-        gerados.append(destino)
+        try:
+            destino = _gerar_provisao_par(
+                local_arquivos,
+                local_salvar,
+                codigo,
+                arquivo1,
+                arquivo2,
+                mes_maior,
+                dicionario_codigos,
+            )
+            gerados.append(destino)
+        except Exception as exc:
+            erros.append((codigo, str(exc)))
 
-    return gerados
+    return gerados, erros
 
 
 class ProvisoesWeb:
@@ -333,9 +337,10 @@ class ProvisoesWeb:
             return False
 
         processados = 0
+        erros = 0
 
-        try:
-            for codigo, arquivo1, arquivo2, mes_maior in lista_arquivos_filtrados:
+        for codigo, arquivo1, arquivo2, mes_maior in lista_arquivos_filtrados:
+            try:
                 destino = _gerar_provisao_par(
                     self.entrada,
                     self.saida,
@@ -355,25 +360,51 @@ class ProvisoesWeb:
                         f"({arquivo1} + {arquivo2})"
                     ),
                 )
+            except Exception as exc:
+                erros += 1
+                self.emit_log(
+                    module=self.log_module,
+                    status="error",
+                    file=codigo,
+                    message=f"Erro ao processar {arquivo1} + {arquivo2}: {exc}",
+                )
 
+        if processados == 0:
+            self.emit_log(
+                module=self.log_module,
+                status="error",
+                file=self.entrada,
+                message=(
+                    f"Nenhuma provisão foi gerada "
+                    f"({erros} erro(s) em {len(lista_arquivos_filtrados)} par(es))."
+                ),
+            )
+            return False
+
+        if erros > 0:
+            self.emit_log(
+                module=self.log_module,
+                status="success",
+                file=self.entrada,
+                message=(
+                    f"Provisões parcialmente concluídas: "
+                    f"{processados} gerado(s), {erros} com erro."
+                ),
+            )
+        else:
             self.emit_log(
                 module=self.log_module,
                 status="success",
                 file=self.entrada,
                 message=f"Provisões transformadas com sucesso ({processados} arquivo(s)).",
             )
-            return True
-        except Exception as exc:
-            self.emit_log(
-                module=self.log_module,
-                status="error",
-                file=self.entrada,
-                message=str(exc),
-            )
-            raise
+        return True
 
 
 if __name__ == "__main__":
     caminho = r"C:\Users\Alexandre\Downloads\Nova pasta"
     salvar = r"C:\Users\Alexandre\Desktop\Saida\prnn"
-    criar_provisao(caminho, salvar, CodigosModel.to_dict())
+    gerados, erros = criar_provisao(caminho, salvar, CodigosModel.to_dict())
+    print(f"Gerados: {len(gerados)} | Erros: {len(erros)}")
+    for codigo, mensagem in erros:
+        print(f"  {codigo}: {mensagem}")

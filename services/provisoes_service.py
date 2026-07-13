@@ -62,12 +62,12 @@ def executar_provisoes(payload):
         if not resultado:
             return {
                 "success": False,
-                "message": "Nenhuma provisão foi gerada.",
+                "message": "Nenhuma provisão foi gerada. Verifique os logs.",
             }
 
         return {
             "success": True,
-            "message": "Provisões transformadas com sucesso.",
+            "message": "Processamento de provisões concluído. Verifique os logs.",
         }
 
     except Exception as exc:

@@ -80,6 +80,18 @@ def processar_df(df, linha, coluna):
     return df.iloc[-1].to_dict()
 
 
+def _valor_para_centavos(valor):
+    if valor is None or (isinstance(valor, float) and np.isnan(valor)):
+        raise ValueError("Valor PIS/COFINS ausente (NaN) na planilha.")
+    try:
+        numero = float(valor)
+    except (TypeError, ValueError) as exc:
+        raise ValueError(f"Valor PIS/COFINS inválido: {valor!r}.") from exc
+    if np.isnan(numero):
+        raise ValueError("Valor PIS/COFINS ausente (NaN) na planilha.")
+    return str(int(round(numero * 100)))
+
+
 def gerar_df(nome, lista, data):
     linhas = []
     tipos_ordem = ["PIS", "COFINS"]
@@ -88,8 +100,7 @@ def gerar_df(nome, lista, data):
     for tipo in tipos_ordem:
         for empresa in lista:
             codigos = empresa["codigos"]
-            valor = empresa[f"{tipo}_valor"]
-            valor_e = str(int(round(float(valor) * 100)))
+            valor_e = _valor_para_centavos(empresa[f"{tipo}_valor"])
             linhas.append(
                 {
                     "A": "",
@@ -124,16 +135,20 @@ def gerar_df(nome, lista, data):
 
 def organizar_dados(arquivos, pasta):
     lista_dict = []
+    erros = []
 
     for arq in arquivos:
         caminho = os.path.join(pasta, arq)
-        linha, coluna = ver_linha_coluna(caminho)
-        df = pd.read_excel(caminho)
-        nome = extrair_nome(df)
-        dict_pis_cofins = processar_df(df, linha, coluna)
-        lista_dict.append((nome, dict_pis_cofins))
+        try:
+            linha, coluna = ver_linha_coluna(caminho)
+            df = pd.read_excel(caminho)
+            nome = extrair_nome(df)
+            dict_pis_cofins = processar_df(df, linha, coluna)
+            lista_dict.append((nome, dict_pis_cofins, arq))
+        except Exception as exc:
+            erros.append((arq, str(exc)))
 
-    return lista_dict
+    return lista_dict, erros
 
 
 def _resolver_consorcio(codigos, consorcio):
@@ -149,30 +164,48 @@ def _resolver_consorcio(codigos, consorcio):
 
 def organizar_arquivo_final(lista_dict, codigos):
     listafinal = []
+    erros = []
 
-    for consorcio, pis_cofins in lista_dict:
-        consorcio_key = _resolver_consorcio(codigos, consorcio)
-        if not consorcio_key:
-            raise ValueError(
-                f"Códigos não encontrados para o consórcio '{consorcio}'."
-            )
+    for item in lista_dict:
+        if len(item) == 3:
+            consorcio, pis_cofins, arquivo = item
+        else:
+            consorcio, pis_cofins = item
+            arquivo = consorcio
 
-        codigos_consorcio = codigos[consorcio_key]
-        lista_consorcio = []
+        try:
+            consorcio_key = _resolver_consorcio(codigos, consorcio)
+            if not consorcio_key:
+                raise ValueError(
+                    f"Códigos não encontrados para o consórcio '{consorcio}'."
+                )
 
-        for index, empresa in enumerate(codigos_consorcio, start=1):
-            lista_consorcio.append(
-                {
-                    "empresa": empresa,
-                    "codigos": codigos_consorcio[empresa],
-                    "PIS_valor": pis_cofins[f"PIS_{index}"],
-                    "COFINS_valor": pis_cofins[f"COFINS_{index}"],
-                }
-            )
+            codigos_consorcio = codigos[consorcio_key]
+            lista_consorcio = []
 
-        listafinal.append((consorcio, lista_consorcio))
+            for index, empresa in enumerate(codigos_consorcio, start=1):
+                chave_pis = f"PIS_{index}"
+                chave_cofins = f"COFINS_{index}"
+                if chave_pis not in pis_cofins or chave_cofins not in pis_cofins:
+                    raise ValueError(
+                        f"Planilha não tem PIS/COFINS na posição {index} "
+                        f"para '{empresa}'."
+                    )
 
-    return listafinal
+                lista_consorcio.append(
+                    {
+                        "empresa": empresa,
+                        "codigos": codigos_consorcio[empresa],
+                        "PIS_valor": pis_cofins[chave_pis],
+                        "COFINS_valor": pis_cofins[chave_cofins],
+                    }
+                )
+
+            listafinal.append((consorcio, lista_consorcio, arquivo))
+        except Exception as exc:
+            erros.append((arquivo, str(exc)))
+
+    return listafinal, erros
 
 
 class ApuracaoPisCofinsWeb:
@@ -207,16 +240,47 @@ class ApuracaoPisCofinsWeb:
 
         try:
             codigos = DadosApuracaoModel.get_for_processing(self.empresa)
-            if not codigos:
-                raise ValueError(
-                    f"Nenhum código cadastrado para a empresa '{self.empresa}'."
-                )
+        except Exception as exc:
+            self.emit_log(
+                module=self.log_module,
+                status="error",
+                file=self.entrada,
+                message=str(exc),
+            )
+            return False
 
-            lista_dict = organizar_dados(arquivos, self.entrada)
-            listafinal = organizar_arquivo_final(lista_dict, codigos)
-            gerados = 0
+        if not codigos:
+            self.emit_log(
+                module=self.log_module,
+                status="error",
+                file=self.entrada,
+                message=f"Nenhum código cadastrado para a empresa '{self.empresa}'.",
+            )
+            return False
 
-            for consorcio, lista in listafinal:
+        lista_dict, erros_leitura = organizar_dados(arquivos, self.entrada)
+        for arquivo, mensagem in erros_leitura:
+            self.emit_log(
+                module=self.log_module,
+                status="error",
+                file=arquivo,
+                message=mensagem,
+            )
+
+        listafinal, erros_codigos = organizar_arquivo_final(lista_dict, codigos)
+        for arquivo, mensagem in erros_codigos:
+            self.emit_log(
+                module=self.log_module,
+                status="error",
+                file=arquivo,
+                message=mensagem,
+            )
+
+        gerados = 0
+        erros_geracao = 0
+
+        for consorcio, lista, arquivo in listafinal:
+            try:
                 df, nome = gerar_df(consorcio, lista, self.data)
                 caminho = os.path.join(self.saida, f"{nome}.xlsx")
                 df.to_excel(caminho, index=False, header=None)
@@ -227,7 +291,40 @@ class ApuracaoPisCofinsWeb:
                     file=os.path.basename(caminho),
                     message=f"Apuração gerada para {consorcio}.",
                 )
+            except Exception as exc:
+                erros_geracao += 1
+                self.emit_log(
+                    module=self.log_module,
+                    status="error",
+                    file=arquivo,
+                    message=f"Erro ao gerar apuração de {consorcio}: {exc}",
+                )
 
+        erros_total = len(erros_leitura) + len(erros_codigos) + erros_geracao
+
+        if gerados == 0:
+            self.emit_log(
+                module=self.log_module,
+                status="error",
+                file=self.entrada,
+                message=(
+                    f"Nenhuma apuração foi gerada "
+                    f"({erros_total} erro(s) em {len(arquivos)} arquivo(s))."
+                ),
+            )
+            return False
+
+        if erros_total > 0:
+            self.emit_log(
+                module=self.log_module,
+                status="success",
+                file=self.entrada,
+                message=(
+                    f"Apuração parcialmente concluída para {self.empresa}: "
+                    f"{gerados} gerado(s), {erros_total} com erro."
+                ),
+            )
+        else:
             self.emit_log(
                 module=self.log_module,
                 status="success",
@@ -237,13 +334,4 @@ class ApuracaoPisCofinsWeb:
                     f"para {self.empresa}."
                 ),
             )
-            return gerados > 0
-
-        except Exception as exc:
-            self.emit_log(
-                module=self.log_module,
-                status="error",
-                file=self.entrada,
-                message=str(exc),
-            )
-            raise
+        return True

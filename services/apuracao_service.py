@@ -93,12 +93,12 @@ def executar_apuracao(payload):
         if not resultado:
             return {
                 "success": False,
-                "message": "Nenhuma apuração foi gerada.",
+                "message": "Nenhuma apuração foi gerada. Verifique os logs.",
             }
 
         return {
             "success": True,
-            "message": "Apuração PIS/COFINS gerada com sucesso.",
+            "message": "Processamento de apuração concluído. Verifique os logs.",
         }
 
     except Exception as exc:
