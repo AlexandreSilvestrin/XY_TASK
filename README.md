@@ -117,9 +117,10 @@ Isso gera os arquivos estáticos em `dist/` na raiz do projeto.
 ### 2. Empacotar com PyInstaller
 
 ```powershell
-pyinstaller main.spec --clean --distpath release
+uv run python -m PyInstaller main.spec --clean --distpath release
 ```
 
+> Use sempre `uv run python -m PyInstaller` (e não só `pyinstaller`) para garantir o ambiente do projeto com todas as dependências.
 O executável fica em `release/XY_TASK/XY_TASK.exe`.
 
 **Antes de distribuir**, confira:
