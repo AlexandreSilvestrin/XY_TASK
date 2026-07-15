@@ -7,5 +7,8 @@ release/
 wheels/
 *.egg-info
 
+# Local backups
+backups/
+
 # Virtual environments
 .venv

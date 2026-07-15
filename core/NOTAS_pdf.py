@@ -2,6 +2,8 @@ import tabula
 import pandas as pd
 import traceback
 import PyPDF2
+import pdfplumber
+import re
 
 def verifica_tipo_pdf(caminho):
     with open(caminho, 'rb') as file:
@@ -18,39 +20,88 @@ def verifica_tipo_pdf(caminho):
     else:
         return 'Tipo não identificado'
 
+def extrair_notas(caminho_pdf: str) -> pd.DataFrame:
+    # Padrão de uma linha de dado (nota fiscal). Os grupos nomeados viram as colunas.
+    # Alguns campos ficam colados no PDF (ex: valor+data, valor+código) - o regex
+    # já lida com isso porque cada campo tem um formato fixo (X,XX ou dd/mm/yyyy).
+    PATTERN = re.compile(
+        r'^(?P<data>\d{2}/\d{2}/\d{4})\s+'
+        r'(?P<serie>[A-Z])\s+'
+        r'(?P<numero>\d+)\s+'
+        r'(?P<cnpj>\d{2}\.\d{3}\.\d{3}/\d{4}-\d{2}|\d{3}\.\d{3}\.\d{3}-\d{2})\s+'
+        r'(?P<vlr_total>[\d.]+,\d{2})\s*'
+        r'(?P<data_pagamento>\d{2}/\d{2}/\d{4})\s+'
+        r'(?P<base_calculo>[\d.]+,\d{2})\s+'
+        r'(?P<pis>[\d.]+,\d{2})\s*(?P<cod_pis>\d{4})\s+'
+        r'(?P<cofins>[\d.]+,\d{2})\s*(?P<cod_cofins>\d{4})\s+'
+        r'(?P<csll>[\d.]+,\d{2})\s*(?P<cod_csll>\d{4})\s+'
+        r'(?P<data_cred>\d{2}/\d{2}/\d{4})\s+'
+        r'(?P<irrf>[\d.]+,\d{2})\s*(?P<cod_irrf>\d{4})?\s+'
+        r'(?P<seg_social>[\d.]+,\d{2})$'
+    )
+    """Extrai apenas as linhas de nota fiscal (ignora cabeçalho, 'Total' e rodapé)."""
+    rows = []
+    linhas_ignoradas = []
+
+    with pdfplumber.open(caminho_pdf) as pdf:
+        for page in pdf.pages:
+            texto = page.extract_text()
+            if not texto:
+                continue
+            for linha in texto.split("\n"):
+                linha = linha.strip()
+                if not linha:
+                    continue
+                m = PATTERN.match(linha)
+                if m:
+                    rows.append(m.groupdict())
+                else:
+                    # Aqui caem: cabeçalhos, linhas "Total ..." e rodapé.
+                    # Guardamos só pra permitir conferência se quiser.
+                    linhas_ignoradas.append(linha)
+
+    df = pd.DataFrame(rows)
+
+    # Conversões numéricas (formato brasileiro -> float)
+    colunas_valor = [
+        "vlr_total", "base_calculo", "pis", "cofins",
+        "csll", "irrf", "seg_social"
+    ]
+    for col in colunas_valor:
+        df[col] = (
+            df[col]
+            .str.replace(".", "", regex=False)
+            .str.replace(",", ".", regex=False)
+            .astype(float)
+        )
+
+    # Datas
+    for col in ["data", "data_pagamento", "data_cred"]:
+        df[col] = pd.to_datetime(df[col], format="%d/%m/%Y")
+
+    # Identifica se o documento é CNPJ (14 dígitos) ou CPF (11 dígitos)
+    digitos = df["cnpj"].str.replace(r"\D", "", regex=True)
+    df["tipo_documento"] = digitos.apply(lambda d: "CNPJ" if len(d) == 14 else "CPF")
+
+    return df
 
 def gerarpdf(caminho):
     try:
         tipo = verifica_tipo_pdf(caminho)
-        
+        print(tipo)
         if 'Tipo 3' == tipo:
             dfFINAL = pd.DataFrame(columns=['Data',	'Número', 'CNPJ', 'Tipo', 'Valor'])
             return {"df": dfFINAL}
         elif tipo == 'Tipo 1':
-            # Specify the area coordinates (left, top, right, bottom) for extraction
-            area = [120.285,12.375,573.705,765.765]
-
-            df_list = tabula.read_pdf(caminho, pages=1, area=area,lattice=True)
-
-            tabela = pd.concat(df_list, ignore_index=True)
-            # Print the extracted data
-            
-            tabela.rename(columns={'Seg\rSocial': 'ValorSS'}, inplace=True)
-            tabela.rename(columns={'Unnamed: 0': 'Data'}, inplace=True)
-            tabelaF = tabela[['Data', 'Número', 'CNPJ/CPF', 'PIS Retido',  'COFINS Retida', 'CSLL retida', 'IRRF', 'ValorSS']].copy()
+            df = extrair_notas(caminho)
+            df = df[['data', 'numero', 'cnpj', 'pis',  'cofins', 'csll', 'irrf', 'seg_social']]
+            df.columns = ('Data', 'Número', 'CNPJ/CPF', 'PIS Retido', 'COFINS Retida', 'CSLL retida', 'IRRF', 'ValorSS')
+            tabelaF = df.copy()
             tabelaF.rename(columns={'CNPJ/CPF': "CNPJ"}, inplace=True)
-            tabelaF = tabelaF.replace(r'\r', ' ', regex=True)
-            tabelaF = tabelaF.replace(r',', '', regex=True)
-            tabelaF = tabelaF.replace(r'.', '')
-            tabelaF[['PIS Retido', 'COFINS Retida', 'CSLL retida']] = tabelaF[['PIS Retido', 'COFINS Retida', 'CSLL retida']].apply(lambda x: x.str.split())
-            tabelaF['PIS Retido'] =tabelaF['PIS Retido'].apply(lambda x: x[0])
-            tabelaF['COFINS Retida'] =tabelaF['COFINS Retida'].apply(lambda x: x[0])
-            tabelaF['CSLL retida'] =tabelaF['CSLL retida'].apply(lambda x: x[0])
-            tabelaF['CNPJ'] = tabelaF['CNPJ'].str.replace(r'[^\d]', '', regex=True)
             tabelaF[['PIS Retido', 'COFINS Retida', 'CSLL retida']] =tabelaF[['PIS Retido', 'COFINS Retida', 'CSLL retida']].apply(lambda x: pd.to_numeric(x))
             tabelaF['Valor'] = tabelaF[['PIS Retido', 'COFINS Retida', 'CSLL retida']].sum(axis=1)
-            tabelaF['IRRF'] = tabelaF['IRRF'].astype(int)
-            tabelaF['ValorSS'] = tabelaF['ValorSS'].astype(int)
+            tabelaF['IRRF'] = tabelaF['IRRF'].astype(float)
+            tabelaF['ValorSS'] = tabelaF['ValorSS'].astype(float)
             tabelaF['Data'] = pd.to_datetime(tabelaF['Data'], format='%d/%m/%Y')
             tabelaF['Data'] = tabelaF['Data'].dt.day.astype(str)
             dadosIRRF = tabelaF[tabelaF['IRRF']>0].copy()
@@ -65,6 +116,8 @@ def gerarpdf(caminho):
             dadosINSS = dadosINSS[['Data', 'Número', 'CNPJ', 'Tipo', 'ValorSS']].reset_index(drop=True)
             dadosINSS.rename(columns={'ValorSS': 'Valor'}, inplace=True)
             dfFINAL = pd.concat([dadosRS, dadosIRRF, dadosINSS], ignore_index=True)
+            dfFINAL['Valor'] = dfFINAL['Valor'].astype(str).str.replace('.', '', regex=False).astype(int)
+            dfFINAL['CNPJ'] = dfFINAL['CNPJ'].str.replace(r'[-./]', '', regex=True)
             dfFINAL['Número'] = dfFINAL['Número'].astype(str).str.zfill(10)
         elif tipo == 'Tipo 2':
             area = [123.672,31.476,562.523,779.733]
@@ -122,4 +175,5 @@ def gerarpdf(caminho):
             }
     
 if __name__ == "__main__": 
-    print(gerarpdf(r"C:\Users\Alexandre\Downloads\drive-download-20241010T171031Z-001\LBR\ARTESP8- Consorcio LBR Modera\Serv tomados\Relatorio retenção serv tomados LBR Modera 09-2024.pdf"))
+    caminho = r"C:\Users\Alexandre\Downloads\NOVO LBR\NOVO LBR\Serviços tomados\Relatório retenção Serviços Tomados 06-2026.pdf"
+    print(gerarpdf(caminho))

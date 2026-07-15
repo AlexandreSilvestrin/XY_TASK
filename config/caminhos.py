@@ -53,6 +53,17 @@ def get_data_dir() -> Path:
     return path
 
 
+def get_backups_dir() -> Path:
+    """Pasta de cópias locais de backup, ao lado de data."""
+    if is_installed():
+        path = get_local_app_dir() / "backups"
+    else:
+        path = get_base_dir() / "backups"
+
+    path.mkdir(parents=True, exist_ok=True)
+    return path
+
+
 def init_user_data() -> None:
     """Copia arquivos iniciais do seed para o data do usuário, se ainda não existirem."""
     data_dir = get_data_dir()
