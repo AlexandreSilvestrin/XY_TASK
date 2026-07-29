@@ -19,7 +19,7 @@ def campo(tipo='numerico', tamanho=0, valor='', alinhamento='esquerda'):
         valor_str = str(valor).replace('.', '').replace(',', '').strip()
 
         if alinhamento == 'direita':
-            return valor_str.rjust(tamanho, ' ')
+            return valor_str.rjust(tamanho, '0')
         else:
             return valor_str.ljust(tamanho, ' ')[:tamanho]
 

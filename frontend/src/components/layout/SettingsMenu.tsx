@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { ApiError } from '../../api/client'
 import { criarBackup, importarBackup } from '../../api/backup'
+import { checkForUpdates } from '../../api/version'
 import { AlertDialog } from '../cnpj/AlertDialog'
 import { ConfirmDialog } from '../cnpj/ConfirmDialog'
 import {
@@ -39,7 +40,9 @@ export function SettingsMenu({ open, collapsed, onClose }: SettingsMenuProps) {
   const { openLicenseModal } = useLicenses()
   const menuRef = useRef<HTMLDivElement>(null)
   const [feedback, setFeedback] = useState<Feedback | null>(null)
-  const [busyAction, setBusyAction] = useState<'criar' | 'importar' | null>(null)
+  const [busyAction, setBusyAction] = useState<
+    'criar' | 'importar' | 'atualizacao' | null
+  >(null)
   const [confirmImportOpen, setConfirmImportOpen] = useState(false)
 
   useEffect(() => {
@@ -104,6 +107,34 @@ export function SettingsMenu({ open, collapsed, onClose }: SettingsMenuProps) {
         error instanceof ApiError
           ? error.message
           : 'Falha ao criar o backup.',
+      )
+    } finally {
+      setBusyAction(null)
+    }
+  }
+
+  async function handleVerificarAtualizacao() {
+    setBusyAction('atualizacao')
+    try {
+      const result = await checkForUpdates()
+      if (!result.success) {
+        showFeedback(
+          'Verificação de atualização',
+          result.message ?? 'Não foi possível iniciar a verificação.',
+        )
+        return
+      }
+      showFeedback(
+        'Verificação de atualização',
+        result.message ??
+          'Verificação iniciada. Você será notificado se houver uma nova versão.',
+      )
+    } catch (error) {
+      showFeedback(
+        'Erro na verificação',
+        error instanceof ApiError
+          ? error.message
+          : 'Falha ao verificar atualizações.',
       )
     } finally {
       setBusyAction(null)
@@ -266,6 +297,22 @@ export function SettingsMenu({ open, collapsed, onClose }: SettingsMenuProps) {
                   {busyAction === 'importar' ? 'Importando…' : 'Importar backup'}
                 </button>
               </div>
+            </section>
+
+            <section className="rounded-lg px-2 py-1">
+              <p className="mb-2 px-1 text-xs font-semibold uppercase tracking-wide text-muted">
+                Atualização
+              </p>
+              <button
+                type="button"
+                disabled={busy}
+                onClick={() => void handleVerificarAtualizacao()}
+                className="flex w-full items-center justify-center rounded-lg border border-intensity-2 px-3 py-2.5 text-xs font-semibold uppercase tracking-wide text-accent transition-colors hover:bg-intensity-fill-2 disabled:cursor-not-allowed disabled:opacity-40"
+              >
+                {busyAction === 'atualizacao'
+                  ? 'Verificando…'
+                  : 'Verificar atualização'}
+              </button>
             </section>
 
             <section className="rounded-lg px-2 py-1">

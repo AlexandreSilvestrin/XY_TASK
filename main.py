@@ -25,7 +25,7 @@ from routes.prn_routes import prn_bp
 from routes.provisoes_routes import provisoes_bp
 from routes.razao_routes import razao_bp
 from services.cnpj_service import encerrar_pesquisa_cnpj
-from services.update_check import start_update_check
+from services.update_check import start_update_check, trigger_manual_update_check
 from app_webview import run_webview
 from websocket.emitter import init_socketio
 
@@ -103,6 +103,21 @@ def app_version():
     return jsonify({
         "success": True,
         "version": __version__,
+    })
+
+
+@app.route("/verificar_atualizacao", methods=["POST"])
+def verificar_atualizacao():
+    started = trigger_manual_update_check(__version__, shutdown_application)
+    if not started:
+        return jsonify({
+            "success": False,
+            "message": "Já existe uma verificação de atualização em andamento.",
+        }), 409
+
+    return jsonify({
+        "success": True,
+        "message": "Verificação de atualização iniciada.",
     })
 
 

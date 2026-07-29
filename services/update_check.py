@@ -7,7 +7,7 @@ import urllib.request
 from collections.abc import Callable
 from dataclasses import dataclass
 from pathlib import Path
-from threading import Thread
+from threading import Lock, Thread
 
 from config.caminhos import get_local_app_dir
 
@@ -20,9 +20,14 @@ _REQUEST_HEADERS = {
     "User-Agent": "XY-TASK",
 }
 
+_MB_OK = 0x00000000
 _MB_OKCANCEL = 0x00000001
 _MB_ICONINFORMATION = 0x00000040
+_MB_ICONERROR = 0x00000010
 _IDOK = 1
+
+_check_lock = Lock()
+_check_running = False
 
 
 @dataclass(frozen=True)
@@ -103,6 +108,24 @@ def _download_installer(download_url: str, destination: Path) -> None:
         destination.write_bytes(response.read())
 
 
+def _show_message(title: str, message: str, *, error: bool = False) -> None:
+    if sys.platform == "win32":
+        icon = _MB_ICONERROR if error else _MB_ICONINFORMATION
+        ctypes.windll.user32.MessageBoxW(0, message, title, _MB_OK | icon)
+        return
+
+    from tkinter import Tk, messagebox
+
+    root = Tk()
+    root.withdraw()
+    root.attributes("-topmost", True)
+    if error:
+        messagebox.showerror(title, message)
+    else:
+        messagebox.showinfo(title, message)
+    root.destroy()
+
+
 def _prompt_update_available(update: UpdateInfo, current: str) -> bool:
     message = (
         f"Uma nova versão ({update.version}) está disponível.\n\n"
@@ -145,13 +168,27 @@ def _run_installer(installer_path: Path) -> None:
 def _update_worker(
     current_version: str,
     on_before_exit: Callable[[], None] | None,
+    *,
+    manual: bool = False,
 ) -> None:
     try:
         update = fetch_latest_release()
     except (urllib.error.URLError, TimeoutError, OSError, json.JSONDecodeError):
+        if manual:
+            _show_message(
+                "Erro na verificação",
+                "Não foi possível verificar atualizações.\n\n"
+                "Verifique sua conexão com a internet e tente novamente.",
+                error=True,
+            )
         return
 
     if update is None or not is_newer_version(update.version, current_version):
+        if manual:
+            _show_message(
+                "Sem atualizações",
+                f"Você já está usando a versão mais recente ({current_version}).",
+            )
         return
 
     installer_path = get_installer_path(update.version)
@@ -160,6 +197,13 @@ def _update_worker(
         try:
             _download_installer(update.download_url, installer_path)
         except (urllib.error.URLError, TimeoutError, OSError):
+            if manual:
+                _show_message(
+                    "Erro no download",
+                    f"A versão {update.version} está disponível, mas não foi "
+                    "possível baixar o instalador.\n\nTente novamente mais tarde.",
+                    error=True,
+                )
             return
 
     _cleanup_old_installers(installer_path)
@@ -170,6 +214,12 @@ def _update_worker(
     try:
         _run_installer(installer_path)
     except OSError:
+        if manual:
+            _show_message(
+                "Erro na instalação",
+                "Não foi possível iniciar o instalador.",
+                error=True,
+            )
         return
 
     if on_before_exit is not None:
@@ -177,15 +227,51 @@ def _update_worker(
     os._exit(0)
 
 
+def _start_update_worker(
+    current_version: str,
+    on_before_exit: Callable[[], None] | None,
+    *,
+    manual: bool = False,
+) -> bool:
+    global _check_running
+
+    with _check_lock:
+        if _check_running:
+            return False
+        _check_running = True
+
+    def worker() -> None:
+        global _check_running
+        try:
+            _update_worker(
+                current_version,
+                on_before_exit,
+                manual=manual,
+            )
+        finally:
+            with _check_lock:
+                _check_running = False
+
+    thread = Thread(
+        target=worker,
+        daemon=True,
+        name="update-check-manual" if manual else "update-check",
+    )
+    thread.start()
+    return True
+
+
 def start_update_check(
     current_version: str,
     on_before_exit: Callable[[], None] | None = None,
 ) -> None:
     """Verifica e baixa atualização em background, sem bloquear a abertura do app."""
-    thread = Thread(
-        target=_update_worker,
-        args=(current_version, on_before_exit),
-        daemon=True,
-        name="update-check",
-    )
-    thread.start()
+    _start_update_worker(current_version, on_before_exit, manual=False)
+
+
+def trigger_manual_update_check(
+    current_version: str,
+    on_before_exit: Callable[[], None] | None = None,
+) -> bool:
+    """Inicia verificação manual; retorna False se já houver uma em andamento."""
+    return _start_update_worker(current_version, on_before_exit, manual=True)
