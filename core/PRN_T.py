@@ -17,6 +17,9 @@ def listar_arquivos_excel(caminho):
 def campo(tipo='numerico', tamanho=0, valor='', alinhamento='esquerda'):
     if tipo == 'numerico':
         valor_str = str(valor).replace('.', '').replace(',', '').strip()
+    
+        if valor_str == 'none':
+            return ' '.rjust(tamanho, ' ')
 
         if alinhamento == 'direita':
             return valor_str.rjust(tamanho, '0')
@@ -40,13 +43,18 @@ def gerar_prn(df):
         lista_linha = linha.values.tolist()
         lista_linha += [''] * (17 - len(lista_linha))
         if lista_linha[4].strip() == '':
-            valor = ''
+            valor = 'none'
         else:
             valor = str(round(float(lista_linha[4])))
         if lista_linha[11].strip() == '':
-            valor2 = ''
+            valorD = 'none'
         else:
-            valor2 = str(round(float(lista_linha[11])))
+            valorD = str(round(float(lista_linha[11])))
+
+        if lista_linha[13].strip() == '':
+            valorC = 'none'
+        else:
+            valorC = str(round(float(lista_linha[13])))
         linha = [
         campo('texto', 5, ''),  #campo 01
         campo('texto', 18, lista_linha[1], 'direita'),  #campo 02 Codigo conta debito
@@ -59,10 +67,10 @@ def gerar_prn(df):
         campo('texto', 143, lista_linha[7]),  #campo 09  NOME (complemento do historico)
         campo('texto', 20, lista_linha[8]),  #campo 10 
         campo('texto', 20, lista_linha[9]),  #campo 11
-        campo('texto', 20, lista_linha[10], 'direita'),  #campo 12 #codigo CC
-        campo('numerico', 15, valor2, 'direita'),  #campo 13 #valor CC
-        campo('texto', 20, lista_linha[12]),  #campo 14
-        campo('texto', 15, lista_linha[13]),  #campo 15
+        campo('texto', 20, lista_linha[10], 'esquerda'),  #campo 12 #codigo CC
+        campo('numerico', 15, valorD, 'direita'),  #campo 13 #valor CC
+        campo('texto', 20, lista_linha[12], 'esquerda'),  #campo 14
+        campo('numerico', 15, valorC, 'direita'),  #campo 15 #valor CC
         campo('texto', 1, lista_linha[14]),  #campo 16
         campo('texto', 4, lista_linha[15]),  #campo 17
         campo('texto', 10, lista_linha[16]),  #campo 18
@@ -83,12 +91,15 @@ def remover_acentos(texto):
 
 def ler_arquivo(caminho):
     df = pd.read_excel(caminho, header=None, dtype=str)
-    df.dropna(subset=[4], inplace=True)
+    df.dropna(how='all', inplace=True)
     df.fillna('', inplace=True)
     df[7] = df[7].apply(lambda x: x.replace('°', ''))
     df[5] = pd.to_datetime(df[5], errors='coerce')
     mes = df[5].dt.month.astype(str).str.zfill(2)
     df[5] = df[5].dt.strftime('%d/%m/%Y').fillna('')
+    df[4] = df[4].astype(str).str.split(".", n=1).str[0]
+    df[11] = df[11].astype(str).str.split(".", n=1).str[0]
+    df[13] = df[13].astype(str).str.split(".", n=1).str[0]
     mes = mes.iloc[0] if not mes.empty else '00'
     return df, mes
 
