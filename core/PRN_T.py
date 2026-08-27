@@ -1,7 +1,7 @@
 import pandas as pd
 import os
 import unicodedata
-
+import math
 
 def _entrada_e_arquivo(caminho):
     return os.path.isfile(caminho)
@@ -14,10 +14,13 @@ def listar_arquivos_excel(caminho):
             arquivos_excel.append(os.path.join(caminho, item))
     return arquivos_excel
 
-def campo(tipo='numerico', tamanho=0, valor='', alinhamento='esquerda'):
+def campo(tipo='numerico', tamanho=0, valor='', alinhamento='esquerda', cc=''):
     if tipo == 'numerico':
-        valor_str = str(valor).replace('.', '').replace(',', '').strip()
-    
+        if cc == 'cc':
+            valor_str = str(valor).replace(',', '').strip()
+        else:
+            valor_str = str(valor).replace('.', '').replace(',', '').strip()
+
         if valor_str == 'none':
             return ' '.rjust(tamanho, ' ')
 
@@ -67,10 +70,10 @@ def gerar_prn(df):
         campo('texto', 143, lista_linha[7]),  #campo 09  NOME (complemento do historico)
         campo('texto', 20, lista_linha[8]),  #campo 10 
         campo('texto', 20, lista_linha[9]),  #campo 11
-        campo('texto', 20, lista_linha[10], 'esquerda'),  #campo 12 #codigo CC
+        campo('texto', 20, lista_linha[10], 'esquerda', 'cc'),  #campo 12 #codigo CC
         campo('numerico', 15, valorD, 'direita'),  #campo 13 #valor CC
         campo('texto', 20, lista_linha[12], 'esquerda'),  #campo 14
-        campo('numerico', 15, valorC, 'direita'),  #campo 15 #valor CC
+        campo('numerico', 15, valorC, 'direita', 'cc'),  #campo 15 #valor CC
         campo('texto', 1, lista_linha[14]),  #campo 16
         campo('texto', 4, lista_linha[15]),  #campo 17
         campo('texto', 10, lista_linha[16]),  #campo 18
@@ -91,16 +94,18 @@ def remover_acentos(texto):
 
 def ler_arquivo(caminho):
     df = pd.read_excel(caminho, header=None, dtype=str)
+    #df.to_excel(r"C:\Users\Alexandre\Desktop\df1.xlsx", index=False)
     df.dropna(how='all', inplace=True)
     df.fillna('', inplace=True)
     df[7] = df[7].apply(lambda x: x.replace('°', ''))
     df[5] = pd.to_datetime(df[5], errors='coerce')
     mes = df[5].dt.month.astype(str).str.zfill(2)
     df[5] = df[5].dt.strftime('%d/%m/%Y').fillna('')
-    df[4] = df[4].astype(str).str.split(".", n=1).str[0]
-    df[11] = df[11].astype(str).str.split(".", n=1).str[0]
-    df[13] = df[13].astype(str).str.split(".", n=1).str[0]
+    df[4] = df[4].apply(lambda x: str(round(float(x))) if str(x).strip() else '')
+    df[11] = df[11].apply(lambda x: str(round(float(x))) if str(x).strip() else '')
+    df[13] = df[13].apply(lambda x: str(round(float(x))) if str(x).strip() else '')
     mes = mes.iloc[0] if not mes.empty else '00'
+    #df.to_excel(r"C:\Users\Alexandre\Desktop\df2.xlsx", index=False)
     return df, mes
 
 
