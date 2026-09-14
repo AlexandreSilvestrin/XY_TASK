@@ -1,7 +1,7 @@
 import pandas as pd
 import os
 import unicodedata
-import math
+import traceback
 
 def _entrada_e_arquivo(caminho):
     return os.path.isfile(caminho)
@@ -17,7 +17,7 @@ def listar_arquivos_excel(caminho):
 def campo(tipo='numerico', tamanho=0, valor='', alinhamento='esquerda', cc=''):
     if tipo == 'numerico':
         if cc == 'cc':
-            valor_str = str(valor).replace(',', '').strip()
+            valor_str = str(valor).replace(',', '').replace('.', '').strip()
         else:
             valor_str = str(valor).replace('.', '').replace(',', '').strip()
 
@@ -97,6 +97,11 @@ def ler_arquivo(caminho):
     #df.to_excel(r"C:\Users\Alexandre\Desktop\df1.xlsx", index=False)
     df.dropna(how='all', inplace=True)
     df.fillna('', inplace=True)
+
+    # Garante que as colunas existam
+    for coluna in [4, 5, 7, 11, 13]:
+        if coluna not in df.columns:
+            df[coluna] = ''
     df[7] = df[7].apply(lambda x: x.replace('°', ''))
     df[5] = pd.to_datetime(df[5], errors='coerce')
     mes = df[5].dt.month.astype(str).str.zfill(2)
@@ -197,6 +202,8 @@ class PRNweb:
             )
             return True
         except Exception as exc:
+            traceback.print_exc()
+
             self.emit_log(
                 module=self.log_module,
                 status="error",
