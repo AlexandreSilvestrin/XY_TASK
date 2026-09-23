@@ -176,6 +176,35 @@ Na primeira execução instalada, os arquivos de `data/seed/` são copiados auto
 
 ---
 
+## Transferência de banco pela rede (LAN)
+
+O backup em arquivo (`.xybackup`) continua igual: **Exportar banco → Salvar no computador** e **Importar banco → Selecionar arquivo**.
+
+Para copiar o banco entre dois PCs na mesma rede local, use **Enviar pela rede** / **Receber pela rede**. A troca usa só IPv4 na LAN (TCP `54321` e descoberta UDP `54322`). Não usa internet e não pede código de pareamento — o código de 6 dígitos serve só para identificar visualmente a transferência.
+
+### Firewall do Windows (rede privada)
+
+O Windows Firewall precisa **permitir o XY Task na rede privada**. As portas **não** devem ser abertas em redes públicas/Internet.
+
+O programa tenta criar automaticamente estas regras (perfil **Private** apenas):
+
+| Regra | Direção | Perfil |
+|-------|---------|--------|
+| XY Task (rede privada) | Entrada, para o executável | Privada |
+| XY Task LAN TCP 54321 | Entrada TCP 54321 | Privada |
+| XY Task LAN UDP 54322 | Entrada UDP 54322 | Privada |
+
+Se a criação automática falhar (geralmente falta de permissão de administrador), configure manualmente:
+
+1. Defina a rede do escritório como **Privada** (Configurações → Rede e Internet).
+2. Firewall do Windows Defender → **Permitir um aplicativo**.
+3. Inclua o `XY Task.exe` somente para **Rede privada**.
+4. Confirme entrada em TCP `54321` e UDP `54322` só no perfil privado.
+
+Não crie regra para o perfil **Público**.
+
+---
+
 ## Versão
 
 A versão exibida no app vem de `pyproject.toml`:

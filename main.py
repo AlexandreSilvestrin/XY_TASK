@@ -24,6 +24,7 @@ from routes.notas_routes import notas_bp
 from routes.prn_routes import prn_bp
 from routes.provisoes_routes import provisoes_bp
 from routes.razao_routes import razao_bp
+from services.banco_rede_service import cancelar_envio as cancelar_envio_banco_rede
 from services.cnpj_service import encerrar_pesquisa_cnpj
 from services.update_check import start_update_check, trigger_manual_update_check
 from app_webview import run_webview
@@ -78,6 +79,7 @@ def shutdown_application():
     _shutdown_done = True
 
     encerrar_pesquisa_cnpj(timeout=5)
+    cancelar_envio_banco_rede(force=True)
 
     try:
         socketio.stop()

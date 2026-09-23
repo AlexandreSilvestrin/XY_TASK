@@ -9,6 +9,13 @@ const API_PROXY_TARGET =
 const apiRoutes = [
   '/version',
   '/verificar_atualizacao',
+  '/criar_backup',
+  '/importar_backup',
+  '/banco_rede/iniciar_envio',
+  '/banco_rede/status_envio',
+  '/banco_rede/cancelar_envio',
+  '/banco_rede/descobrir',
+  '/banco_rede/receber',
   '/select',
   '/pesquisar_cnpj',
   '/exportar_banco',

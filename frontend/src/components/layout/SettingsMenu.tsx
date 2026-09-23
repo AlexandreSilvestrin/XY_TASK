@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { ApiError } from '../../api/client'
 import { criarBackup, importarBackup } from '../../api/backup'
 import { checkForUpdates } from '../../api/version'
+import { BancoRedeDialogs } from './BancoRedeDialogs'
 import { AlertDialog } from '../cnpj/AlertDialog'
 import { ConfirmDialog } from '../cnpj/ConfirmDialog'
 import {
@@ -44,12 +45,21 @@ export function SettingsMenu({ open, collapsed, onClose }: SettingsMenuProps) {
     'criar' | 'importar' | 'atualizacao' | null
   >(null)
   const [confirmImportOpen, setConfirmImportOpen] = useState(false)
+  const [dadosMenu, setDadosMenu] = useState<'exportar' | 'importar' | null>(null)
+  const [sendRedeOpen, setSendRedeOpen] = useState(false)
+  const [receiveRedeOpen, setReceiveRedeOpen] = useState(false)
 
   useEffect(() => {
     if (!open) return
 
+    const blockingUi =
+      confirmImportOpen ||
+      feedback ||
+      sendRedeOpen ||
+      receiveRedeOpen
+
     const handlePointerDown = (event: MouseEvent) => {
-      if (confirmImportOpen || feedback) return
+      if (blockingUi) return
       if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
         onClose()
       }
@@ -65,6 +75,7 @@ export function SettingsMenu({ open, collapsed, onClose }: SettingsMenuProps) {
           setConfirmImportOpen(false)
           return
         }
+        if (sendRedeOpen || receiveRedeOpen) return
         onClose()
       }
     }
@@ -75,10 +86,20 @@ export function SettingsMenu({ open, collapsed, onClose }: SettingsMenuProps) {
       document.removeEventListener('mousedown', handlePointerDown)
       document.removeEventListener('keydown', handleEscape)
     }
-  }, [open, onClose, confirmImportOpen, feedback])
+  }, [
+    open,
+    onClose,
+    confirmImportOpen,
+    feedback,
+    sendRedeOpen,
+    receiveRedeOpen,
+  ])
 
   useEffect(() => {
-    if (!open) setConfirmImportOpen(false)
+    if (!open) {
+      setConfirmImportOpen(false)
+      setDadosMenu(null)
+    }
   }, [open])
 
   function showFeedback(title: string, text: string) {
@@ -283,19 +304,67 @@ export function SettingsMenu({ open, collapsed, onClose }: SettingsMenuProps) {
                 <button
                   type="button"
                   disabled={busy}
-                  onClick={() => void handleCriarBackup()}
+                  onClick={() =>
+                    setDadosMenu((current) =>
+                      current === 'exportar' ? null : 'exportar',
+                    )
+                  }
                   className="flex w-full items-center justify-center rounded-lg border border-intensity-2 px-3 py-2.5 text-xs font-semibold uppercase tracking-wide text-accent transition-colors hover:bg-intensity-fill-2 disabled:cursor-not-allowed disabled:opacity-40"
                 >
-                  {busyAction === 'criar' ? 'Criando…' : 'Criar backup'}
+                  Exportar banco
                 </button>
+                {dadosMenu === 'exportar' ? (
+                  <div className="flex flex-col gap-1.5 pl-1">
+                    <button
+                      type="button"
+                      disabled={busy}
+                      onClick={() => void handleCriarBackup()}
+                      className="flex w-full items-center justify-center rounded-lg border border-intensity-1 px-3 py-2 text-[0.7rem] font-semibold uppercase tracking-wide text-foreground transition-colors hover:bg-intensity-fill-2 disabled:cursor-not-allowed disabled:opacity-40"
+                    >
+                      {busyAction === 'criar' ? 'Salvando…' : 'Salvar no computador'}
+                    </button>
+                    <button
+                      type="button"
+                      disabled={busy}
+                      onClick={() => setSendRedeOpen(true)}
+                      className="flex w-full items-center justify-center rounded-lg border border-intensity-1 px-3 py-2 text-[0.7rem] font-semibold uppercase tracking-wide text-foreground transition-colors hover:bg-intensity-fill-2 disabled:cursor-not-allowed disabled:opacity-40"
+                    >
+                      Enviar pela rede
+                    </button>
+                  </div>
+                ) : null}
                 <button
                   type="button"
                   disabled={busy}
-                  onClick={() => setConfirmImportOpen(true)}
+                  onClick={() =>
+                    setDadosMenu((current) =>
+                      current === 'importar' ? null : 'importar',
+                    )
+                  }
                   className="flex w-full items-center justify-center rounded-lg border border-intensity-2 px-3 py-2.5 text-xs font-semibold uppercase tracking-wide text-accent transition-colors hover:bg-intensity-fill-2 disabled:cursor-not-allowed disabled:opacity-40"
                 >
-                  {busyAction === 'importar' ? 'Importando…' : 'Importar backup'}
+                  Importar banco
                 </button>
+                {dadosMenu === 'importar' ? (
+                  <div className="flex flex-col gap-1.5 pl-1">
+                    <button
+                      type="button"
+                      disabled={busy}
+                      onClick={() => setConfirmImportOpen(true)}
+                      className="flex w-full items-center justify-center rounded-lg border border-intensity-1 px-3 py-2 text-[0.7rem] font-semibold uppercase tracking-wide text-foreground transition-colors hover:bg-intensity-fill-2 disabled:cursor-not-allowed disabled:opacity-40"
+                    >
+                      {busyAction === 'importar' ? 'Importando…' : 'Selecionar arquivo'}
+                    </button>
+                    <button
+                      type="button"
+                      disabled={busy}
+                      onClick={() => setReceiveRedeOpen(true)}
+                      className="flex w-full items-center justify-center rounded-lg border border-intensity-1 px-3 py-2 text-[0.7rem] font-semibold uppercase tracking-wide text-foreground transition-colors hover:bg-intensity-fill-2 disabled:cursor-not-allowed disabled:opacity-40"
+                    >
+                      Receber pela rede
+                    </button>
+                  </div>
+                ) : null}
               </div>
             </section>
 
@@ -339,6 +408,14 @@ export function SettingsMenu({ open, collapsed, onClose }: SettingsMenuProps) {
         cancelLabel="Cancelar"
         onConfirm={() => void handleImportarBackup()}
         onCancel={() => setConfirmImportOpen(false)}
+      />
+
+      <BancoRedeDialogs
+        sendOpen={sendRedeOpen}
+        receiveOpen={receiveRedeOpen}
+        onCloseSend={() => setSendRedeOpen(false)}
+        onCloseReceive={() => setReceiveRedeOpen(false)}
+        onFeedback={showFeedback}
       />
 
       <AlertDialog

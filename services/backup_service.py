@@ -164,6 +164,59 @@ def _restore_from_archive(archive_path: Path) -> dict:
     return manifest
 
 
+def criar_backup_temporario() -> Path:
+    temp_file = tempfile.NamedTemporaryFile(
+        prefix="XYTask_Backup_",
+        suffix=BACKUP_EXTENSION,
+        delete=False,
+    )
+    destination = Path(temp_file.name)
+    temp_file.close()
+    _write_backup_archive(destination)
+    return destination
+
+
+def importar_backup_de_arquivo(archive_path: Path) -> dict:
+    if archive_path.suffix.lower() != BACKUP_EXTENSION:
+        return {
+            "success": False,
+            "message": f"Selecione um arquivo com extensão {BACKUP_EXTENSION}.",
+        }
+
+    if not zipfile.is_zipfile(archive_path):
+        return {
+            "success": False,
+            "message": "Arquivo de backup inválido ou corrompido.",
+        }
+
+    try:
+        manifest = _restore_from_archive(archive_path)
+        backup_version = str(manifest.get("version") or "desconhecida")
+        version_mismatch = backup_version != __version__
+
+        message = "Backup importado com sucesso. Os dados atuais foram substituídos."
+        if version_mismatch:
+            message += (
+                f" Atenção: o backup é da versão {backup_version} "
+                f"e este programa está na versão {__version__}."
+            )
+
+        return {
+            "success": True,
+            "message": message,
+            "path": str(archive_path),
+            "backup_version": backup_version,
+            "app_version": __version__,
+            "version_mismatch": version_mismatch,
+            "created_at": manifest.get("created_at_display"),
+        }
+    except Exception as exc:
+        return {
+            "success": False,
+            "message": str(exc),
+        }
+
+
 def criar_backup():
     default_name = _default_backup_filename()
     chosen = _ask_save_backup_path(default_name)
@@ -208,42 +261,4 @@ def importar_backup():
             "message": "Nenhum arquivo de backup selecionado.",
         }
 
-    archive_path = Path(chosen)
-    if archive_path.suffix.lower() != BACKUP_EXTENSION:
-        return {
-            "success": False,
-            "message": f"Selecione um arquivo com extensão {BACKUP_EXTENSION}.",
-        }
-
-    if not zipfile.is_zipfile(archive_path):
-        return {
-            "success": False,
-            "message": "Arquivo de backup inválido ou corrompido.",
-        }
-
-    try:
-        manifest = _restore_from_archive(archive_path)
-        backup_version = str(manifest.get("version") or "desconhecida")
-        version_mismatch = backup_version != __version__
-
-        message = "Backup importado com sucesso. Os dados atuais foram substituídos."
-        if version_mismatch:
-            message += (
-                f" Atenção: o backup é da versão {backup_version} "
-                f"e este programa está na versão {__version__}."
-            )
-
-        return {
-            "success": True,
-            "message": message,
-            "path": str(archive_path),
-            "backup_version": backup_version,
-            "app_version": __version__,
-            "version_mismatch": version_mismatch,
-            "created_at": manifest.get("created_at_display"),
-        }
-    except Exception as exc:
-        return {
-            "success": False,
-            "message": str(exc),
-        }
+    return importar_backup_de_arquivo(Path(chosen))
